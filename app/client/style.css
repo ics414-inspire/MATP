@@ -62,6 +62,58 @@ a {
   color: #0056b3;
   font-weight: 600;
 }
+.footer {
+  background-color: #f8f9fa; /* Light background */
+  padding: 40px 0;
+}
+
+.footer h5 {
+  font-weight: bold;
+  color: #333;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer ul li {
+  margin-bottom: 5px;
+}
+
+.footer address {
+  line-height: 1.6;
+}
+
+.footer .list-inline {
+  padding-left: 0;
+}
+
+.footer .list-inline-item {
+  margin-right: 10px;
+}
+
+.footer .list-inline-item a {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.footer-logo {
+  width: 100px; /* Adjust logo size */
+  margin-top: 10px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #333; /* Divider line color */
+}
+
+.text-center {
+  font-size: 0.9rem;
+  color: #666;
+}
+
 /* Set the SignIn and SignUp alerts background. */
 #signin-page .alert-light, #signup-page .alert-light {
   --bs-alert-bg: var(--matr-navbar-bg);
