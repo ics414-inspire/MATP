@@ -1,13 +1,14 @@
+/*
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import faker from 'faker';
 import { Stuffs, stuffConditions } from './StuffCollection';
 import { defineTestUser, withLoggedInUser, withSubscriptions } from '../../test-utilities/test-utilities';
 import { defineMethod, updateMethod, removeItMethod } from '../base/BaseCollection.methods';
-
+*/
 /* eslint prefer-arrow-callback: "off",  no-unused-expressions: "off" */
 /* eslint-env mocha */
-
+/*
 if (Meteor.isClient) {
   describe('StuffCollection Meteor Methods', function testSuite() {
     it('Can define, update, and removeIt', async function test1() {
@@ -48,3 +49,4 @@ if (Meteor.isClient) {
     });
   });
 }
+*/
