@@ -11,7 +11,7 @@
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
-  background-image: 'background.png';
+  background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -43,7 +43,7 @@ h2 {
 
 /* Button styling */
 .submit-button {
-  background-color: #007bff; /* Match the button to a bold color */
+  background-color: #FFFFFF; /* Submit button color */
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
@@ -54,7 +54,7 @@ h2 {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #B3EBF2;
 }
 
 /* Link styling */
