@@ -51,13 +51,13 @@ const Footer = () => (
           <h5>FOLLOW ALONG</h5>
           <ul className="list-inline">
             <li className="list-inline-item">
-              <a href="#"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/company/spire-hawaii-llp/"><FaLinkedin /></a>
             </li>
             <li className="list-inline-item">
-              <a href="#"><FaInstagram /></a>
+              <a href="https://www.instagram.com/spirehawaii/"><FaInstagram /></a>
             </li>
             <li className="list-inline-item">
-              <a href="#"><FaTwitter /></a>
+              <a href="https://x.com/spirehawaii"><FaTwitter /></a>
             </li>
           </ul>
         </Col>
