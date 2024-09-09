@@ -11,7 +11,108 @@
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
-  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+/* Sign-in form container */
+#sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card styling */
+.card {
+  background-color: rgba(255, 255, 255, 0.8); /* Make the card slightly transparent */
+  border-radius: 15px; /* Add some rounding to the card edges */
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add soft shadow */
+}
+
+/* Text and heading styles */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Button styling */
+.submit-button {
+  background-color: #FFFFFF; /* Submit button color */
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #B3EBF2;
+}
+
+/* Link styling */
+a {
+  color: #0056b3;
+  font-weight: 600;
+}
+.footer {
+  background-color: #f8f9fa; /* Light background */
+  padding: 40px 0;
+}
+
+.footer h5 {
+  font-weight: bold;
+  color: #333;
+}
+
+.footer ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer ul li {
+  margin-bottom: 5px;
+}
+
+.footer address {
+  line-height: 1.6;
+}
+
+.footer .list-inline {
+  padding-left: 0;
+}
+
+.footer .list-inline-item {
+  margin-right: 10px;
+}
+
+.footer .list-inline-item a {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.footer-logo {
+  width: 100px; /* Adjust logo size */
+  margin-top: 25px;
+  margin-right: 15px; /* Add space between logos */
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #333; /* Divider line color */
+}
+
+.text-center {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 /* Set the SignIn and SignUp alerts background. */

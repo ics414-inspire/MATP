@@ -7,12 +7,12 @@ const Landing = () => (
   <Container id={PAGE_IDS.LANDING} className="py-3">
     <Row className="align-middle text-center">
       <Col xs={4}>
-        <Image roundedCircle src="/images/meteor-logo.png" width="150px" />
+        <Image src="/images/spire_logo.jpg" width="300px" />
       </Col>
 
       <Col xs={8} className="d-flex flex-column justify-content-center">
-        <h1>Welcome to this template</h1>
-        <p>Now get to work and modify this app!</p>
+        <h1>SPIRE HAWAII</h1>
+        <p>Data Management tool</p>
       </Col>
 
     </Row>
