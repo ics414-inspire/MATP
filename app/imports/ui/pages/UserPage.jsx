@@ -59,7 +59,15 @@ const mockLogs = [
 
 const UserPage = () => (
   <div className="user-page-container">
-    <h1>Your Data Logs</h1>
+    <h1> Company Name</h1>
+    <h2 className={"my-3"}> Company details </h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      A accusantium at atque deleniti dolorum enim esse eum id mollitia nisi,
+      provident reprehenderit sit vitae. Beatae dolore fugit nulla sunt vero?
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      A accusantium at atque deleniti dolorum enim esse eum id mollitia nisi,
+      provident reprehenderit sit vitae. Beatae dolore fugit nulla sunt vero?</p>
+    <h2>Your Data Logs</h2>
 
     <table className="data-table">
       <thead>
