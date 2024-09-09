@@ -29,6 +29,32 @@ const mockLogs = [
     assets: 105000,
     liabilities: 42000,
   },
+  {
+    id: 4,
+    date: '2024-09-12',
+    revenue: 62000,
+    expenses: 40000,
+    netProfit: 22000,
+    assets: 115000,
+    liabilities: 46000,
+  },
+  {
+    id: 5,
+    date: '2024-09-15',
+    revenue: 48000,
+    expenses: 28000,
+    netProfit: 20000,
+    assets: 102000,
+    liabilities: 41000,
+  },
+  {
+    id: 6,
+    date: '2024-09-18',
+    revenue: 70000,
+    expenses: 45000,
+    netProfit: 25000,
+    assets: 120000,
+    liabilities: 47000 },
 ];
 
 const UserPage = () => (
