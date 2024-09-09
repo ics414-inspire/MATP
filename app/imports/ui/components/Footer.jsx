@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => (
@@ -51,13 +51,13 @@ const Footer = () => (
           <h5>FOLLOW ALONG</h5>
           <ul className="list-inline">
             <li className="list-inline-item">
-              <a href="https://www.linkedin.com/company/spire-hawaii-llp/"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/company/spire-hawaii-llp/" aria-label="LinkedIn profile"><FaLinkedin /></a>
             </li>
             <li className="list-inline-item">
-              <a href="https://www.instagram.com/spirehawaii/"><FaInstagram /></a>
+              <a href="https://www.instagram.com/spirehawaii/" aria-label="Instagram profile"><FaInstagram /></a>
             </li>
             <li className="list-inline-item">
-              <a href="https://x.com/spirehawaii"><FaTwitter /></a>
+              <a href="https://x.com/spirehawaii" aria-label="Twitter profile"><FaTwitter /></a>
             </li>
           </ul>
         </Col>
