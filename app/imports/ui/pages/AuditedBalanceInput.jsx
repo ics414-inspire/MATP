@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-/* This is used as a mockup and doesn't require the schema. */
+/* This is used as a mockup and doesn't require the schema. Will use the same format */
 const AuditedBalanceInput = () => (
-  <Container id={PAGE_IDS.ADD_STUFF} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_BALANCE} className="inputDataBackground w-75 py-3 h-100">
     <Row className="justify-content-center">
-      <Col className="mx-auto"> {/* Adjust the size as needed */}
+      <Col className="mx-auto">
         <Col className="text-center pb-4 text-black"><h2>Audited Balance</h2></Col>
         <Row className="inputDataWidth w-100 px-3 my-3">
           <Col>
@@ -152,8 +152,8 @@ const AuditedBalanceInput = () => (
             </Form.Group>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-4"> {/* Adds margin-top for spacing */}
-          <Col xs="auto"> {/* Auto-sizing column for centering */}
+        <Row className="justify-content-center mt-4">
+          <Col xs="auto">
             <Button className="px-5 m-5" type="button">Submit</Button> {/* Mock submit button */}
           </Col>
         </Row>
