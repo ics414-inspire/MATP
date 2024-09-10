@@ -25,7 +25,7 @@ const NavBar = () => {
           <Nav className="mx-auto justify-content-center">
             {currentUser ? ([
               <Nav.Link as={NavLink} to="/add" key="add">Dashboard</Nav.Link>,
-              <Nav.Link as={NavLink} to="/list" key="list">Input Data</Nav.Link>,
+              <Nav.Link as={NavLink} to="/datainput" key="list">Input Data</Nav.Link>,
               <Nav.Link as={NavLink} to="/add" key="add">Information</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
