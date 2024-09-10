@@ -19,6 +19,10 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
+import AuditedBalanceInputTest from '../pages/AuditedBalanceInputTest';
+import AuditedBalanceInput from '../pages/AuditedBalanceInput';
+import BudgetPl from '../pages/BudgetPl';
+import Audited from '../pages/Audited';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -40,6 +44,10 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+          <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
+          <Route path="/budgetpl" element={<ProtectedRoute><BudgetPl /></ProtectedRoute>} />
+          <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
+          <Route path="/auditedbalanceinputtest" element={<ProtectedRoute><AuditedBalanceInputTest /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />

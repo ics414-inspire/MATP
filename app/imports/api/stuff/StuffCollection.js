@@ -6,7 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const stuffConditions = ['excellent', 'good', 'fair', 'poor'];
 export const stuffPublications = {
   stuff: 'Stuff',
   stuffAdmin: 'StuffAdmin',
@@ -16,30 +15,26 @@ class StuffCollection extends BaseCollection {
   constructor() {
     super('Stuffs', new SimpleSchema({
       name: String,
-      quantity: Number,
+      financial: Number,
       owner: String,
-      condition: {
-        type: String,
-        allowedValues: stuffConditions,
-        defaultValue: 'good',
-      },
+      formula: String,
     }));
   }
 
   /**
    * Defines a new Stuff item.
    * @param name the name of the item.
-   * @param quantity how many.
+   * @param financial the data.
    * @param owner the owner of the item.
-   * @param condition the condition of the item.
+   * @param formula data conversion.
    * @return {String} the docID of the new document.
    */
-  define({ name, quantity, owner, condition }) {
+  define({ name, financial, owner, formula }) {
     const docID = this._collection.insert({
       name,
-      quantity,
+      financial,
       owner,
-      condition,
+      formula,
     });
     return docID;
   }
@@ -48,20 +43,20 @@ class StuffCollection extends BaseCollection {
    * Updates the given document.
    * @param docID the id of the document to update.
    * @param name the new name (optional).
-   * @param quantity the new quantity (optional).
-   * @param condition the new condition (optional).
+   * @param financial the new quantity (optional).
+   * @param formula the new condition (optional).
    */
-  update(docID, { name, quantity, condition }) {
+  update(docID, { name, financial, formula }) {
     const updateData = {};
     if (name) {
       updateData.name = name;
     }
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
-    if (_.isNumber(quantity)) {
-      updateData.quantity = quantity;
+    if (_.isNumber(financial)) {
+      updateData.financial = financial;
     }
-    if (condition) {
-      updateData.condition = condition;
+    if (formula) {
+      updateData.formula = formula;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -139,15 +134,15 @@ class StuffCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{owner: (*|number), condition: *, quantity: *, name}}
+   * @return {{owner: (*|number), formula: *, financial: *, name}}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const name = doc.name;
-    const quantity = doc.quantity;
-    const condition = doc.condition;
+    const financial = doc.financial;
+    const formula = doc.formula;
     const owner = doc.owner;
-    return { name, quantity, condition, owner };
+    return { name, financial, formula, owner };
   }
 }
 

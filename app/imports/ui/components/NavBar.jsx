@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Image, Dropdown } from 'react-bootstrap';
 import { BoxArrowRight, CloudDownload, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -25,7 +25,16 @@ const NavBar = () => {
           <Nav className="mx-auto justify-content-center">
             {currentUser ? ([
               <Nav.Link as={NavLink} to="/add" key="add">Dashboard</Nav.Link>,
-              <Nav.Link as={NavLink} to="/list" key="list">Input Data</Nav.Link>,
+              <Dropdown key="dropdown">
+                <Dropdown.Toggle as={NavLink} className="nav-link">
+                  Input Data
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
+                  <Dropdown.Item as={NavLink} to="/budgetpl">Budget P&L</Dropdown.Item>
+                  <Dropdown.Item as={NavLink} to="/audited">Audited</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>,
               <Nav.Link as={NavLink} to="/add" key="add">Information</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
