@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => (
@@ -51,19 +51,25 @@ const Footer = () => (
           <h5>FOLLOW ALONG</h5>
           <ul className="list-inline">
             <li className="list-inline-item">
-              <a href="#"><FaLinkedin /></a>
+              <a href="https://www.linkedin.com/company/spire-hawaii-llp/" aria-label="LinkedIn profile"><FaLinkedin /></a>
             </li>
             <li className="list-inline-item">
-              <a href="#"><FaInstagram /></a>
+              <a href="https://www.instagram.com/spirehawaii/" aria-label="Instagram profile"><FaInstagram /></a>
             </li>
             <li className="list-inline-item">
-              <a href="#"><FaTwitter /></a>
+              <a href="https://x.com/spirehawaii" aria-label="Twitter profile"><FaTwitter /></a>
             </li>
           </ul>
         </Col>
         <Col md={1}>
           {/* Add logos here */}
-          <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/spire_logo.jpg?raw=true" alt="Logo 1" className="footer-logo" />
+          <a href="/" aria-label="Spire Hawaii Landing Page">
+            <img
+              src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/spire_logo.jpg?raw=true"
+              alt="Spire Hawaii Logo"
+              className="footer-logo"
+            />
+          </a>
           <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/aicpa_logo.png?raw=true" alt="Logo 2" className="footer-logo" />
           <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/allinial.png?raw=true" alt="Logo 2" className="footer-logo" />
         </Col>
