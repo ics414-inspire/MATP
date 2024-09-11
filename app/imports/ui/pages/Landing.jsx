@@ -4,19 +4,21 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
-  <Container id={PAGE_IDS.LANDING} className="py-3">
-    <Row className="align-middle text-center">
       <Col xs={4}>
-        <Image src="/images/spire_logo.jpg" width="300px" />
-      </Col>
+  <div className="landingPage">
+    <div className="landing-center">
+      <Container id={PAGE_IDS.LANDING} className="py-3">
+        <Row className="align-middle text-center">
 
-      <Col xs={8} className="d-flex flex-column justify-content-center">
-        <h1>SPIRE HAWAII</h1>
-        <p>Data Management tool</p>
-      </Col>
+          <Col xs={-5} className="d-flex flex-column justify-content-center">
+            <h1>Welcome to InSpire Hawaii</h1>
+            <p>Our goal is to create an autonomous organization platform for the company SPIRE Hawaii</p>
+          </Col>
 
-    </Row>
-  </Container>
+        </Row>
+      </Container>
+    </div>
+  </div>
 );
 
 export default Landing;
