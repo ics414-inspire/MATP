@@ -129,8 +129,19 @@ hr {
   padding-bottom: 20px;
 }
 
+.inputDataBackground {
+  color: black;
+  background-color: white;
+  background-size: cover;
+  height: 720px;
+}
 
-/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+.inputDataWidth {
+  width: 300px;
+}
+
+/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+
 .user-page-container {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -140,7 +151,6 @@ hr {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: white;
 }
 
 .data-table th, .data-table td {
@@ -155,20 +165,12 @@ hr {
   color: white;
   border: none;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .view-button:hover, .add-data-button:hover {
-  background-color: #6969a4;
-}
-/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+  background-color: #413b3b;
+  transform: scale(1.02);
 
-.inputDataBackground {
-  color: black;
-  background-color: white;
-  background-size: cover;
-  height: 720px;
 }
-
-.inputDataWidth {
-  width: 300px;
-}
+/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/

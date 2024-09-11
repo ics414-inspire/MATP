@@ -1,4 +1,8 @@
 import React from 'react';
+import { Line } from 'react-chartjs-2';
+import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+
+Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 // Mockup Data
 const mockLogs = [
@@ -57,52 +61,134 @@ const mockLogs = [
     liabilities: 47000 },
 ];
 
+const dates = mockLogs.map(log => log.date);
+const revenues = mockLogs.map(log => log.revenue);
+const expenses = mockLogs.map(log => log.expenses);
+const netProfit = mockLogs.map(log => log.netProfit);
+
+const revenueData = {
+  labels: dates,
+  datasets: [
+    {
+      label: 'Revenue',
+      data: revenues,
+      borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderWidth: 2,
+      fill: true,
+    },
+  ],
+};
+const expensesData = {
+  labels: dates,
+  datasets: [
+    {
+      label: 'expenses',
+      data: expenses,
+      borderColor: 'rgb(192,141,75)',
+      backgroundColor: 'rgba(192,141,75,0.2)',
+      borderWidth: 2,
+      fill: true,
+    },
+  ],
+};
+const netProfitData = {
+  labels: dates,
+  datasets: [
+    {
+      label: 'Net Profit',
+      data: netProfit,
+      borderColor: 'rgb(192,141,75)',
+      backgroundColor: 'rgba(192,141,75,0.2)',
+      borderWidth: 2,
+      fill: true,
+    },
+  ],
+};
+
+const chartOptions = {
+  responsive: true,
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: 'Date',
+      },
+      type: 'category',
+    },
+    y: {
+      title: {
+        display: true,
+        text: 'Amount ($)',
+      },
+      beginAtZero: false,
+      type: 'linear',
+    },
+  },
+};
+
 const UserPage = () => (
   <div className="user-page-container">
-    <h1> Company Name</h1>
-    <h2 className={"my-3"}> Company details </h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      A accusantium at atque deleniti dolorum enim esse eum id mollitia nisi,
-      provident reprehenderit sit vitae. Beatae dolore fugit nulla sunt vero?
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      A accusantium at atque deleniti dolorum enim esse eum id mollitia nisi,
-      provident reprehenderit sit vitae. Beatae dolore fugit nulla sunt vero?</p>
+    <h1><b> Account Name&apos;s</b></h1>
+    <h4>Financial Overview</h4>
+
+    <hr />
     <h2>Your Data Logs</h2>
-
-    <table className="data-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Revenue</th>
-          <th>Expenses</th>
-          <th>Net Profit</th>
-          <th>Assets</th>
-          <th>Liabilities</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {mockLogs.map((log, index) => (
-          <tr key={index}>
-            <td>{log.date}</td>
-            <td>{`$${log.revenue.toLocaleString()}`}</td>
-            <td>{`$${log.expenses.toLocaleString()}`}</td>
-            <td>{`$${log.netProfit.toLocaleString()}`}</td>
-            <td>{`$${log.assets.toLocaleString()}`}</td>
-            <td>{`$${log.liabilities.toLocaleString()}`}</td>
-            <td>
-              <button className="view-button">
-                View Data
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-
-    <button className="add-data-button my-3">
+    <div className="row justify-content-center">
+      <div className="col-lg-11">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Revenue</th>
+              <th>Expenses</th>
+              <th>Net Profit</th>
+              <th>Assets</th>
+              <th>Liabilities</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mockLogs.map((log) => (
+              <tr key={log.id}>
+                <td>{log.date}</td>
+                <td>{`$${log.revenue.toLocaleString()}`}</td>
+                <td>{`$${log.expenses.toLocaleString()}`}</td>
+                <td>{`$${log.netProfit.toLocaleString()}`}</td>
+                <td>{`$${log.assets.toLocaleString()}`}</td>
+                <td>{`$${log.liabilities.toLocaleString()}`}</td>
+                <td>
+                  <button type="button" className="view-button">
+                    View Data
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button type="button" className="add-data-button my-3 mx-5 ">
       Add New Data
     </button>
+    <hr />
+    <div className="chart-container">
+      <h2>Revenue Over Time</h2>
+      <Line data={revenueData} options={chartOptions} />
+    </div>
+
+    <div className="chart-container my-2">
+      <div className="row">
+        <div className="col-md-6">
+          <h2>Net Profit Over Time</h2>
+          <Line data={netProfitData} options={chartOptions} />
+        </div>
+        <div className="col-md-6">
+          <h2>Expenses Over Time</h2>
+          <Line data={expensesData} options={chartOptions} />
+        </div>
+      </div>
+    </div>
   </div>
 );
 
