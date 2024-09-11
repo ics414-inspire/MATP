@@ -1,10 +1,10 @@
 import { Selector, t } from 'testcafe';
 import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage, budgetPLInputPage, auditedInputPage } from './simple.page';
-import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
 import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
+import { dashboardPage } from './dashboard.page';
 
 /* global fixture:false, test:false */
 
@@ -16,8 +16,11 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-test('Test that landing page shows up', async () => {
-  await landingPage.isDisplayed();
+test.only('Test that dashboard page shows up', async () => {
+  await navBar.gotoSignInPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.gotoDashboardPage();
+  await dashboardPage.isDisplayed();
 });
 
 test('Test that signin and signout work', async () => {
@@ -28,7 +31,7 @@ test('Test that signin and signout work', async () => {
   await signOutPage.isDisplayed();
 });
 
-test.only('Test that user pages show up', async () => {
+test('Test that user input pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);

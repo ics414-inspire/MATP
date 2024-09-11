@@ -24,7 +24,7 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="mx-auto justify-content-center">
             {currentUser ? ([
-              <Nav.Link as={NavLink} to="/dashboard" key="add">Dashboard</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_PAGE} as={NavLink} to="/dashboard" key="add">Dashboard</Nav.Link>,
               <Dropdown key="dropdown">
                 <Dropdown.Toggle id={COMPONENT_IDS.NAVBAR_DATA_INPUT} as={NavLink} className="nav-link">
                   Input Data

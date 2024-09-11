@@ -3,7 +3,7 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 const Dashboard = () => (
-  <Container id={PAGE_IDS.LANDING} className="py-3">
+  <Container id={PAGE_IDS.DASHBOARD} className="py-3">
     <Row className="align-middle text-center">
       <Col xs={4}>
         <Image src="/images/spire_logo.jpg" width="300px" />
