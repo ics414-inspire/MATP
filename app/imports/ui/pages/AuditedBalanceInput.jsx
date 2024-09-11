@@ -4,7 +4,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* This is used as a mockup and doesn't require the schema. Will use the same format */
 const AuditedBalanceInput = () => (
-  <Container id={PAGE_IDS.AUDITED_BALANCE} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="inputDataBackground w-75 py-3 h-100">
     <Row className="justify-content-center">
       <Col className="mx-auto">
         <Col className="text-center pb-4 text-black"><h2>Audited Balance</h2></Col>

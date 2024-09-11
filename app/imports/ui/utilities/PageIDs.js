@@ -1,7 +1,7 @@
 /** Define ids for each page. */
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
-  AUDITED_BALANCE: 'audited-balance',
+  AUDITED_BALANCE_INPUT: 'audited-balance-input',
   BUDGET_PL: 'budget-pl',
   AUDITED: 'audited',
   DATA_INPUT: 'data-input',
