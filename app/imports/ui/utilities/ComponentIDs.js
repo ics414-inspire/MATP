@@ -1,6 +1,6 @@
 export const COMPONENT_IDS = {
   LIST_STUFF_EDIT: 'list-stuff-edit',
-  MANGAGE_DATABASE_DUMP: 'manage-database-dump',
+  MANAGE_DATABASE_DUMP: 'manage-database-dump',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_DATA_INPUT: 'navbar-data-input',
   NAVBAR_LIST_DATA: 'navbar-list-data',
@@ -9,6 +9,7 @@ export const COMPONENT_IDS = {
   NAVBAR_CURRENT_USER: 'navbar-current-user',
   NAVBAR_LANDING_PAGE: 'navbar-landing-page',
   NAVBAR_AUDITED_BALANCE_INPUT_PAGE: 'navbar-audited-balance-input-page',
+  NAVBAR_BUDGET_PL_INPUT_PAGE: 'navbar-budget-pl-input-page',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   NAVBAR_LOGIN_DROPDOWN: 'navbar-login-dropdown',
   NAVBAR_LOGIN_DROPDOWN_SIGN_IN: 'navbar-login-dropdown-sign-in',

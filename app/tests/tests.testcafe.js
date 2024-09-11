@@ -1,5 +1,5 @@
 import { Selector, t } from 'testcafe';
-import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage } from './simple.page';
+import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage, budgetPLInputPage } from './simple.page';
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
@@ -34,6 +34,8 @@ test.only('Test that user pages show up', async () => {
   await navBar.isLoggedIn(credentials.username);
   await navBar.gotoAuditedBalanceInputPage();
   await auditedBalanceInputPage.isDisplayed();
+  await navBar.gotoBudgetPLInputPage();
+  await budgetPLInputPage.isDisplayed();
   /** await navBar.gotoAddStuffPage();
   await addStuffPage.isDisplayed();
   await navBar.gotoListStuffPage();

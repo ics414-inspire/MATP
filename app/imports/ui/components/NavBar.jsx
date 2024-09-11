@@ -31,7 +31,7 @@ const NavBar = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE} as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
-                  <Dropdown.Item as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE} as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
                   <Dropdown.Item as={NavLink} to="/audited">Audited</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,

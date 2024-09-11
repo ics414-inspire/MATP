@@ -54,7 +54,7 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP}`);
   }
 
-  /* Go to the list stuff page. */
+  /* Go to the Audited Balance Input page. */
   async gotoAuditedBalanceInputPage() {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
     if (!visible) {
@@ -63,6 +63,17 @@ class NavBar {
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
     await t.click(`#${COMPONENT_IDS.NAVBAR_DATA_INPUT}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE}`);
+  }
+
+  /* Go to the Budget PL Input page. */
+  async gotoBudgetPLInputPage() {
+    const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
+    if (!visible) {
+      await t.click('button.navbar-toggler');
+    }
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DATA_INPUT}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE}`);
   }
 
   /* Go to the list stuff admin page. */
