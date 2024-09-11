@@ -145,3 +145,38 @@ hr {
   }
 
 }
+
+/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+
+.user-page-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+}
+
+.view-button, .add-data-button {
+  padding: 10px 20px;
+  background-color: #282a28;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.view-button:hover, .add-data-button:hover {
+  background-color: #413b3b;
+  transform: scale(1.02);
+
+}
+/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/

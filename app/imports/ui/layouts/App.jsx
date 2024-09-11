@@ -13,6 +13,7 @@ import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
+import UserPage from '../pages/UserPage';
 import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
@@ -21,8 +22,11 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import AuditedBalanceInputTest from '../pages/AuditedBalanceInputTest';
 import AuditedBalanceInput from '../pages/AuditedBalanceInput';
-import BudgetPl from '../pages/BudgetPl';
+import BudgetPlInput from '../pages/BudgetPlInput';
 import Audited from '../pages/Audited';
+import Dashboard from '../pages/Dashboard';
+import Information from '../pages/Information';
+import ContactUs from '../components/ContactUs';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -38,14 +42,19 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/information" element={<ProtectedRoute><Information /></ProtectedRoute>} />
           <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
-          <Route path="/budgetpl" element={<ProtectedRoute><BudgetPl /></ProtectedRoute>} />
+          <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
           <Route path="/auditedbalanceinputtest" element={<ProtectedRoute><AuditedBalanceInputTest /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />

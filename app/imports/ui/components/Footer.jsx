@@ -63,7 +63,13 @@ const Footer = () => (
         </Col>
         <Col md={1}>
           {/* Add logos here */}
-          <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/spire_logo.jpg?raw=true" alt="Logo 1" className="footer-logo" />
+          <a href="/" aria-label="Spire Hawaii Landing Page">
+            <img
+              src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/spire_logo.jpg?raw=true"
+              alt="Spire Hawaii Logo"
+              className="footer-logo"
+            />
+          </a>
           <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/aicpa_logo.png?raw=true" alt="Logo 2" className="footer-logo" />
           <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/allinial.png?raw=true" alt="Logo 2" className="footer-logo" />
         </Col>

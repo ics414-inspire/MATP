@@ -24,18 +24,19 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="mx-auto justify-content-center">
             {currentUser ? ([
-              <Nav.Link as={NavLink} to="/add" key="add">Dashboard</Nav.Link>,
+              <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_PAGE} as={NavLink} to="/dashboard" key="add">Dashboard</Nav.Link>,
               <Dropdown key="dropdown">
-                <Dropdown.Toggle as={NavLink} className="nav-link">
+                <Dropdown.Toggle id={COMPONENT_IDS.NAVBAR_DATA_INPUT} as={NavLink} className="nav-link">
                   Input Data
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
-                  <Dropdown.Item as={NavLink} to="/budgetpl">Budget P&L</Dropdown.Item>
-                  <Dropdown.Item as={NavLink} to="/audited">Audited</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE} as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE} as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE} as={NavLink} to="/audited">Audited</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,
-              <Nav.Link as={NavLink} to="/add" key="add">Information</Nav.Link>,
+              <Nav.Link as={NavLink} to="/information" key="add">Information</Nav.Link>,
+              <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
@@ -45,13 +46,15 @@ const NavBar = () => {
             ) : ''}
           </Nav>
           <Nav className="justify-content-end">
-            {currentUser === '' ? (
+            {currentUser === '' ? ([
+              <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
               <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} as={NavLink} to="/signin"><PersonFill />Sign in</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} as={NavLink} to="/signup"><PersonPlusFill />Sign up</NavDropdown.Item>
-              </NavDropdown>
-            ) : (
+              </NavDropdown>,
+            ]) : (
               <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
+                <NavDropdown.Item as={NavLink} to="/userpage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Page</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
               </NavDropdown>
             )}

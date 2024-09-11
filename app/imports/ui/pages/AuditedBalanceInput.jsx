@@ -4,7 +4,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* This is used as a mockup and doesn't require the schema. Will use the same format */
 const AuditedBalanceInput = () => (
-  <Container id={PAGE_IDS.AUDITED_BALANCE} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="inputDataBackground w-75 py-3 h-100">
     <Row className="justify-content-center">
       <Col className="mx-auto">
         <Col className="text-center pb-4 text-black"><h2>Audited Balance</h2></Col>
@@ -155,6 +155,12 @@ const AuditedBalanceInput = () => (
         <Row className="justify-content-center mt-4">
           <Col xs="auto">
             <Button className="px-5 m-5" type="button">Submit</Button> {/* Mock submit button */}
+          </Col>
+        </Row>
+        <Row className="justify-content-center mt-1">
+          <Col xs="auto">
+            <Button href="/budgetplinput" className="px-4 mx-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Budget P&L Input</Button>
+            <Button href="/audited" className="px-5 mx-4" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Page</Button>
           </Col>
         </Row>
       </Col>
