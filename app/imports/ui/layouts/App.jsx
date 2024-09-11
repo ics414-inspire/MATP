@@ -27,6 +27,7 @@ import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
 import Information from '../pages/Information';
 import ContactUs from '../components/ContactUs';
+import ForecastDataPage from "../pages/ForecastDataPage";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
+          <Route path="/forecastpage" element={<ProtectedRoute><ForecastDataPage /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
