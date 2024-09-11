@@ -26,11 +26,11 @@ const NavBar = () => {
             {currentUser ? ([
               <Nav.Link as={NavLink} to="/dashboard" key="add">Dashboard</Nav.Link>,
               <Dropdown key="dropdown">
-                <Dropdown.Toggle as={NavLink} className="nav-link">
+                <Dropdown.Toggle id={COMPONENT_IDS.NAVBAR_DATA_INPUT} as={NavLink} className="nav-link">
                   Input Data
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE} as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
                   <Dropdown.Item as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
                   <Dropdown.Item as={NavLink} to="/audited">Audited</Dropdown.Item>
                 </Dropdown.Menu>

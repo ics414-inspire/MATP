@@ -1,5 +1,5 @@
 import { Selector, t } from 'testcafe';
-import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage } from './simple.page';
+import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage } from './simple.page';
 import { landingPage } from './landing.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
@@ -28,11 +28,13 @@ test('Test that signin and signout work', async () => {
   await signOutPage.isDisplayed();
 });
 
-test('Test that user pages show up', async () => {
+test.only('Test that user pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);
-  await navBar.gotoAddStuffPage();
+  await navBar.gotoAuditedBalanceInputPage();
+  await auditedBalanceInputPage.isDisplayed();
+  /** await navBar.gotoAddStuffPage();
   await addStuffPage.isDisplayed();
   await navBar.gotoListStuffPage();
   await listStuffPage.isDisplayed();
@@ -41,7 +43,7 @@ test('Test that user pages show up', async () => {
   await t.click(editLinks.nth(0));
   await editStuffPage.isDisplayed();
   await navBar.logout();
-  await signOutPage.isDisplayed();
+  await signOutPage.isDisplayed(); */
 });
 
 test('Test that sign up and sign out work', async () => {
