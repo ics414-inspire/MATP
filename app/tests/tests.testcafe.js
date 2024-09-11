@@ -5,6 +5,7 @@ import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
 import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 import { dashboardPage } from './dashboard.page';
+import { landingPage } from './landing.page';
 
 /* global fixture:false, test:false */
 
@@ -16,7 +17,11 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-test.only('Test that dashboard page shows up', async () => {
+test.only('Test that landing page shows up', async () => {
+  await landingPage.isDisplayed();
+});
+
+test('Test that dashboard page shows up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.gotoDashboardPage();
