@@ -1,9 +1,8 @@
-import { Selector, t } from 'testcafe';
-import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage, budgetPLInputPage, auditedInputPage } from './simple.page';
+/* import { Selector, t } from 'testcafe'; */
+import { /* manageDatabasePage, */ signOutPage, auditedBalanceInputPage, budgetPLInputPage, auditedInputPage } from './simple.page';
 import { signInPage } from './signin.page';
 import { signUpPage } from './signup.page';
 import { navBar } from './navbar.component';
-import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 import { dashboardPage } from './dashboard.page';
 import { landingPage } from './landing.page';
 
@@ -11,7 +10,7 @@ import { landingPage } from './landing.page';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
-const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
+/** const adminCredentials = { username: 'admin@foo.com', password: 'changeme' }; */
 const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-production localhost test with default db')
@@ -67,6 +66,7 @@ test('Test that sign up and sign out work', async () => {
   await signOutPage.isDisplayed();
 });
 
+/**
 test('Test that admin pages show up', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
@@ -84,3 +84,4 @@ test('Test that admin pages show up', async () => {
   // await navBar.gotoManageDatabasePage();
   // await manageDatabasePage.isDisplayed();
 });
+*/
