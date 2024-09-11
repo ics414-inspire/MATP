@@ -3,7 +3,7 @@ export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
   AUDITED_BALANCE_INPUT: 'audited-balance-input',
   BUDGET_PL_INPUT: 'budget-pl-input',
-  AUDITED: 'audited',
+  AUDITED_INPUT: 'audited-input',
   DATA_INPUT: 'data-input',
   LIST_DATA: 'list-data',
   EDIT_STUFF: 'edit-stuff',
