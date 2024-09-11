@@ -26,6 +26,7 @@ import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
 import Information from '../pages/Information';
 
+import ContactUs from '../components/ContactUs';
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
@@ -40,6 +41,7 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          <Route path="/contact" element={<ContactUs />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
