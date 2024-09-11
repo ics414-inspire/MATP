@@ -16,7 +16,7 @@ const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-test.only('Test that landing page shows up', async () => {
+test('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
 
