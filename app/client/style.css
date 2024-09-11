@@ -138,4 +138,10 @@ hr {
 
 .inputDataWidth {
   width: 300px;
+
+  .carousel-caption-top {
+    padding-top: 10px; /* Adjust padding as needed */
+    color: black; /* Ensures the text is readable */
+  }
+
 }
