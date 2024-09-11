@@ -21,7 +21,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import AuditedBalanceInputTest from '../pages/AuditedBalanceInputTest';
 import AuditedBalanceInput from '../pages/AuditedBalanceInput';
-import BudgetPl from '../pages/BudgetPl';
+import BudgetPlInput from '../pages/BudgetPlInput';
 import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
 import Information from '../pages/Information';
@@ -51,7 +51,7 @@ const App = () => {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/information" element={<ProtectedRoute><Information /></ProtectedRoute>} />
           <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
-          <Route path="/budgetpl" element={<ProtectedRoute><BudgetPl /></ProtectedRoute>} />
+          <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
           <Route path="/auditedbalanceinputtest" element={<ProtectedRoute><AuditedBalanceInputTest /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />

@@ -31,7 +31,7 @@ const NavBar = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
-                  <Dropdown.Item as={NavLink} to="/budgetpl">Budget P&L</Dropdown.Item>
+                  <Dropdown.Item as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
                   <Dropdown.Item as={NavLink} to="/audited">Audited</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,
