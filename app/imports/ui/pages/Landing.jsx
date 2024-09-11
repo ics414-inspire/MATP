@@ -4,7 +4,6 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
-      <Col xs={4}>
   <div className="landingPage">
     <div className="landing-center">
       <Container id={PAGE_IDS.LANDING} className="py-3">
