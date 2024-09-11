@@ -154,7 +154,13 @@ const Audited = () => (
         </Row>
         <Row className="justify-content-center mt-4">
           <Col xs="auto">
-            <Button className="px-5 m-5" type="button">Submit</Button>
+            <Button className="px-5 mt-5" type="button">Submit</Button>
+          </Col>
+        </Row>
+        <Row className="justify-content-center mt-1">
+          <Col xs="auto">
+            <Button href="/auditedbalanceinput" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Balance</Button>
+            <Button href="/budgetplinput" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Budget P&L Input</Button>
           </Col>
         </Row>
       </Col>
