@@ -21,7 +21,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import AuditedBalanceInputTest from '../pages/AuditedBalanceInputTest';
 import AuditedBalanceInput from '../pages/AuditedBalanceInput';
-import BudgetPlInput from '../pages/BudgetPl';
+import BudgetPlInput from '../pages/BudgetPlInput';
 import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
 import Information from '../pages/Information';

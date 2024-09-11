@@ -159,8 +159,8 @@ const AuditedBalanceInput = () => (
         </Row>
         <Row className="justify-content-center mt-1">
           <Col xs="auto">
-            <Button href="/budgetplinput" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Budget P&L Input</Button>
-            <Button href="/audited" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Page</Button>
+            <Button href="/budgetplinput" className="px-4 mx-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Budget P&L Input</Button>
+            <Button href="/audited" className="px-5 mx-4" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Page</Button>
           </Col>
         </Row>
       </Col>
