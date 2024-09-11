@@ -5,7 +5,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 /* This is used as a mockup and doesn't require the schema. Will use the same format */
 const BudgetPlInput = () => (
   <div>
-    <Container id={PAGE_IDS.BUDGET_PL} className="inputDataBackground w-75 py-3 h-100">
+    <Container id={PAGE_IDS.BUDGET_PL_INPUT} className="inputDataBackground w-75 py-3 h-100">
       <Row className="justify-content-center">
         <Col className="mx-auto"> {/* Adjust the size as needed */}
           <Col className="text-center pb-4 text-black"><h2>Budget P&L</h2></Col>

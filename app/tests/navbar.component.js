@@ -54,34 +54,47 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP}`);
   }
 
-  /* Go to the add stuff page. */
-  async gotoAddStuffPage() {
+  /* Go to the Audited Balance Input page. */
+  async gotoAuditedBalanceInputPage() {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
     if (!visible) {
       await t.click('button.navbar-toggler');
     }
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
-    await t.click(`#${COMPONENT_IDS.NAVBAR_ADD_STUFF}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DATA_INPUT}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE}`);
   }
 
-  /* Go to the list stuff page. */
-  async gotoListStuffPage() {
+  /* Go to the Budget PL Input page. */
+  async gotoBudgetPLInputPage() {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
     if (!visible) {
       await t.click('button.navbar-toggler');
     }
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
-    await t.click(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DATA_INPUT}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE}`);
   }
 
-  /* Go to the list stuff admin page. */
-  async gotoListStuffAdminPage() {
+  /* Go to the Audited Input page. */
+  async gotoAuditedInputPage() {
     const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
     if (!visible) {
       await t.click('button.navbar-toggler');
     }
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
-    await t.click(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DATA_INPUT}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE}`);
+  }
+
+  /* Go to dashboard page. */
+  async gotoDashboardPage() {
+    const visible = await Selector(`#${COMPONENT_IDS.NAVBAR_COLLAPSE}`).visible;
+    if (!visible) {
+      await t.click('button.navbar-toggler');
+    }
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_DASHBOARD_PAGE}`);
   }
 
   /* Go to the manage database page. Must be adimin. */

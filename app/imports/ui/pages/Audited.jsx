@@ -4,7 +4,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* This is used as a mockup and doesn't require the schema. Uses the same format */
 const Audited = () => (
-  <Container id={PAGE_IDS.AUDITED} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_INPUT} className="inputDataBackground w-75 py-3 h-100">
     <Row className="justify-content-center">
       <Col className="mx-auto">
         <Col className="text-center pb-4 text-black"><h2>Audited</h2></Col>
