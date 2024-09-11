@@ -15,7 +15,7 @@ const NavBar = () => {
   }), []);
   const menuStyle = { marginBottom: '10px' };
   return (
-    <Navbar bg="light" expand="lg" style={menuStyle}>
+    <Navbar expand="lg" style={{ backgroundColor: '#FFFFFF', menuStyle }}>
       <Container>
         <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/">
           <Image width={125} alt="spire logo" src="/images/spire_logo.jpg" />

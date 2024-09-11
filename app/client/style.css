@@ -11,7 +11,7 @@
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
-  background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true");
+  background-color: #F8F8F8 !important;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -63,7 +63,7 @@ a {
   font-weight: 600;
 }
 .footer {
-  background-color: #f8f9fa; /* Light background */
+  background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true"); /* Light background */
   padding: 40px 0;
   margin-top: 10px;
 }
