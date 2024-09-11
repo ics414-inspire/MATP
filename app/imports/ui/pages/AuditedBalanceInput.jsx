@@ -157,6 +157,12 @@ const AuditedBalanceInput = () => (
             <Button className="px-5 m-5" type="button">Submit</Button> {/* Mock submit button */}
           </Col>
         </Row>
+        <Row className="justify-content-center mt-1">
+          <Col xs="auto">
+            <Button href="/budgetplinput" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Budget P&L Input</Button>
+            <Button href="/audited" className="px-5 m-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Page</Button>
+          </Col>
+        </Row>
       </Col>
     </Row>
   </Container>
