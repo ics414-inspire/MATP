@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+
 const ContactUs = () => {
   // Place the handleSubmit function inside the component
   const handleSubmit = (event) => {
@@ -44,20 +45,24 @@ const ContactUs = () => {
           <form onSubmit={handleSubmit}>
             <h4>Mahalo!</h4>
             <div className="mb-3">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="name" className="form-label">Name</label>
               <input type="text" className="form-control" id="name" name="name" placeholder="Your name" />
             </div>
             <div className="mb-3">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="email" className="form-label">Email Address</label>
               <input type="email" className="form-control" id="email" name="email" placeholder="Your email" />
             </div>
             <div className="mb-3">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="subject" className="form-label">Subject</label>
               <input type="text" className="form-control" id="subject" name="subject" placeholder="Your subject" />
             </div>
             <div className="mb-3">
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label htmlFor="message" className="form-label">Message</label>
-              <textarea className="form-control" id="message" name="message" rows="4" placeholder="Your message"></textarea>
+              <textarea className="form-control" id="message" name="message" rows="4" placeholder="Your message" />
             </div>
             <button type="submit" className="btn btn-primary">Send</button>
           </form>
