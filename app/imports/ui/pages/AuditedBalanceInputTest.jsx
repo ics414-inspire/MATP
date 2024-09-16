@@ -18,7 +18,7 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the AddStuff page for adding a document. */
+/* Renders the Audited Balance Input page for adding a document. */
 const AuditedBalanceInputTest = () => {
 
   // On submit, insert the data.
