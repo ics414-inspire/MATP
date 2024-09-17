@@ -9,57 +9,57 @@ import { defineMethod, updateMethod } from '../../api/base/BaseCollection.method
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2';
 
-// Create dynamic schema based on the audited balance sheet fields
+// Create dynamic schema
 const fields = [
-  'Petty_cash',
-  'Cash',
-  'Total_Cash_and_Cash_Equivalents',
-  'Accounts_receivable',
-  // Add all other fields you need...
+  { key: 'Petty_cash', label: 'Petty Cash' },
+  { key: 'Cash', label: 'Cash' },
+  { key: 'Total_Cash_and_Cash_Equivalents', label: 'Total Cash and Cash Equivalents' },
+  { key: 'Accounts_receivable', label: 'Accounts Receivable' },
+  // Add all other fields ...
 ];
 
-const years = ['year6', 'year7', 'year8', 'year9']; // Define the years you want to generate for
+const years = ['year6', 'year7', 'year8', 'year9']; // Define the years  to generate
 
 // Dynamically create the schema
 const schemaDefinition = {};
 
-fields.forEach(field => {
-  // First define the parent field as an object
-  schemaDefinition[field] = {
+fields.forEach(({ key }) => {
+  // define the parent field as object
+  schemaDefinition[key] = {
     type: Object,
     optional: true, // Optional if not always present
   };
 
-  // Now define the subfields for each year
+  // define the subfields for each year
   years.forEach(year => {
-    schemaDefinition[`${field}.${year}`] = {
+    schemaDefinition[`${key}.${year}`] = {
       type: Number,
-      defaultValue: 123, // Set default value for each year-based field
+      defaultValue: 123, // Set default value
     };
   });
 });
 
-// Create the schema with SimpleSchema
+// Create the schema
 const dynamicFormSchema = new SimpleSchema(schemaDefinition);
 
 const bridge = new SimpleSchema2Bridge(dynamicFormSchema);
 
 const AddStuff = () => {
-  // Default model to provide initial values for the form fields
-  const defaultModel = fields.reduce((accumulatedModel, field) => {
+  // Default model to provide initial values for the form
+  const defaultModel = fields.reduce((accumulatedModel, { key }) => {
     const updatedModel = { ...accumulatedModel }; // Create a new object instead of mutating
     years.forEach(year => {
-      updatedModel[`${field}.${year}`] = 123; // Default value for each field
+      updatedModel[`${key}.${year}`] = 123; // Default value for each field
     });
     return updatedModel;
   }, {});
 
-  // On submit, insert or update the data
+  // On submit, insert data
   const submit = (data, formRef) => {
     const owner = Meteor.user().username;
     const collectionName = AuditedBalanceSheets.getCollectionName();
 
-    // Prepare the data to update in the collection
+    // Prepare the data to define in the collection
     const definitionData = { ...data, owner };
 
     defineMethod.callPromise({ collectionName, definitionData })
@@ -80,8 +80,13 @@ const AddStuff = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} model={defaultModel} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                {fields.map((field) => years.map((year) => (
-                  <NumField key={`${field}.${year}`} name={`${field}.${year}`} decimal={null} />
+                {fields.map(({ key, label }) => years.map((year) => (
+                  <NumField
+                    key={`${key}.${year}`}
+                    name={`${key}.${year}`}
+                    decimal={null}
+                    label={`${label} (${year})`} 
+                  />
                 )))}
                 <SubmitField value="Submit" />
                 <ErrorsField />
