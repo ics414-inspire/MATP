@@ -48,6 +48,8 @@ const NavBar = () => {
           <Nav className="justify-content-end">
             {currentUser === '' ? ([
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
+              <Nav.Link href="https://www.spirenewyork.com/" key="spire-ny" target="_blank">Spire NY</Nav.Link>,
+              <Nav.Link href="https://www.spirehawaii.com/" key="spire-hi" target="_blank">Spire HI</Nav.Link>,
               <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} as={NavLink} to="/signin"><PersonFill />Sign in</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} as={NavLink} to="/signup"><PersonPlusFill />Sign up</NavDropdown.Item>
