@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../stuff/StuffCollection';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
+import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet2.js';// inputing ABS collections
 
 class MATPClass {
   collections;
@@ -14,7 +14,7 @@ class MATPClass {
     // list of all the MATPCollections collections
     this.collections = [
       AdminProfiles,
-      Stuffs,
+      AuditedBalanceSheets, // inputing ABS collections
       UserProfiles,
     ];
     /*
@@ -23,7 +23,7 @@ class MATPClass {
     this.collectionLoadSequence = [
       AdminProfiles,
       UserProfiles,
-      Stuffs,
+      AuditedBalanceSheets, // inputing ABS collections
     ];
 
     /*
