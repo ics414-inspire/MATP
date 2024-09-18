@@ -30,6 +30,13 @@ schemaDefinition.companyName = {
   optional: false, // Set to true if the field is optional
 };
 
+// Specify the year for the data
+schemaDefinition.year = {
+  type: Number,
+  label: 'Year',
+  optional: false,
+};
+
 fields.forEach(({ key }) => {
   // define the parent field as object
   schemaDefinition[key] = {
@@ -91,6 +98,12 @@ const AddStuff = () => {
                   name="companyName"
                   label="Company"
                   placeholder="Enter company name"
+                />
+                <NumField
+                  name="year"
+                  label="Year"
+                  placeholder="Enter Year"
+                  decimal={null}
                 />
                 <h5 className="section-title">Cash and Cash Equivalents</h5>
                 {fields.map(({ key, label }) => (

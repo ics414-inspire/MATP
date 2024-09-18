@@ -32,6 +32,13 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       optional: false, // Set to true if you want the field to be optional
     };
 
+    // Specifies the year for the data
+    schemaDefinition.year = {
+      type: Number,
+      label: 'Year',
+      optional: false, // Require year input
+    };
+
     fields.forEach(field => {
       // First, define the top-level field as an object
       schemaDefinition[field] = {
