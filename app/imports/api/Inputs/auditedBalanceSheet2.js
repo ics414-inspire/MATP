@@ -25,6 +25,13 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     // Dynamically generating the schema
     const schemaDefinition = {};
 
+    // Add companyName field to the schema
+    schemaDefinition.companyName = {
+      type: String,
+      label: 'Company Name',
+      optional: false, // Set to true if you want the field to be optional
+    };
+
     fields.forEach(field => {
       // First, define the top-level field as an object
       schemaDefinition[field] = {

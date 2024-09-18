@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SubmitField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, NumField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -22,6 +22,13 @@ const years = ['year6', 'year7', 'year8', 'year9']; // Define the years  to gene
 
 // Dynamically create the schema
 const schemaDefinition = {};
+
+// Add companyName field to the schema
+schemaDefinition.companyName = {
+  type: String,
+  label: 'Company Name',
+  optional: false, // Set to true if the field is optional
+};
 
 fields.forEach(({ key }) => {
   // define the parent field as object
@@ -80,22 +87,39 @@ const AddStuff = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} model={defaultModel} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                {fields.map(({ key, label }) => years.map((year) => (
-                  <NumField
-                    key={`${key}.${year}`}
-                    name={`${key}.${year}`}
-                    decimal={null}
-                    label={`${label} (${year})`} 
-                  />
-                )))}
-                <SubmitField value="Submit" />
-                <ErrorsField />
+                <TextField
+                  name="companyName"
+                  label="Company"
+                  placeholder="Enter company name"
+                />
+                <h5 className="section-title">Cash and Cash Equivalents</h5>
+                {fields.map(({ key, label }) => (
+                  <Row key={key}>
+                    {years.map((year) => (
+                      <Col key={`${key}.${year}`} xs={6} md={4} lg={3}>
+                        <NumField
+                          name={`${key}.${year}`}
+                          decimal={null}
+                          label={`${label} (${year})`}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                ))}
+                <hr />
+                <Row>
+                  <Col>
+                    <SubmitField value="Submit" />
+                    <ErrorsField />
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           </AutoForm>
         </Col>
       </Row>
     </Container>
+
   );
 };
 
