@@ -29,11 +29,14 @@ test('Test that sign up and sign out work', async () => {
   await signOutPage.isDisplayed();
 });
 
-test('Test that dashboard page shows up', async () => {
+test('Test that dashboard page and 4-8-12 year graphs display', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.gotoDashboardPage();
   await dashboardPage.isDisplayed();
+  await dashboardPage.goto4YearGraphs();
+  await dashboardPage.goto8YearGraphs();
+  await dashboardPage.goto12YearGraphs();
 });
 
 test('Test that signin and signout work', async () => {
