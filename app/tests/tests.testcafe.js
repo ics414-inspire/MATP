@@ -9,9 +9,9 @@ import { landingPage } from './landing.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
-const credentials = { username: 'john@foo.com', password: 'changeme' };
+const credentials = { username: 'john@foo.com', password: 'I50sAE05P?&' };
 /** const adminCredentials = { username: 'admin@foo.com', password: 'changeme' }; */
-const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
+const newCredentials = { username: 'jane@foo.com', password: 'I50sAE05P?&' };
 
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
@@ -20,11 +20,23 @@ test('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
 
-test('Test that dashboard page shows up', async () => {
+test('Test that sign up and sign out work', async () => {
+  await navBar.gotoSignUpPage();
+  await signUpPage.isDisplayed();
+  await signUpPage.signupUser(newCredentials.username, newCredentials.password);
+  await navBar.isLoggedIn(newCredentials.username);
+  await navBar.logout();
+  await signOutPage.isDisplayed();
+});
+
+test('Test that dashboard page and 4-8-12 year graphs display', async () => {
   await navBar.gotoSignInPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.gotoDashboardPage();
   await dashboardPage.isDisplayed();
+  await dashboardPage.goto4YearGraphs();
+  await dashboardPage.goto8YearGraphs();
+  await dashboardPage.goto12YearGraphs();
 });
 
 test('Test that signin and signout work', async () => {
@@ -55,15 +67,6 @@ test('Test that user input pages show up', async () => {
   await editStuffPage.isDisplayed();
   await navBar.logout();
   await signOutPage.isDisplayed(); */
-});
-
-test('Test that sign up and sign out work', async () => {
-  await navBar.gotoSignUpPage();
-  await signUpPage.isDisplayed();
-  await signUpPage.signupUser(newCredentials.username, newCredentials.password);
-  await navBar.isLoggedIn(newCredentials.username);
-  await navBar.logout();
-  await signOutPage.isDisplayed();
 });
 
 /**

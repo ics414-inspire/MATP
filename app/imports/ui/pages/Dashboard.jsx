@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, Col, Container, Row, Button } from 'react-bootstrap';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 // Sample Dashboard Content
 const SnapShot = () => {
   // Hardcoded Snap Shot data
@@ -97,7 +98,7 @@ const Dashboard4yr = () => { // Hardcoded data for each chart
   ];
 
   return (
-    <Container>
+    <Container id={COMPONENT_IDS.DASHBOARD_4YR_PAGE}>
       <Row>
         {/* Net Position Chart */}
         <Col md={6}>
@@ -264,7 +265,7 @@ const Dashboard8yr = () => { // Hardcoded data for each chart (based on the imag
   ];
 
   return (
-    <Container>
+    <Container id={COMPONENT_IDS.DASHBOARD_8YR_PAGE}>
       <Row>
         {/* Net Position Chart */}
         <Col md={6}>
@@ -450,7 +451,7 @@ const Dashboard12yr = () => { // Hardcoded data for each chart (based on the ima
   ];
 
   return (
-    <Container>
+    <Container id={COMPONENT_IDS.DASHBOARD_12YR_PAGE}>
       <Row>
         {/* Net Position Chart */}
         <Col md={6}>
@@ -588,6 +589,7 @@ const Dashboard = () => {
             Snap Shot
           </Button>
           <Button
+            id={COMPONENT_IDS.DASHBOARD_4YR_BTN}
             variant="primary"
             className="mx-2"
             onClick={() => setActiveDashboard('Dashboard 4yr')}
@@ -595,6 +597,7 @@ const Dashboard = () => {
             Dashboard 4yr
           </Button>
           <Button
+            id={COMPONENT_IDS.DASHBOARD_8YR_BTN}
             variant="primary"
             className="mx-2"
             onClick={() => setActiveDashboard('Dashboard 8yr')}
@@ -602,6 +605,7 @@ const Dashboard = () => {
             Dashboard 8yr
           </Button>
           <Button
+            id={COMPONENT_IDS.DASHBOARD_12YR_BTN}
             variant="primary"
             className="mx-2"
             onClick={() => setActiveDashboard('Dashboard 12yr')}
