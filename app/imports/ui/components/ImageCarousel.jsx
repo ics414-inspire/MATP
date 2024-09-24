@@ -15,43 +15,47 @@ const ImageCarousel = () => {
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
-      {/* First Slide */}
+      {/* First Slide: "Data Input Made Simple" */}
       <Carousel.Item>
-        <Container className="d-block w-100">
-          <Row className="text-center"> <h1>Easy Form Access</h1></Row>
-          <Row className="text-center">
-            <div className="col-md-4">
-              <Link to="/auditedbalanceinput">
-                <img
-                  className="d-block w-100"
-                  src="images/audited-balance-form.jpg"
-                  alt="Audited Balance Form"
-                />
-              </Link>
-              <h3>Audited Balance Form</h3>
-            </div>
-            <div className="col-md-4">
-              <Link to="/budgetplinput">
-                <img
-                  className="d-block w-100"
-                  src="images/budget-form.jpeg"
-                  alt="budget form"
-                />
-              </Link>
-              <h3>Budget P&L Form</h3>
-            </div>
-            <div className="col-md-4">
-              <Link to="/audited">
-                <img
-                  className="d-block w-100"
-                  src="images/audited-form.jpeg"
-                  alt="audited form"
-                />
-              </Link>
-              <h3>Audited Form</h3>
-            </div>
-          </Row>
-        </Container>
+        <div style={{ backgroundColor: '#628FCA', padding: '20px' }}>
+          <Container className="d-block w-100">
+            <Row className="text-center">
+              <h1 className="text-white">Streamlined Financial Data Entry</h1>
+            </Row>
+            <Row className="text-center">
+              <div className="col-md-4">
+                <Link to="/auditedbalanceinput">
+                  <img
+                    className="d-block w-100"
+                    src="images/audited-balance-form.jpg"
+                    alt="Audited Balance Form"
+                  />
+                </Link>
+                <h3 className="text-white">Audited Balance Form</h3>
+              </div>
+              <div className="col-md-4">
+                <Link to="/budgetplinput">
+                  <img
+                    className="d-block w-100"
+                    src="images/budget-form.jpeg"
+                    alt="budget form"
+                  />
+                </Link>
+                <h3 className="text-white">Budget P&L Form</h3>
+              </div>
+              <div className="col-md-4">
+                <Link to="/audited">
+                  <img
+                    className="d-block w-100"
+                    src="images/audited-form.jpeg"
+                    alt="audited form"
+                  />
+                </Link>
+                <h3 className="text-white">Audited Form</h3>
+              </div>
+            </Row>
+          </Container>
+        </div>
       </Carousel.Item>
 
       {/* Second Slide */}
