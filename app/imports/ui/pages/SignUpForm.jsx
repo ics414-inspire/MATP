@@ -14,7 +14,8 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
  */
-const SignUp = () => {
+const SignUpForm = () => {
+  // State for handling form input and errors
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
@@ -52,28 +53,56 @@ const SignUp = () => {
   if (redirectToReferer) {
     return <Navigate to="/add" />;
   }
+
   return (
     <Container id={PAGE_IDS.SIGN_UP} className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={12} md={6}>
           <Col className="text-center">
             <h2>Register your account</h2>
           </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="firstName" placeholder="First name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME} name="lastName" placeholder="Last name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
+                <TextField
+                  id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}
+                  name="firstName"
+                  placeholder="First Name"
+                  className="form-control mb-3"
+                />
+                <TextField
+                  id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}
+                  name="lastName"
+                  placeholder="Last Name"
+                  className="form-control mb-3"
+                />
+                <TextField
+                  id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
+                  name="email"
+                  placeholder="E-mail address"
+                  className="form-control mb-3"
+                />
+                <TextField
+                  id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  className="form-control mb-3"
+                />
                 <ErrorsField />
-                <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
+                <SubmitField
+                  id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT}
+                  className="btn btn-primary"
+                  value="Sign Up"
+                />
               </Card.Body>
             </Card>
           </AutoForm>
-          <Alert variant="secondary">
+
+          <Alert variant="secondary" className="mt-3">
             Already have an account? Login <Link to="/signin">here</Link>
           </Alert>
+
           {error === '' ? (
             ''
           ) : (
@@ -88,4 +117,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpForm;

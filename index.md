@@ -231,7 +231,7 @@ body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
 }
 
-/* Set the SignIn and SignUp alerts background. */
+/* Set the SignInForm and SignUpForm alerts background. */
 #signin-page .alert-light, #signup-page .alert-light {
   --bs-alert-bg: var(--matr-navbar-bg);
 }
