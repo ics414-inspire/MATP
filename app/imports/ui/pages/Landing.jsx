@@ -32,14 +32,14 @@ const Landing = () => {
               {/* Set interval to null to disable automatic sliding */}
               <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
                 <Carousel.Item>
-                  <ImageCarousel src="images/first-slide.jpg" />
+                  <ImageCarousel />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <ImageCarousel src="images/second-slide.jpg" />
+                  <ImageCarousel />
                 </Carousel.Item>
-                <Carousel.Item>
+                {/* <Carousel.Item>
                   <ImageCarousel src="images/third-slide.jpg" />
-                </Carousel.Item>
+                </Carousel.Item> */}
               </Carousel>
             </Col>
           </Row>
