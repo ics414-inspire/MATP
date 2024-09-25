@@ -15,7 +15,7 @@ const cashFlowTrendsData = [
 ];
 
 const CashFlowTrendsChart = () => (
-  <ResponsiveContainer width="100%" height={300}>
+  <ResponsiveContainer width="100%" height={300} className="text-center">
     <LineChart data={cashFlowTrendsData}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="year" />
@@ -25,6 +25,7 @@ const CashFlowTrendsChart = () => (
       <Line type="monotone" dataKey="cashInflow" stroke="#8884d8" name="Cash Inflow" />
       <Line type="monotone" dataKey="cashOutflow" stroke="#82ca9d" name="Cash Outflow" />
     </LineChart>
+    <h7>Cash Flow Trends</h7>
   </ResponsiveContainer>
 );
 

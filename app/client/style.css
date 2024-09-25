@@ -196,5 +196,16 @@ hr {
   display: inline-block;
 }
 
+/* Slightly enlarges the button on hover */
+.btn-enlarge:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.small-enlarge:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
 
 /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
