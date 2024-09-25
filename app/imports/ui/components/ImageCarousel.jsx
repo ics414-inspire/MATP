@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import CashFlowTrendsChart from './GraphExamples';
+import { CashFlowTrendsChart, FinancingChart, BudgetChart } from './GraphExamples';
 
 const ImageCarousel = () => {
   // State to track the currently active slide
@@ -83,8 +83,8 @@ const ImageCarousel = () => {
         <div className="carousel-item-custom" style={{ backgroundColor: '#B7E2F2' }}>
           <Container className="d-block w-100">
             <Row className="mt-4">
-              <Col md={6}>
-                <Row className="text-center pt-3 ps-3"><h1>Explore Interactive Dashboards!</h1></Row>
+              <Col md={6} className="ps-5">
+                <Row className="text-center pt-3 ps-3"><h1>Explore Interactive Dashboards</h1></Row>
                 <Row className="justify-content-center pt-3">
                   <Col md={4}>
                     <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#8884D8', borderColor: '#4CAF50' }}>
@@ -110,16 +110,16 @@ const ImageCarousel = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col md={6}>
+              <Col md={6} className="pt-5">
                 <CashFlowTrendsChart />
               </Col>
             </Row>
-            <Row className="mt-4">
+            <Row className="mt-4 pb-3">
               <Col md={6}>
-                <CashFlowTrendsChart />
+                <FinancingChart />
               </Col>
               <Col md={6}>
-                <CashFlowTrendsChart />
+                <BudgetChart />
               </Col>
             </Row>
           </Container>
@@ -127,7 +127,7 @@ const ImageCarousel = () => {
       </Carousel.Item>
 
       {/* Third Slide */}
-      <Carousel.Item>
+      {/* <Carousel.Item>
         <img
           className="d-block w-100"
           src="images/third-slide.jpg"
@@ -137,7 +137,7 @@ const ImageCarousel = () => {
           <h3>Third Slide Label</h3>
           <p>Some description for the third slide.</p>
         </Carousel.Caption>
-      </Carousel.Item>
+      </Carousel.Item> */}
     </Carousel>
   );
 };

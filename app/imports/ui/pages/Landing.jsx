@@ -37,9 +37,9 @@ const Landing = () => {
                 <Carousel.Item>
                   <ImageCarousel />
                 </Carousel.Item>
-                <Carousel.Item>
+                {/* <Carousel.Item>
                   <ImageCarousel src="images/third-slide.jpg" />
-                </Carousel.Item>
+                </Carousel.Item> */}
               </Carousel>
             </Col>
           </Row>
