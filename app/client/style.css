@@ -289,8 +289,6 @@ hr {
 
 /* Audited Balance Input style */
 
-
-Copy code
 .input-data-background {
   width: 75%;
   padding-top: 1rem;
@@ -318,6 +316,52 @@ Copy code
 .separator {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.margin-top-large {
+  margin-top: 3rem;
+}
+
+.margin-bottom-small {
+  margin-bottom: 0.5rem;
+}
+
+.margin-y-medium {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.margin-bottom-medium {
+  margin-bottom: 1rem;
+}
+
+.input-data-width {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.separator {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.padding-x-large {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.margin-all-large {
+  margin: 3rem;
+}
+
+.margin-top-medium {
+  margin-top: 1.5rem;
 }
 
 /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/

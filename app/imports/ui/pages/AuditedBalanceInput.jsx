@@ -3,16 +3,18 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 const AuditedBalanceInput = () => (
-  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="input-data-background">
     <Row className="justify-content-center">
       <Col className="mx-auto">
-        <Col className="text-center pb-4 text-black"><h2>Audited Balance</h2></Col>
-        <Row className="inputDataWidth w-100 px-3 my-3">
+        <Col className="text-center-heading">
+          <h2>Audited Balance</h2>
+        </Col>
+        <Row className="input-data-width">
           <Col>
             <h5 className="section-title">Cash and Cash Equivalents</h5>
           </Col>
         </Row>
-        <Row className="inputDataWidth w-100 px-3">
+        <Row className="input-data-width">
           <Col>
             <Form.Group>
               <Form.Label>Petty Cash</Form.Label>
@@ -32,7 +34,7 @@ const AuditedBalanceInput = () => (
             </Form.Group>
           </Col>
         </Row>
-        <hr className="my-5" />
+        <hr className="separator" />
 
         <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
           <Col>
