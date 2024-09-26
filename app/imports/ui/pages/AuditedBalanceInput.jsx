@@ -2,18 +2,19 @@ import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-/* This is used as a mockup and doesn't require the schema. Will use the same format */
 const AuditedBalanceInput = () => (
-  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="inputDataBackground w-75 py-3 h-100">
+  <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="input-data-background">
     <Row className="justify-content-center">
       <Col className="mx-auto">
-        <Col className="text-center pb-4 text-black"><h2>Audited Balance</h2></Col>
-        <Row className="inputDataWidth w-100 px-3 my-3">
+        <Col className="text-center-heading">
+          <h2>Audited Balance</h2>
+        </Col>
+        <Row className="input-data-width">
           <Col>
-            <h5 className="section-title">Cash and Cash Equivalents</h5> {/* Subtitle */}
+            <h5 className="section-title">Cash and Cash Equivalents</h5>
           </Col>
         </Row>
-        <Row className="inputDataWidth w-100 px-3">
+        <Row className="input-data-width">
           <Col>
             <Form.Group>
               <Form.Label>Petty Cash</Form.Label>
@@ -33,15 +34,15 @@ const AuditedBalanceInput = () => (
             </Form.Group>
           </Col>
         </Row>
-        <hr className="my-5" />
+        <hr className="separator" />
 
-        <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
+        <Row className="input-data-width margin-top-large margin-bottom-small">
           <Col>
-            <h5 className="section-title">Other Assets</h5> {/* Subtitle */}
+            <h5 className="section-title">Other Assets</h5>
           </Col>
         </Row>
-        <Row className="inputDataWidth w-100 px-3">
-          <Row className="mb-3">
+        <Row className="input-data-width">
+          <Row className="margin-bottom-medium">
             <Col>
               <Form.Group>
                 <Form.Label>Accounts receivable</Form.Label>
@@ -94,12 +95,14 @@ const AuditedBalanceInput = () => (
             </Col>
           </Row>
         </Row>
-        <Row className="inputDataWidth w-100 px-3 my-3">
+
+        <Row className="input-data-width margin-y-medium">
           <Col>
-            <h5 className="section-title my-3">Investments</h5> {/* Subtitle */}
+            <h5 className="section-title">Investments</h5>
           </Col>
         </Row>
-        <Row className="mb-3 w-100 px-3">
+
+        <Row className="margin-bottom-medium input-data-width">
           <Col>
             <Form.Group>
               <Form.Label>Mutual Funds</Form.Label>
@@ -125,14 +128,15 @@ const AuditedBalanceInput = () => (
             </Form.Group>
           </Col>
         </Row>
-        <hr className="my-5" />
 
-        <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
+        <hr className="separator" />
+
+        <Row className="input-data-width margin-top-large margin-bottom-small">
           <Col>
-            <h5 className="section-title">Liabilities</h5> {/* Subtitle */}
+            <h5 className="section-title">Liabilities</h5>
           </Col>
         </Row>
-        <Row className="inputDataWidth w-100 px-3">
+        <Row className="input-data-width">
           <Col>
             <Form.Group>
               <Form.Label>Accounts payable and accrued liabilities</Form.Label>
@@ -152,9 +156,9 @@ const AuditedBalanceInput = () => (
             </Form.Group>
           </Col>
         </Row>
-        <Row className="justify-content-center mt-4">
+        <Row className="justify-content-center margin-top-medium">
           <Col xs="auto">
-            <Button className="px-5 m-5" type="button">Submit</Button> {/* Mock submit button */}
+            <Button className="px-5 m-5" type="button">Submit</Button>
           </Col>
         </Row>
         <Row className="justify-content-center mt-1">
