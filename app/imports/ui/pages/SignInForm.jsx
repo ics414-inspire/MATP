@@ -56,7 +56,7 @@ const SignInForm = () => {
             type="email"
             name="email"
             id={COMPONENT_IDS.SIGN_IN_FORM_EMAIL}
-            placeholder="Email"
+            placeholder="email"
             value={state.email}
             onChange={handleChange}
             required
@@ -65,12 +65,12 @@ const SignInForm = () => {
             type="password"
             name="password"
             id={COMPONENT_IDS.SIGN_IN_FORM_PASSWORD}
-            placeholder="Password"
+            placeholder="password"
             value={state.password}
             onChange={handleChange}
             required
           />
-          <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} className="my-3">Sign In</button>
+          <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} className="my-2">Sign In</button>
         </form>
         <div className="link-container">
           <Link to="/signup">Click here to Register</Link>

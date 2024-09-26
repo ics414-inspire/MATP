@@ -43,7 +43,7 @@ const App = () => {
           <Route exact path="/" element={<Landing />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/signin" element={<SignInSignUpPage />} />
+          <Route path="/signInSignOut" element={<SignInSignUpPage />} />
           <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />

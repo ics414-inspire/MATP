@@ -311,8 +311,8 @@ hr {
   overflow: hidden;
   width: 770px;
   max-width: 100%;
-  min-height: 200px;
-  height: 100vh;
+  min-height: 480px;
+  height: 70vh;
   display: flex;
   padding: 20px;
   margin: 50px auto;
@@ -444,3 +444,4 @@ hr {
   height: 40px;
   width: 40px;
 }
+

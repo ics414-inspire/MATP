@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { Col, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-
 /**
- * SignUp component is similar to signin component, but we create a new user instead.
+ * SignUpForm component is similar to signin component, but we create a new user instead.
  */
 const SignUpForm = () => {
-  // State for handling form input and errors
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const schema = new SimpleSchema({
     firstName: String,
@@ -25,95 +27,102 @@ const SignUpForm = () => {
     email: String,
     password: String,
   });
-  const bridge = new SimpleSchema2Bridge(schema);
 
-  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
-  const submit = (doc) => {
-    const collectionName = UserProfiles.getCollectionName();
-    const definitionData = doc;
-    // create the new UserProfile
-    defineMethod.callPromise({ collectionName, definitionData })
-      .then(() => {
-        // log the new user in.
-        const { email, password } = doc;
-        Meteor.loginWithPassword(email, password, (err) => {
-          if (err) {
-            setError(err.reason);
-          } else {
-            setError('');
-            setRedirectToRef(true);
-          }
-        });
-      })
-      .catch((err) => setError(err.reason));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    try {
+      schema.validate(formData); // Correct schema reference
+
+      const collectionName = UserProfiles.getCollectionName();
+      const definitionData = formData;
+
+      defineMethod.callPromise({ collectionName, definitionData })
+        .then(() => {
+          const { email, password } = formData;
+          Meteor.loginWithPassword(email, password, (err) => {
+            if (err) {
+              setError(err.reason);
+            } else {
+              setError('');
+              setRedirectToRef(true);
+            }
+          });
+        })
+        .catch((err) => setError(err.reason));
+
+    } catch (validationError) {
+      setError(validationError.message);
+    }
   };
 
-  /* Display the signup form. Redirect to add page after successful registration and login. */
-  // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return <Navigate to="/add" />;
+    return <Navigate to="/" />;
   }
 
   return (
-    <Container id={PAGE_IDS.SIGN_UP} className="py-3">
-      <Row className="justify-content-center">
-        <Col xs={12} md={6}>
-          <Col className="text-center">
-            <h2>Register your account</h2>
+    <div id={PAGE_IDS.SIGN_UP} className="form-container sign-up-container">
+      <form onSubmit={handleSubmit}>
+        <h1>Create Account</h1>
+        <Row>
+          <Col>
+            <input
+              id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}
+              type="text"
+              name="firstName"
+              placeholder="First name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
           </Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
-              <Card.Body>
-                <TextField
-                  id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}
-                  name="firstName"
-                  placeholder="First Name"
-                  className="form-control mb-3"
-                />
-                <TextField
-                  id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}
-                  name="lastName"
-                  placeholder="Last Name"
-                  className="form-control mb-3"
-                />
-                <TextField
-                  id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
-                  name="email"
-                  placeholder="E-mail address"
-                  className="form-control mb-3"
-                />
-                <TextField
-                  id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                  className="form-control mb-3"
-                />
-                <ErrorsField />
-                <SubmitField
-                  id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT}
-                  className="btn btn-primary"
-                  value="Sign Up"
-                />
-              </Card.Body>
-            </Card>
-          </AutoForm>
+          <Col>
+            <input
+              id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}
+              type="text"
+              name="lastName"
+              placeholder="Last name"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </Col>
+        </Row>
 
-          <Alert variant="secondary" className="mt-3">
-            Already have an account? Login <Link to="/signin">here</Link>
-          </Alert>
+        <input
+          id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <button id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} type="submit" className="custom-button my-2">
+          Sign Up
+        </button>
+      </form>
 
-          {error === '' ? (
-            ''
-          ) : (
-            <Alert variant="danger">
-              <Alert.Heading>Registration was not successful</Alert.Heading>
-              {error}
-            </Alert>
-          )}
-        </Col>
-      </Row>
-    </Container>
+      <div className="custom-alert">
+        Already have an account? Login <Link to="/signin">here</Link>
+      </div>
+
+      {error && (
+        <div className="custom-error">
+          <h3>Registration was not successful</h3>
+          <p>{error}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
