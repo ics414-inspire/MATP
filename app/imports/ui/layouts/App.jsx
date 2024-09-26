@@ -11,10 +11,11 @@ import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
+import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
 import UserPage from '../pages/UserPage';
 import NavBar from '../components/NavBar';
-import SignInSignUpPage from '../pages/SignInSignUp';
+import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -42,8 +43,10 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/signin" element={<SignInSignUpPage />} />
+          <Route path="/signout" element={<SignOut />} />
           <Route path="/userpage" element={<ProtectedRoute><UserPage /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
