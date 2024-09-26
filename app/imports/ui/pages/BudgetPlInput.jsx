@@ -2,16 +2,15 @@ import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-/* This is used as a mockup and doesn't require the schema. Will use the same format */
 const BudgetPlInput = () => (
   <div>
     <Container id={PAGE_IDS.BUDGET_PL_INPUT} className="inputDataBackground w-75 py-3 h-100">
       <Row className="justify-content-center">
-        <Col className="mx-auto"> {/* Adjust the size as needed */}
+        <Col className="mx-auto">
           <Col className="text-center pb-4 text-black"><h2>Budget P&L</h2></Col>
           <Row className="inputDataWidth w-100 px-3 my-3">
             <Col>
-              <h5 id="top" className="section-title">Revenue</h5> {/* Subtitle */}
+              <h5 id="top" className="section-title">Revenue</h5>
             </Col>
           </Row>
           <Row className="inputDataWidth w-100 px-3">
@@ -38,7 +37,7 @@ const BudgetPlInput = () => (
 
           <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
             <Col>
-              <h5 className="section-title">Expenses</h5> {/* Subtitle */}
+              <h5 className="section-title">Expenses</h5>
             </Col>
           </Row>
           <Row className="inputDataWidth w-100 px-3">
@@ -51,7 +50,7 @@ const BudgetPlInput = () => (
               </Col>
               <Row className="inputDataWidth w-100 px-3 my-3">
                 <Col>
-                  <h5 className="section-title my-3">Personnel & Fringe</h5> {/* Subtitle */}
+                  <h5 className="section-title my-3">Personnel & Fringe</h5>
                 </Col>
               </Row>
               <Col>
@@ -110,7 +109,7 @@ const BudgetPlInput = () => (
 
           <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
             <Col>
-              <h5 className="section-title">Surplus Deficit</h5> {/* Subtitle */}
+              <h5 className="section-title">Surplus Deficit</h5>
             </Col>
           </Row>
           <Row className="inputDataWidth w-100 px-3">
@@ -135,7 +134,7 @@ const BudgetPlInput = () => (
           </Row>
           <Row className="justify-content-center mt-4">
             <Col xs="auto">
-              <Button className="px-5 m-5" type="button">Submit</Button> {/* Mock submit button */}
+              <Button className="px-5 m-5" type="button">Submit</Button>
             </Col>
           </Row>
           <Row className="justify-content-center">
