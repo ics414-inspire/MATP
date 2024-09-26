@@ -4,16 +4,18 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 
 const BudgetPlInput = () => (
   <div>
-    <Container id={PAGE_IDS.BUDGET_PL_INPUT} className="inputDataBackground w-75 py-3 h-100">
+    <Container id={PAGE_IDS.BUDGET_PL_INPUT} className="input-data-background">
       <Row className="justify-content-center">
         <Col className="mx-auto">
-          <Col className="text-center pb-4 text-black"><h2>Budget P&L</h2></Col>
-          <Row className="inputDataWidth w-100 px-3 my-3">
+          <Col className="text-center-heading">
+            <h2>Budget P&L</h2>
+          </Col>
+          <Row className="input-data-width">
             <Col>
               <h5 id="top" className="section-title">Revenue</h5>
             </Col>
           </Row>
-          <Row className="inputDataWidth w-100 px-3">
+          <Row className="input-data-width">
             <Col>
               <Form.Group>
                 <Form.Label>5% of the Investment Portfolio</Form.Label>
@@ -33,24 +35,24 @@ const BudgetPlInput = () => (
               </Form.Group>
             </Col>
           </Row>
-          <hr className="my-5" />
+          <hr className="separator" />
 
-          <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
+          <Row className="input-data-width margin-top-large margin-bottom-small">
             <Col>
               <h5 className="section-title">Expenses</h5>
             </Col>
           </Row>
-          <Row className="inputDataWidth w-100 px-3">
-            <Row className="mb-3">
+          <Row className="input-data-width">
+            <Row className="margin-bottom-medium">
               <Col>
-                <Form.Group className="w-25">
+                <Form.Group className="width-quarter">
                   <Form.Label>Personnel</Form.Label>
                   <Form.Control type="number" />
                 </Form.Group>
               </Col>
-              <Row className="inputDataWidth w-100 px-3 my-3">
+              <Row className="input-data-width margin-y-medium">
                 <Col>
-                  <h5 className="section-title my-3">Personnel & Fringe</h5>
+                  <h5 className="section-title">Personnel & Fringe</h5>
                 </Col>
               </Row>
               <Col>
@@ -105,14 +107,14 @@ const BudgetPlInput = () => (
               </Col>
             </Row>
           </Row>
-          <hr className="my-5" />
+          <hr className="separator" />
 
-          <Row className="inputDataWidth w-100 px-3 mt-5 mb-2">
+          <Row className="input-data-width margin-top-large margin-bottom-small">
             <Col>
               <h5 className="section-title">Surplus Deficit</h5>
             </Col>
           </Row>
-          <Row className="inputDataWidth w-100 px-3">
+          <Row className="input-data-width">
             <Col>
               <Form.Group>
                 <Form.Label>Management</Form.Label>
@@ -132,9 +134,9 @@ const BudgetPlInput = () => (
               </Form.Group>
             </Col>
           </Row>
-          <Row className="justify-content-center mt-4">
+          <Row className="justify-content-center margin-top-medium">
             <Col xs="auto">
-              <Button className="px-5 m-5" type="button">Submit</Button>
+              <Button className="padding-x-large margin-all-large" type="button">Submit</Button>
             </Col>
           </Row>
           <Row className="justify-content-center">
