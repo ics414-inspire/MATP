@@ -22,14 +22,14 @@ export default function SignInSignUpPage() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
-              <p>Login to access your financial insights and stay on top of your data.</p>
+              <p>To keep connected with us please login with your personal info</p>
               <button className="ghost" id="signInForm" onClick={() => handleOnClick('signInForm')}>
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Welcome to Spire!</h1>
-              <p>Begin your journey with us by entering your personal details below.</p>
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start your journey with us</p>
               <button className="ghost" id="signUpForm" onClick={() => handleOnClick('signUpForm')}>
                 Sign Up
               </button>
