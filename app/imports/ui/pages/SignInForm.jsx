@@ -70,8 +70,7 @@ const SignInForm = () => {
             onChange={handleChange}
             required
           />
-          <a href="#">Forgot your password?</a>
-          <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT}>Sign In</button>
+          <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} className="my-3">Sign In</button>
         </form>
         <div className="link-container">
           <Link to="/signup">Click here to Register</Link>
