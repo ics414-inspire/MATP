@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
-export default function SignInSignUpPage() {
+const SignInSignUpPage = () => {
   const location = useLocation();
   const [type, setType] = useState('signInForm');
 
@@ -34,14 +34,14 @@ export default function SignInSignUpPage() {
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
               <p>Login to access your financial insights and stay on top of your data.</p>
-              <button className="ghost" id="signInForm" onClick={() => handleOnClick('signInForm')}>
+              <button type="button" className="ghost" id="signInForm" onClick={() => handleOnClick('signInForm')}>
                 Sign In
               </button>
             </div>
             <div className="overlay-panel overlay-right">
               <h1>Welcome to Spire!</h1>
               <p>Begin your journey with us by entering your personal details below.</p>
-              <button className="ghost" id="signUpForm" onClick={() => handleOnClick('signUpForm')}>
+              <button type="button" className="ghost" id="signUpForm" onClick={() => handleOnClick('signUpForm')}>
                 Sign Up
               </button>
             </div>
@@ -50,4 +50,6 @@ export default function SignInSignUpPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SignInSignUpPage;
