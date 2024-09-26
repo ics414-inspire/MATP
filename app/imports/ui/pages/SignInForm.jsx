@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+
+// Schema definition for validation
+const schema = new SimpleSchema({
+  email: String,
+  password: String,
+});
+const bridge = new SimpleSchema2Bridge(schema);
 
 const SignInForm = () => {
   const [error, setError] = useState('');

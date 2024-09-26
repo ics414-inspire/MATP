@@ -50,7 +50,7 @@ const NavBar = () => {
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
               <Nav.Link href="https://www.spirenewyork.com/" key="spire-ny" target="_blank">Spire NY</Nav.Link>,
               <Nav.Link href="https://www.spirehawaii.com/" key="spire-hi" target="_blank">Spire HI</Nav.Link>,
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login">
+              <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login" >
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} as={NavLink} to={{ pathname: '/signin-signup', search: '?form=signin' }} activeClassName=""><PersonFill />Sign in</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} as={NavLink} to={{ pathname: '/signin-signup', search: '?form=signup' }} activeClassName=""><PersonPlusFill />Sign up</NavDropdown.Item>
               </NavDropdown>,
