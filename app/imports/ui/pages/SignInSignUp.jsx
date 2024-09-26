@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 export default function SignInSignUpPage() {
+  const location = useLocation();
   const [type, setType] = useState('signInForm');
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const formType = params.get('form'); // Get the query param
+    if (formType === 'signup') {
+      setType('signUpForm');
+    } else {
+      setType('signInForm');
+    }
+  }, [location]);
 
   const handleOnClick = (text) => {
     if (text !== type) {
@@ -16,8 +28,7 @@ export default function SignInSignUpPage() {
   return (
     <div id="signin-signup-page" className="App">
       <div className={containerClass} id="container">
-        <SignUpForm />
-        <SignInForm />
+        {type === 'signUpForm' ? <SignUpForm /> : <SignInForm />}
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
