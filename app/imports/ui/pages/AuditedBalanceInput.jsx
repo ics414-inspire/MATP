@@ -1,6 +1,13 @@
 import React from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Tooltip } from 'react-bootstrap';
+import { QuestionCircle } from 'react-bootstrap-icons';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { PAGE_IDS } from '../utilities/PageIDs';
+
+const renderTooltip = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the register button</Tooltip>
+);
 
 const AuditedBalanceInput = () => (
   <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="input-data-background">
@@ -11,13 +18,34 @@ const AuditedBalanceInput = () => (
         </Col>
         <Row className="input-data-width">
           <Col>
-            <h5 className="section-title">Cash and Cash Equivalents</h5>
+            <h5 className="section-title">Cash and Cash Equivalents
+              <OverlayTrigger
+                delay={{ hide: 450, show: 300 }}
+                overlay={(props) => (
+                  <Tooltip {...props}>
+                    Hii, I am a simple tooltip information!!!
+                  </Tooltip>
+                )}
+                placement="bottom"
+              >
+                <QuestionCircle />
+              </OverlayTrigger>,
+
+              <Tooltip>
+                hello
+              </Tooltip>
+            </h5>
           </Col>
         </Row>
         <Row className="input-data-width">
           <Col>
             <Form.Group>
-              <Form.Label>Petty Cash</Form.Label>
+              <Form.Label>
+                 Petty Cash { ' ' }
+                  <OverlayTrigger placement="top" overlay={renderTooltip}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
