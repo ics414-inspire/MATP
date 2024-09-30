@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2.js';
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2';
 /* eslint-disable no-console */
 
 function addData(data) {

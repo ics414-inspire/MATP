@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
-import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet2.js';// inputing ABS collections
+import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet2';// inputing ABS collections
 
 class MATPClass {
   collections;
