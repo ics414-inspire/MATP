@@ -21,4 +21,10 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_EMAIL: 'sign-up-form-email',
   SIGN_UP_FORM_PASSWORD: 'sign-up-form-password',
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
+  DASHBOARD_4YR_PAGE: 'dashboard-4yr-page',
+  DASHBOARD_8YR_PAGE: 'dashboard-8yr-page',
+  DASHBOARD_12YR_PAGE: 'dashboard-12yr-page',
+  DASHBOARD_4YR_BTN: 'dashboard-4yr-btn',
+  DASHBOARD_8YR_BTN: 'dashboard-8yr-btn',
+  DASHBOARD_12YR_BTN: 'dashboard-12yr-btn',
 };

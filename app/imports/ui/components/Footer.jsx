@@ -70,8 +70,13 @@ const Footer = () => (
               className="footer-logo"
             />
           </a>
-          <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/aicpa_logo.png?raw=true" alt="Logo 2" className="footer-logo" />
-          <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/allinial.png?raw=true" alt="Logo 2" className="footer-logo" />
+          <a href="https://www.aicpa-cima.com/home ">
+            <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/aicpa_logo.png?raw=true" alt="Logo 2" className="footer-logo" />
+          </a>
+
+          <a href="https://allinialglobal.com/">
+            <img src="https://github.com/manoa-inspire/MATP/blob/issue-32/app/public/images/allinial.png?raw=true" alt="Logo 2" className="footer-logo" />
+          </a>
         </Col>
       </Row>
       <Row>
