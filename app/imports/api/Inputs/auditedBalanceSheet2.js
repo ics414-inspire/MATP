@@ -25,20 +25,6 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     // Dynamically generating the schema
     const schemaDefinition = {};
 
-    // Add companyName field to the schema
-    schemaDefinition.companyName = {
-      type: String,
-      label: 'Company Name',
-      optional: false, // Set to true if you want the field to be optional
-    };
-
-    // Specifies the year for the data
-    schemaDefinition.year = {
-      type: Number,
-      label: 'Year',
-      optional: false, // Require year input
-    };
-
     fields.forEach(field => {
       // First, define the top-level field as an object
       schemaDefinition[field] = {
@@ -56,7 +42,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     });
 
     // Create the schema using SimpleSchema
-    super('AuditedBalanceSheets2', new SimpleSchema(schemaDefinition));
+    super('AuditedBalanceSheets', new SimpleSchema(schemaDefinition));
   }
 
   define(data) {
@@ -134,4 +120,4 @@ class AuditedBalanceSheetCollection extends BaseCollection {
   }
 }
 
-export const AuditedBalanceSheets2 = new AuditedBalanceSheetCollection();
+export const AuditedBalanceSheets = new AuditedBalanceSheetCollection();

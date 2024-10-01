@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
+import { Stuffs } from '../../api/stuff/StuffCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
@@ -25,7 +25,7 @@ const AuditedBalanceInputTest = () => {
   const submit = (data, formRef) => {
     const { name, financial, formula } = data;
     const owner = Meteor.user().username;
-    const collectionName = AuditedBalanceSheets.getCollectionName();
+    const collectionName = Stuffs.getCollectionName();
     const definitionData = { name, financial, formula, owner };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
