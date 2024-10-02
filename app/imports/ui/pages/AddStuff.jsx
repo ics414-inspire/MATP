@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { defineMethod, updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { AuditedBalanceSheets2 } from '../../api/Inputs/auditedBalanceSheet2';
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2';
 
 // Create dynamic schema
 const fields = [
@@ -71,7 +71,7 @@ const AddStuff = () => {
   // On submit, insert data
   const submit = (data, formRef) => {
     const owner = Meteor.user().username;
-    const collectionName = AuditedBalanceSheets2.getCollectionName();
+    const collectionName = AuditedBalanceSheets.getCollectionName();
 
     // Prepare the data to define in the collection
     const definitionData = { ...data, owner };
