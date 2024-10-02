@@ -56,7 +56,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     });
 
     // Create the schema using SimpleSchema
-    super('AuditedBalanceSheets2', new SimpleSchema(schemaDefinition));
+    super('AuditedBalanceSheets', new SimpleSchema(schemaDefinition));
   }
 
   define(data) {
@@ -134,4 +134,4 @@ class AuditedBalanceSheetCollection extends BaseCollection {
   }
 }
 
-export const AuditedBalanceSheets2 = new AuditedBalanceSheetCollection();
+export const AuditedBalanceSheets = new AuditedBalanceSheetCollection();
