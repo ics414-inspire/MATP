@@ -4,9 +4,89 @@ import { QuestionCircle } from 'react-bootstrap-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-const renderTooltip = props => (
+const pettyCashTt = props => (
   // eslint-disable-next-line react/jsx-props-no-spreading
-  <Tooltip {...props}>Tooltip for the register button</Tooltip>
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const cashTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the cash button</Tooltip>
+);
+
+const cashInBanksTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const accountsReceiveTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the accounts receivable button</Tooltip>
+);
+
+const dueFundsTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const interestTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const prepaidTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const notesReceiveTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const notesReceiveAfterTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const securityTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const cashHeldTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+const mutualFundsTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+const commingledFundsTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+const hedgeFundsTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+const privateEquityTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+const accountsPayableTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const dueToFundTt = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
+);
+
+const dueToOtherFund = props => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Tooltip {...props}>Tooltip for the petty cash button</Tooltip>
 );
 
 const AuditedBalanceInput = () => (
@@ -19,21 +99,6 @@ const AuditedBalanceInput = () => (
         <Row className="input-data-width">
           <Col>
             <h5 className="section-title">Cash and Cash Equivalents
-              <OverlayTrigger
-                delay={{ hide: 450, show: 300 }}
-                overlay={(props) => (
-                  <Tooltip {...props}>
-                    Hii, I am a simple tooltip information!!!
-                  </Tooltip>
-                )}
-                placement="bottom"
-              >
-                <QuestionCircle />
-              </OverlayTrigger>,
-
-              <Tooltip>
-                hello
-              </Tooltip>
             </h5>
           </Col>
         </Row>
@@ -41,23 +106,31 @@ const AuditedBalanceInput = () => (
           <Col>
             <Form.Group>
               <Form.Label>
-                 Petty Cash { ' ' }
-                  <OverlayTrigger placement="top" overlay={renderTooltip}>
-                    <QuestionCircle />
-                  </OverlayTrigger>
+                Petty Cash { ' ' }
+                <OverlayTrigger placement="top" overlay={pettyCashTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
               </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Cash</Form.Label>
+              <Form.Label>Cash { ' ' }
+                <OverlayTrigger placement="top" overlay={cashTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Cash in banks/Draw on Line of Credit</Form.Label>
+              <Form.Label>Cash in banks/Draw on Line of Credit { ' ' }
+                <OverlayTrigger placement="top" overlay={cashInBanksTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
@@ -73,25 +146,44 @@ const AuditedBalanceInput = () => (
           <Row className="margin-bottom-medium">
             <Col>
               <Form.Group>
-                <Form.Label>Accounts receivable</Form.Label>
+                <Form.Label>Accounts receivable { ' ' }
+                  <OverlayTrigger placement="top" overlay={accountsReceiveTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Due from other fund</Form.Label>
+                <Form.Label>Due from other fund { ' ' }
+                  <OverlayTrigger placement="top" overlay={dueFundsTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Interest & dividends receivable</Form.Label>
+                <Form.Label>Interest & dividends receivable { ' ' }
+                  <OverlayTrigger placement="top" overlay={interestTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Inv prepaid items & assets</Form.Label>
+                <Form.Label>Inv prepaid items & assets { ' ' }
+                  <OverlayTrigger placement="top" overlay={prepaidTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
@@ -99,25 +191,42 @@ const AuditedBalanceInput = () => (
           <Row>
             <Col>
               <Form.Group>
-                <Form.Label>Notes Receivable (1 yr)</Form.Label>
+                <Form.Label>Notes Receivable (1 yr) { ' ' }
+                  <OverlayTrigger placement="top" overlay={notesReceiveTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Notes Receivable (after 1 yr)</Form.Label>
+                <Form.Label>Notes Receivable (after 1 yr) { ' ' }
+                  <OverlayTrigger placement="top" overlay={notesReceiveAfterTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Security Deposits</Form.Label>
+                <Form.Label>Security Deposits { ' ' }
+                  <OverlayTrigger placement="top" overlay={securityTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Cash Held by Invest Manager</Form.Label>
+                <Form.Label>Cash Held by Invest Manager { ' ' }
+                  <OverlayTrigger placement="top" overlay={cashHeldTt}>
+                    <QuestionCircle />
+                  </OverlayTrigger>
+
+                </Form.Label>
                 <Form.Control type="number" />
               </Form.Group>
             </Col>
@@ -133,25 +242,41 @@ const AuditedBalanceInput = () => (
         <Row className="margin-bottom-medium input-data-width">
           <Col>
             <Form.Group>
-              <Form.Label>Mutual Funds</Form.Label>
+              <Form.Label>Mutual Funds { ' ' }
+                <OverlayTrigger placement="top" overlay={mutualFundsTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Commingled Funds</Form.Label>
+              <Form.Label>Commingled Funds { ' ' }
+                <OverlayTrigger placement="top" overlay={commingledFundsTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Hedge Funds</Form.Label>
+              <Form.Label>Hedge Funds { ' ' }
+                <OverlayTrigger placement="top" overlay={hedgeFundsTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Private Equity</Form.Label>
+              <Form.Label>Private Equity { ' ' }
+                <OverlayTrigger placement="top" overlay={privateEquityTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
@@ -167,19 +292,31 @@ const AuditedBalanceInput = () => (
         <Row className="input-data-width">
           <Col>
             <Form.Group>
-              <Form.Label>Accounts payable and accrued liabilities</Form.Label>
+              <Form.Label>Accounts payable and accrued liabilities { ' ' }
+                <OverlayTrigger placement="top" overlay={accountsPayableTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Due to fund</Form.Label>
+              <Form.Label>Due to fund { ' ' }
+                <OverlayTrigger placement="top" overlay={dueToFundTt}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group>
-              <Form.Label>Due to other fund</Form.Label>
+              <Form.Label>Due to other fund { ' ' }
+                <OverlayTrigger placement="top" overlay={dueToOtherFund}>
+                  <QuestionCircle />
+                </OverlayTrigger>
+              </Form.Label>
               <Form.Control type="number" />
             </Form.Group>
           </Col>
