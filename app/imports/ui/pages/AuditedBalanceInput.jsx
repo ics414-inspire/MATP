@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, NavDropdown, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, NumField, SubmitField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import { NavLink } from 'react-router-dom';
+import { PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { AuditedBalance } from '../../api/Inputs/auditedBalanceCollection';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -222,6 +225,12 @@ const AuditedBalanceInput = () => {
       <Row className="justify-content-center">
         <Col className="mx-auto"> {/* Adjust the size as needed */}
           <Col className="text-center p-4 text-black"><h2>Audited Balance</h2></Col>
+          <NavDropdown className="float-end" title="Year">
+            <NavDropdown.Item>3</NavDropdown.Item>
+            <NavDropdown.Item>4</NavDropdown.Item>
+            <NavDropdown.Item>5</NavDropdown.Item>
+            <NavDropdown.Item>6</NavDropdown.Item>
+          </NavDropdown>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Row className="inputDataWidth w-100 px-3 my-3">
               <Col>
