@@ -18,7 +18,7 @@ const NavBar = () => {
     <Navbar expand="lg" style={{ backgroundColor: '#FFFFFF', menuStyle }}>
       <Container>
         <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/">
-          <Image width={125} alt="spire logo" src="/images/spire_logo.jpg" />
+          <Image className="navbar-logo" alt="spire logo" src="/images/inspireLogo1.png" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
