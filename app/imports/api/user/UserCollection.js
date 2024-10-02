@@ -2,8 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
-import { Stuffs } from '../stuff/StuffCollection';
-
+import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet.js';
 /**
  * Represents a user, which is someone who has a Meteor account.
  *
@@ -12,7 +11,7 @@ import { Stuffs } from '../stuff/StuffCollection';
  *
  * Note that this collection does not extend any of our Base collections, because it has a very limited API
  * which should be used by clients to access the various Profile collections.
- *
+ * stuff
  * It is not saved out or restored when the DB is dumped. It is not listed in RadGrad.collections.
  *
  * Clients provide a "user" as a parameter, which is either the username (i.e. email) or userID.
@@ -95,7 +94,7 @@ class UserCollection {
    * @return {boolean}
    */
   isReferenced(user) {
-    return Stuffs.find({ owner: user }).fetch().length > 0;
+    return AuditedBalanceSheets.find({ owner: user }).fetch().length > 0;
   }
 
   /**
