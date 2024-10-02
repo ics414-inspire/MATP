@@ -10,6 +10,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -30,10 +31,9 @@ const SignUp = () => {
   const submit = (doc) => {
     const collectionName = UserProfiles.getCollectionName();
     const definitionData = doc;
-    // create the new UserProfile
+  
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
-        // log the new user in.
         const { email, password } = doc;
         Meteor.loginWithPassword(email, password, (err) => {
           if (err) {
@@ -41,16 +41,27 @@ const SignUp = () => {
           } else {
             setError('');
             setRedirectToRef(true);
+  
+            // Defining the audited balance sheet for the user
+            AuditedBalanceSheets.define({ owner: email })
+              .then((docId) => {
+                console.log(`Successfully created audited balance sheet with docId: ${docId}`);
+              })
+              // eslint-disable-next-line no-shadow
+              .catch((error) => {
+                console.error('Insert failed:', error);
+              });
           }
         });
       })
       .catch((err) => setError(err.reason));
   };
+  
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return <Navigate to="/add" />;
+    return <Navigate to="/" />;
   }
   return (
     <Container id={PAGE_IDS.SIGN_UP} className="py-3">
@@ -65,7 +76,7 @@ const SignUp = () => {
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="firstName" placeholder="First name" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME} name="lastName" placeholder="Last name" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
+                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" autocomplete="current-password" />
                 <ErrorsField />
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
               </Card.Body>

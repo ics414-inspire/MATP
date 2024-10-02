@@ -1,15 +1,16 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/StuffCollection';
+
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
 function addData(data) {
   console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.define(data);
+  AuditedBalanceSheets.define(data);
 }
 
-// Initialize the StuffsCollection if empty.
-if (Stuffs.count() === 0) {
+// Initialize the AuditedBalanceSheetsCollection if empty.
+if (AuditedBalanceSheets.count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.forEach(data => addData(data));
