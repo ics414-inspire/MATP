@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { AuditedBalance } from '../../api/Inputs/auditedBalanceCollection';
+import { AuditedBalance, AuditedBalancePublications } from '../../api/Inputs/auditedBalanceCollection';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -154,7 +154,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const AuditedBalanceInput = () => {
 
   useEffect(() => {
-    const handle = Meteor.subscribe('AuditedBalance');
+    const handle = Meteor.subscribe(AuditedBalancePublications.AuditedBalance);
     return () => handle.stop(); // Stop the subscription when the component unmounts
   }, []);
 
