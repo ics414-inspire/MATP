@@ -14,6 +14,7 @@ export const AuditedBalancePublications = {
 class AuditedBalanceCollection extends BaseCollection {
   constructor() {
     super('AuditedBalance', new SimpleSchema({
+      Year: Number,
       Petty_cash: Number,
       Cash: Number,
       Cash_in_banksDraw_on_Line_of_Credit: Number,

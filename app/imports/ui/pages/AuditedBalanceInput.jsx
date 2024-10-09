@@ -11,6 +11,7 @@ import { AuditedBalance, AuditedBalancePublications } from '../../api/Inputs/aud
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
+  Year: Number,
   Petty_cash: Number,
   Cash: Number,
   Cash_in_banksDraw_on_Line_of_Credit: Number,
@@ -229,6 +230,7 @@ const AuditedBalanceInput = () => {
             <NavDropdown.Item>6</NavDropdown.Item>
           </NavDropdown>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+            <NumField name="Year" className="inputDataWidth w-25 px-3 custom-label" />
             <Row className="inputDataWidth w-100 px-3 my-3">
               <Col>
                 <h4 className="section-title">Cash and Cash Equivalents</h4>
