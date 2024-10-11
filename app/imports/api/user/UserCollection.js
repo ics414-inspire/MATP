@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
-import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet2';
+import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet.js';
 /**
  * Represents a user, which is someone who has a Meteor account.
  *

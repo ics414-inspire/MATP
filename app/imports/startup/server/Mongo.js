@@ -1,13 +1,17 @@
 import { Meteor } from 'meteor/meteor';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2';
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
 /* eslint-disable no-console */
 
 function addData(data) {
-  console.log('Inserting data:', JSON.stringify(data, null, 2)); // Log the data structure
-  try {
-    AuditedBalanceSheets.define(data);
-  } catch (e) {
-    console.error('Error inserting data:', e.message);
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  AuditedBalanceSheets.define(data);
+}
+
+// Initialize the AuditedBalanceSheetsCollection if empty.
+if (AuditedBalanceSheets.count() === 0) {
+  if (Meteor.settings.defaultData) {
+    console.log('Creating default data.');
+    Meteor.settings.defaultData.forEach(data => addData(data));
   }
 }
 
