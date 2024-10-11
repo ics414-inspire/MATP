@@ -55,7 +55,7 @@ const ImageCarousel = () => {
               <Col md={6} className="text-start">
                 <h2 className="py-3 carousel-text-border">Streamlined Financial Data Entry</h2>
                 <h3 className="pt-2 pb-1">
-                  <a href="/auditedbalanceinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
+                  <a href="/app/imports/ui/pages/AuditedBalanceSchemaInput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
                     Audited Balance Form
                   </a>
                   <h6>Data on financial position, including assets, liabilities, and equity</h6>
