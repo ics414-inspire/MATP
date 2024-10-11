@@ -152,7 +152,7 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the Audited Balance Input page for adding a document. */
-const AuditedBalanceInput = () => {
+const AuditedBalanceSchemaInput = () => {
 
   useEffect(() => {
     const handle = Meteor.subscribe(AuditedBalancePublications.AuditedBalance);
@@ -539,4 +539,4 @@ const AuditedBalanceInput = () => {
   );
 };
 
-export default AuditedBalanceInput;
+export default AuditedBalanceSchemaInput;

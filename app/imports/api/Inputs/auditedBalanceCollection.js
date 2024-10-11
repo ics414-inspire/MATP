@@ -6,6 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
+// Run this in meteor terminal to check the database: db.AuditedBalanceCollection.find().pretty();
 export const AuditedBalancePublications = {
   AuditedBalance: 'AuditedBalance',
   AuditedBalanceAdmin: 'AuditedBalanceAdmin',
