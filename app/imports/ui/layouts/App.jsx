@@ -21,7 +21,7 @@ import { ROLE } from '../../api/role/Role';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ManageDatabase from '../pages/ManageDatabase';
 import AuditedBalanceInputTest from '../pages/AuditedBalanceInputTest';
-// import AuditedBalanceInput from '../pages/AuditedBalanceInput';
+import AuditedBalanceInput from '../pages/AuditedBalanceInput';
 import AuditedBalanceSchemaInput from '../pages/AuditedBalanceSchemaInput';
 import BudgetPlInput from '../pages/BudgetPlInput';
 import Audited from '../pages/Audited';
@@ -54,6 +54,7 @@ const App = () => {
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/information" element={<ProtectedRoute><Information /></ProtectedRoute>} />
+          <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
           <Route path="/auditedbalanceschema" element={<ProtectedRoute><AuditedBalanceSchemaInput /></ProtectedRoute>} />
           <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />

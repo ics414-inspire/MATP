@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { defineMethod, updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet2';
+import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
 
 // Create dynamic schema
 const fields = [
