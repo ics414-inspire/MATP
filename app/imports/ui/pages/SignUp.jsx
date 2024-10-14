@@ -31,7 +31,7 @@ const SignUp = () => {
   const submit = (doc) => {
     const collectionName = UserProfiles.getCollectionName();
     const definitionData = doc;
-  
+
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
         const { email, password } = doc;
@@ -41,7 +41,7 @@ const SignUp = () => {
           } else {
             setError('');
             setRedirectToRef(true);
-  
+
             // Defining the audited balance sheet for the user
             AuditedBalanceSheets.define({ owner: email })
               .then((docId) => {
@@ -56,7 +56,6 @@ const SignUp = () => {
       })
       .catch((err) => setError(err.reason));
   };
-  
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   // if correct authentication, redirect to from: page instead of signup screen

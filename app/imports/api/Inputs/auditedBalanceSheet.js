@@ -697,6 +697,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
 
       // Publish all documents, but only for admin users
       Meteor.publish('auditedBalanceSheets', function () {
+        // eslint-disable-next-line no-use-before-define
         return AuditedBalanceSheets.find(); // Ensure it is correctly publishing documents
       });
 
