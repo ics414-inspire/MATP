@@ -3,10 +3,21 @@ import { Button, Col, Container, Form, Row, Tooltip } from 'react-bootstrap';
 import { QuestionCircle } from 'react-bootstrap-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { TOOLTIP_TEXTS } from '../utilities/TooltipTexts';
+import TooltipOverlay from '../components/TooltipOverlay';
 
-const pettyCashTt = props => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <Tooltip {...props}>Refers to a small amount of cash set aside for small fees.</Tooltip>
+// eslint-disable-next-line react/prop-types
+const AuditedField = ({ label, tooltip, ...rest }) => (
+  <Form.Group>
+    <Form.Label>
+      {label}{' '}
+      <TooltipOverlay tooltipText={tooltip}>
+        <QuestionCircle />
+      </TooltipOverlay>
+    </Form.Label>
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+    <Form.Control type="number" {...rest} />
+  </Form.Group>
 );
 
 const cashTt = props => (
@@ -102,14 +113,9 @@ const Audited = () => (
         </Row>
         <Row className="inputDataWidth w-100 px-3">
           <Col>
-            <Form.Group>
-              <Form.Label>Petty Cash { ' ' }
-                <OverlayTrigger placement="top" overlay={pettyCashTt}>
-                  <QuestionCircle />
-                </OverlayTrigger>
-              </Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+
+                <AuditedField label="Petty Cash" tooltip={TOOLTIP_TEXTS.PETTY_CASH} />
+            
           </Col>
           <Col>
             <Form.Group>
