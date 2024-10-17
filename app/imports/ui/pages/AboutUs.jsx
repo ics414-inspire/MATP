@@ -1,45 +1,76 @@
 import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
-const teamMembers = [
-  { name: 'Lucas Sayin', position: 'Partner' },
-  { name: 'Tyler Kimura', position: 'Partner' },
-  { name: 'Rodney Lee', position: 'Executive Vice President' },
-  { name: 'Lani Nakazawa', position: 'Director' },
-  { name: 'Lisa Victor', position: 'Director' },
-  { name: 'Alain Grant Mahmoud', position: 'Director' },
-  { name: 'Creighton Liu', position: 'Director' },
-  { name: 'Paul Shiraga', position: 'Senior Manager' },
-  // Add more team members as needed
-];
-
-const AboutUs = () => {
-  return (
-    <div className="container mt-5">
-      {/* Existing About Us Content */}
-      <div className="row justify-content-center">
-        <div className="col-md-8 text-center">
-          <h1 className="display-4">About Us</h1>
-          <p className="lead">
-            Welcome to InSpire Hawaii. Our goal is to create an autonomous organization platform for the company SPIRE Hawaii.
-          </p>
-        </div>
-      </div>
-
-      {/* Meet the Team Section */}
-      <div className="row mt-5">
-        <div className="col-12 text-center">
-          <h3 className="mb-4">Meet Our Team</h3>
-        </div>
-
-        {teamMembers.map((member, index) => (
-          <div className="col-sm-6 col-md-4 col-lg-3 text-center mb-4" key={index}>
-            <h5>{member.name}</h5>
-            <p className="text-muted">{member.position}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+const AboutUs = () => (
+  <Container>
+    <Row className="my-5">
+      <Col>
+        <h2>About Our Platform</h2>
+        <p>
+          Our platform is designed to simplify and streamline financial data entry and management,
+          helping businesses and individuals keep track of their financial health. With a focus on
+          accuracy and ease of use, we provide a range of features that make managing your financial
+          data straightforward and efficient.
+        </p>
+        <p>
+          Our key features include:
+        </p>
+        <ul>
+          <li>
+            <strong>Audited Balance Form:</strong> A comprehensive tool for entering data on the financial
+            position, including assets, liabilities, and equity, providing a clear view of the company's
+            financial status.
+          </li>
+          <li>
+            <strong>Budget P&L Form:</strong> A detailed form to capture income and expenses for a given
+            fiscal year, helping to analyze profitability and make informed budgeting decisions.
+          </li>
+          <li>
+            <strong>Audited Form:</strong> A centralized form for gathering all critical financial information,
+            ensuring accurate reporting and easy data retrieval.
+          </li>
+        </ul>
+        <p>
+          Additionally, we offer visual tools and views that enhance your understanding of financial data:
+        </p>
+      </Col>
+    </Row>
+    <Row className="my-5">
+      <Col md={4}>
+        <Card className="text-center">
+          <Card.Body>
+            <Card.Title>Feature One</Card.Title>
+            <Card.Text>
+              Dashboard view of all the company assets, providing a quick overview of the organization's
+              financial status.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
+      <Col md={4}>
+        <Card className="text-center">
+          <Card.Body>
+            <Card.Title>Feature Two</Card.Title>
+            <Card.Text>
+              Individual asset view with detailed information, allowing you to explore specific entries
+              and gain deeper insights.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
+      <Col md={4}>
+        <Card className="text-center">
+          <Card.Body>
+            <Card.Title>Feature Three</Card.Title>
+            <Card.Text>
+              Visualization tools for the company assets, helping to understand trends and make data-driven
+              decisions.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
+);
 
 export default AboutUs;
