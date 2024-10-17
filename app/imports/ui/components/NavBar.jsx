@@ -47,6 +47,7 @@ const NavBar = () => {
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? ([
+              <Nav.Link as={NavLink} to="/about" key="about">About Us</Nav.Link>,
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
               <Nav.Link href="https://www.spirenewyork.com/" key="spire-ny" target="_blank">Spire NY</Nav.Link>,
               <Nav.Link href="https://www.spirehawaii.com/" key="spire-hi" target="_blank">Spire HI</Nav.Link>,
