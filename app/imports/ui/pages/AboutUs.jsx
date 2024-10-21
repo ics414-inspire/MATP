@@ -18,7 +18,7 @@ const AboutUs = () => (
         <ul>
           <li>
             <strong>Audited Balance Form:</strong> A comprehensive tool for entering data on the financial
-            position, including assets, liabilities, and equity, providing a clear view of the company's
+            position, including assets, liabilities, and equity, providing a clear view of the company&apos;s
             financial status.
           </li>
           <li>
@@ -41,7 +41,7 @@ const AboutUs = () => (
           <Card.Body>
             <Card.Title>Feature One</Card.Title>
             <Card.Text>
-              Dashboard view of all the company assets, providing a quick overview of the organization's
+              Dashboard view of all the company assets, providing a quick overview of the organization&apos;s
               financial status.
             </Card.Text>
           </Card.Body>
