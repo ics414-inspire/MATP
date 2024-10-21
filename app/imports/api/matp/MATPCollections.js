@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
+import { AuditedBalance } from '../Inputs/auditedBalanceCollection';
+// inputing ABS collections
 import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet.js';// inputing ABS collections
 
 class MATPClass {
@@ -16,6 +18,7 @@ class MATPClass {
       AdminProfiles,
       AuditedBalanceSheets, // inputing ABS collections
       UserProfiles,
+      AuditedBalance,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -23,6 +26,7 @@ class MATPClass {
     this.collectionLoadSequence = [
       AdminProfiles,
       UserProfiles,
+      AuditedBalance,
       AuditedBalanceSheets, // inputing ABS collections
     ];
 
