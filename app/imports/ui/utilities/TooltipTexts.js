@@ -17,4 +17,5 @@ export const TOOLTIP_TEXTS = {
   ACCOUNTS_PAYABLE: 'Accruals are expenses that have not been received or paid yet. Accounts payable is a type of accrual where a company receives goods prior to paying for it.',
   DUE_TO_FUND: 'This is the amount of funds due to another company. They can be short term or long term funds. This is generally counted as liability on the balance sheet.',
   DUE_TO_OTHER_FUND: 'This is the amount of funds owed to another fund.',
+  INVESTMENT_PORTFOLIO: 'Refers to 5% of your investment portfolio.  5% is a rule that states that no stock should receive more than 5% of the investment portfolio.',
 };

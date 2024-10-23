@@ -3,10 +3,21 @@ import { Button, Col, Container, Form, Row, Tooltip } from 'react-bootstrap';
 import { QuestionCircle } from 'react-bootstrap-icons';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { TOOLTIP_TEXTS } from '../utilities/TooltipTexts';
+import TooltipOverlay from '../components/TooltipOverlay';
 
-const investmentPortFolioTt = props => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <Tooltip {...props}>Refers to 5% of your investment portfolio.  5% is a rule that states that no stock should receive more than 5% of the investment portfolio.</Tooltip>
+// eslint-disable-next-line react/prop-types
+const BudgetField = ({ label, tooltip, ...rest }) => (
+  <Form.Group>
+    <Form.Label>
+      {label}{' '}
+      <TooltipOverlay tooltipText={tooltip}>
+        <QuestionCircle />
+      </TooltipOverlay>
+    </Form.Label>
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+    <Form.Control type="number" {...rest} />
+  </Form.Group>
 );
 
 const revenuesTt = props => (
@@ -94,14 +105,7 @@ const BudgetPlInput = () => (
           </Row>
           <Row className="input-data-width">
             <Col>
-              <Form.Group>
-                <Form.Label>5% of the Investment Portfolio { ' ' }
-                  <OverlayTrigger placement="top" overlay={investmentPortFolioTt}>
-                    <QuestionCircle />
-                  </OverlayTrigger>
-                </Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <BudgetField label="5% of the Investment Portfolio" tooltip={TOOLTIP_TEXTS.INVESTMENT_PORTFOLIO} />
             </Col>
             <Col>
               <Form.Group>
