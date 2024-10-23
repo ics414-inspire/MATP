@@ -28,6 +28,7 @@ import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
 import Information from '../pages/Information';
 import ContactUs from '../components/ContactUs';
+import CSV from '../pages/CSV';
 import AboutUs from '../pages/AboutUs';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
           <Route path="/auditedbalanceschema" element={<ProtectedRoute><AuditedBalanceSchemaInput /></ProtectedRoute>} />
           <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
+          <Route path="/csv" element={<ProtectedRoute><CSV /></ProtectedRoute>} />
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
           <Route path="/auditedbalanceinputtest" element={<ProtectedRoute><AuditedBalanceInputTest /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />

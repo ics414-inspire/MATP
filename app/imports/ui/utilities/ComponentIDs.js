@@ -11,6 +11,7 @@ export const COMPONENT_IDS = {
   NAVBAR_AUDITED_BALANCE_INPUT_PAGE: 'navbar-audited-balance-input-page',
   NAVBAR_BUDGET_PL_INPUT_PAGE: 'navbar-budget-pl-input-page',
   NAVBAR_AUDITED_INPUT_PAGE: 'navbar-audited-input-page',
+  NAVBAR_CSV_INPUT_PAGE: 'navbar-csv-input-page',
   NAVBAR_COLLAPSE: 'navbar-collapse',
   NAVBAR_LOGIN_DROPDOWN: 'navbar-login-dropdown',
   NAVBAR_LOGIN_DROPDOWN_SIGN_IN: 'navbar-login-dropdown-sign-in',
