@@ -40,7 +40,7 @@ const Audited = () => (
             <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.CASH} />
           </Col>
           <Col>
-            <AuditedField label="Cash in Banks" tooltip={TOOLTIP_TEXTS.CASH_IN_BANKS} />
+            <AuditedField label="Cash in banks/Draw on Line of Credit" tooltip={TOOLTIP_TEXTS.CASH_IN_BANKS} />
           </Col>
         </Row>
         <hr className="my-5" />
@@ -53,31 +53,31 @@ const Audited = () => (
         <Row className="inputDataWidth w-100 px-3">
           <Row className="mb-3">
             <Col>
-              <AuditedField label="Receive" tooltip={TOOLTIP_TEXTS.ACCOUNTS_RECEIVE} />
+              <AuditedField label="Accounts receivable" tooltip={TOOLTIP_TEXTS.ACCOUNTS_RECEIVE} />
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.DUE_FUNDS} />
+              <AuditedField label="Due from other fund" tooltip={TOOLTIP_TEXTS.DUE_FUNDS} />
 
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.INTEREST} />
+              <AuditedField label="Interest & dividends receivable" tooltip={TOOLTIP_TEXTS.INTEREST} />
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.PREPAID} />
+              <AuditedField label="Inv prepaid items & assets" tooltip={TOOLTIP_TEXTS.PREPAID} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE} />
+              <AuditedField label="Notes Receivable (1 yr)" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE} />
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE_AFTER} />
+              <AuditedField label="Notes Receivable (after 1 yr)" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE_AFTER} />
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.SECURITY} />
+              <AuditedField label="Security Deposits" tooltip={TOOLTIP_TEXTS.SECURITY} />
             </Col>
             <Col>
-              <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.CASH_HELD} />
+              <AuditedField label="Cash Held by Invest Manager" tooltip={TOOLTIP_TEXTS.CASH_HELD} />
             </Col>
           </Row>
         </Row>
@@ -88,16 +88,16 @@ const Audited = () => (
         </Row>
         <Row className="mb-3 w-100 px-3">
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.MUTUAL_FUNDS} />
+            <AuditedField label="Mutual Funds" tooltip={TOOLTIP_TEXTS.MUTUAL_FUNDS} />
           </Col>
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.COMMINGLED_FUNDS} />
+            <AuditedField label="Commingled Funds" tooltip={TOOLTIP_TEXTS.COMMINGLED_FUNDS} />
           </Col>
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.HEDGE_FUNDS} />
+            <AuditedField label="Hedge Funds" tooltip={TOOLTIP_TEXTS.HEDGE_FUNDS} />
           </Col>
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.PRIVATE_EQUITY} />
+            <AuditedField label="Private Equity" tooltip={TOOLTIP_TEXTS.PRIVATE_EQUITY} />
           </Col>
         </Row>
         <hr className="my-5" />
@@ -109,13 +109,13 @@ const Audited = () => (
         </Row>
         <Row className="inputDataWidth w-100 px-3">
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.ACCOUNTS_PAYABLE} />
+            <AuditedField label="Accounts payable and accrued liabilities" tooltip={TOOLTIP_TEXTS.ACCOUNTS_PAYABLE} />
           </Col>
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.DUE_TO_FUND} />
+            <AuditedField label="Due to fund" tooltip={TOOLTIP_TEXTS.DUE_TO_FUND} />
           </Col>
           <Col>
-            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.DUE_TO_OTHER_FUND} />
+            <AuditedField label="Due to other fund" tooltip={TOOLTIP_TEXTS.DUE_TO_OTHER_FUND} />
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
