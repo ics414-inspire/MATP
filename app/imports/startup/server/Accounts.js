@@ -3,6 +3,7 @@ import { ROLE } from '../../api/role/Role';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet.js';
+import { BudgetPLs } from '../../api/Inputs/BudgetP&L.js';
 
 /* eslint-disable no-console */
 
@@ -324,6 +325,269 @@ function createAuditedBalanceSheet(userId) {
     console.error('Error creating audited balance sheet:', error);
   }
 }
+function createBudgetPL(userId) {
+  console.log(`Creating audited balance sheet for user ${userId}`);
+  const BudgetPLData = {
+    owner: userId,
+    Investment_Portfolio_5_percent_year6: 0,
+    Investment_Portfolio_5_percent_year7: 0,
+    Investment_Portfolio_5_percent_year8: 0,
+    Investment_Portfolio_5_percent_year9: 0,
+
+    Revenues_year6: 0,
+    Revenues_year7: 0,
+    Revenues_year8: 0,
+    Revenues_year9: 0,
+
+    General_Fund_year6: 0,
+    General_Fund_year7: 0,
+    General_Fund_year8: 0,
+    General_Fund_year9: 0,
+
+    Core_Operating_Budget_NOT_Authorized_year6: 0,
+    Core_Operating_Budget_NOT_Authorized_year7: 0,
+    Core_Operating_Budget_NOT_Authorized_year8: 0,
+    Core_Operating_Budget_NOT_Authorized_year9: 0,
+
+    Total_Revenue_year6: 0,
+    Total_Revenue_year7: 0,
+    Total_Revenue_year8: 0,
+    Total_Revenue_year9: 0,
+
+    Admin_Salary_year6: 0,
+    Admin_Salary_year7: 0,
+    Admin_Salary_year8: 0,
+    Admin_Salary_year9: 0,
+
+    Admin_Pension_Accumulation_year6: 0,
+    Admin_Pension_Accumulation_year7: 0,
+    Admin_Pension_Accumulation_year8: 0,
+    Admin_Pension_Accumulation_year9: 0,
+
+    Admin_Retiree_Health_Insurance_year6: 0,
+    Admin_Retiree_Health_Insurance_year7: 0,
+    Admin_Retiree_Health_Insurance_year8: 0,
+    Admin_Retiree_Health_Insurance_year9: 0,
+
+    Admin_Other_Post_Employment_Benefits_year6: 0,
+    Admin_Other_Post_Employment_Benefits_year7: 0,
+    Admin_Other_Post_Employment_Benefits_year8: 0,
+    Admin_Other_Post_Employment_Benefits_year9: 0,
+
+    Admin_Employees_Health_Fund_year6: 0,
+    Admin_Employees_Health_Fund_year7: 0,
+    Admin_Employees_Health_Fund_year8: 0,
+    Admin_Employees_Health_Fund_year9: 0,
+
+    Admin_Social_Security_year6: 0,
+    Admin_Social_Security_year7: 0,
+    Admin_Social_Security_year8: 0,
+    Admin_Social_Security_year9: 0,
+
+    Admin_Medicare_year6: 0,
+    Admin_Medicare_year7: 0,
+    Admin_Medicare_year8: 0,
+    Admin_Medicare_year9: 0,
+
+    Admin_Workers_Compensation_year6: 0,
+    Admin_Workers_Compensation_year7: 0,
+    Admin_Workers_Compensation_year8: 0,
+    Admin_Workers_Compensation_year9: 0,
+
+    Admin_Unemployment_Compensation_year6: 0,
+    Admin_Unemployment_Compensation_year7: 0,
+    Admin_Unemployment_Compensation_year8: 0,
+    Admin_Unemployment_Compensation_year9: 0,
+
+    Admin_Pension_Administration_year6: 0,
+    Admin_Pension_Administration_year7: 0,
+    Admin_Pension_Administration_year8: 0,
+    Admin_Pension_Administration_year9: 0,
+
+    Admin_Fringe_Benefits_year6: 0,
+    Admin_Fringe_Benefits_year7: 0,
+    Admin_Fringe_Benefits_year8: 0,
+    Admin_Fringe_Benefits_year9: 0,
+
+    Admin_Personnel_Fring_year6: 0,
+    Admin_Personnel_Fring_year7: 0,
+    Admin_Personnel_Fring_year8: 0,
+    Admin_Personnel_Fring_year9: 0,
+
+    Admin_Staff_Salary_year6: 0,
+    Admin_Staff_Salary_year7: 0,
+    Admin_Staff_Salary_year8: 0,
+    Admin_Staff_Salary_year9: 0,
+
+    Admin_Staff_Pension_Accumulation_year6: 0,
+    Admin_Staff_Pension_Accumulation_year7: 0,
+    Admin_Staff_Pension_Accumulation_year8: 0,
+    Admin_Staff_Pension_Accumulation_year9: 0,
+
+    Admin_Staff_Retiree_Health_Insurance_year6: 0,
+    Admin_Staff_Retiree_Health_Insurance_year7: 0,
+    Admin_Staff_Retiree_Health_Insurance_year8: 0,
+    Admin_Staff_Retiree_Health_Insurance_year9: 0,
+
+    Admin_Staff_Other_Post_Employment_Benefits_year6: 0,
+    Admin_Staff_Other_Post_Employment_Benefits_year7: 0,
+    Admin_Staff_Other_Post_Employment_Benefits_year8: 0,
+    Admin_Staff_Other_Post_Employment_Benefits_year9: 0,
+
+    Admin_Staff_Employees_Health_Fund_year6: 0,
+    Admin_Staff_Employees_Health_Fund_year7: 0,
+    Admin_Staff_Employees_Health_Fund_year8: 0,
+    Admin_Staff_Employees_Health_Fund_year9: 0,
+
+    Admin_Staff_Social_Security_year6: 0,
+    Admin_Staff_Social_Security_year7: 0,
+    Admin_Staff_Social_Security_year8: 0,
+    Admin_Staff_Social_Security_year9: 0,
+
+    Admin_Staff_Medicare_year6: 0,
+    Admin_Staff_Medicare_year7: 0,
+    Admin_Staff_Medicare_year8: 0,
+    Admin_Staff_Medicare_year9: 0,
+
+    Admin_Staff_Workers_Compensation_year6: 0,
+    Admin_Staff_Workers_Compensation_year7: 0,
+    Admin_Staff_Workers_Compensation_year8: 0,
+    Admin_Staff_Workers_Compensation_year9: 0,
+
+    Admin_Staff_Unemployment_Compensation_year6: 0,
+    Admin_Staff_Unemployment_Compensation_year7: 0,
+    Admin_Staff_Unemployment_Compensation_year8: 0,
+    Admin_Staff_Unemployment_Compensation_year9: 0,
+
+    Admin_Staff_Pension_Administration_year6: 0,
+    Admin_Staff_Pension_Administration_year7: 0,
+    Admin_Staff_Pension_Administration_year8: 0,
+    Admin_Staff_Pension_Administration_year9: 0,
+
+    Management_Salary_year6: 0,
+    Management_Salary_year7: 0,
+    Management_Salary_year8: 0,
+    Management_Salary_year9: 0,
+
+    Management_Pension_Accumulation_year6: 0,
+    Management_Pension_Accumulation_year7: 0,
+    Management_Pension_Accumulation_year8: 0,
+    Management_Pension_Accumulation_year9: 0,
+
+    Management_Retiree_Health_Insurance_year6: 0,
+    Management_Retiree_Health_Insurance_year7: 0,
+    Management_Retiree_Health_Insurance_year8: 0,
+    Management_Retiree_Health_Insurance_year9: 0,
+
+    Management_Other_Post_Employment_Benefits_year6: 0,
+    Management_Other_Post_Employment_Benefits_year7: 0,
+    Management_Other_Post_Employment_Benefits_year8: 0,
+    Management_Other_Post_Employment_Benefits_year9: 0,
+
+    Management_Employees_Health_Fund_year6: 0,
+    Management_Employees_Health_Fund_year7: 0,
+    Management_Employees_Health_Fund_year8: 0,
+    Management_Employees_Health_Fund_year9: 0,
+
+    Management_Social_Security_year6: 0,
+    Management_Social_Security_year7: 0,
+    Management_Social_Security_year8: 0,
+    Management_Social_Security_year9: 0,
+
+    Management_Medicare_year6: 0,
+    Management_Medicare_year7: 0,
+    Management_Medicare_year8: 0,
+    Management_Medicare_year9: 0,
+
+    Management_Workers_Compensation_year6: 0,
+    Management_Workers_Compensation_year7: 0,
+    Management_Workers_Compensation_year8: 0,
+    Management_Workers_Compensation_year9: 0,
+
+    Management_Unemployment_Compensation_year6: 0,
+    Management_Unemployment_Compensation_year7: 0,
+    Management_Unemployment_Compensation_year8: 0,
+    Management_Unemployment_Compensation_year9: 0,
+
+    Management_Pension_Administration_year6: 0,
+    Management_Pension_Administration_year7: 0,
+    Management_Pension_Administration_year8: 0,
+    Management_Pension_Administration_year9: 0,
+
+    Program_year6: 0,
+    Program_year7: 0,
+    Program_year8: 0,
+    Program_year9: 0,
+
+    Contracts_year6: 0,
+    Contracts_year7: 0,
+    Contracts_year8: 0,
+    Contracts_year9: 0,
+
+    Grants_year6: 0,
+    Grants_year7: 0,
+    Grants_year8: 0,
+    Grants_year9: 0,
+
+    Travel_year6: 0,
+    Travel_year7: 0,
+    Travel_year8: 0,
+    Travel_year9: 0,
+
+    Equipment_year6: 0,
+    Equipment_year7: 0,
+    Equipment_year8: 0,
+    Equipment_year9: 0,
+
+    Overhead_year6: 0,
+    Overhead_year7: 0,
+    Overhead_year8: 0,
+    Overhead_year9: 0,
+
+    Debt_Service_year6: 0,
+    Debt_Service_year7: 0,
+    Debt_Service_year8: 0,
+    Debt_Service_year9: 0,
+
+    Other_year6: 0,
+    Other_year7: 0,
+    Other_year8: 0,
+    Other_year9: 0,
+
+    Total_Expenses_year6: 0,
+    Total_Expenses_year7: 0,
+    Total_Expenses_year8: 0,
+    Total_Expenses_year9: 0,
+
+    Surplus_Deficit_year6: 0,
+    Surplus_Deficit_year7: 0,
+    Surplus_Deficit_year8: 0,
+    Surplus_Deficit_year9: 0,
+
+    Management_year6: 0,
+    Management_year7: 0,
+    Management_year8: 0,
+    Management_year9: 0,
+
+    Support_Services_year6: 0,
+    Support_Services_year7: 0,
+    Support_Services_year8: 0,
+    Support_Services_year9: 0,
+
+    Beneficiary_Advocacy_year6: 0,
+    Beneficiary_Advocacy_year7: 0,
+    Beneficiary_Advocacy_year8: 0,
+    Beneficiary_Advocacy_year9: 0,
+
+  };
+
+  try {
+    const docID = BudgetPLs.define(BudgetPLData);
+    console.log(`BudgetPL created with docID: ${docID}`);
+  } catch (error) {
+    console.error('Error creating BudgetPL:', error);
+  }
+}
 
 // Function to create a new user and then their balance sheet
 function createUser(email, role, firstName, lastName, password) {
@@ -341,6 +605,7 @@ function createUser(email, role, firstName, lastName, password) {
     const user = Meteor.users.findOne({ 'emails.address': email });
     if (user) {
       createAuditedBalanceSheet(user._id);
+      createBudgetPL(user._id);
     } else {
       console.error(`Error: Unable to find user with email ${email} to create balance sheet.`);
     }
