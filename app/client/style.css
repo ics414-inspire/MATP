@@ -17,13 +17,6 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
 }
-/* Sign-in form container */
-#sign-in-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
 /* Card styling */
 .card {
@@ -590,17 +583,7 @@ hr {
   transform: translateX(20%);
 }
 
-#signin-signup-page .social-container {
-  margin: 20px 0;
-}
-
-#signin-signup-page .social-container a {
-  border: 1px solid #dddddd;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  height: 40px;
-  width: 40px;
+.navbar .dropdown-menu .dropdown-item.active{
+  background-color: transparent !important;
+  color: inherit !important;
 }
