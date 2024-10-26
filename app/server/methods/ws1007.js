@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { AuditedBalanceSheets } from '../../imports/api/Inputs/auditedBalanceSheet';
+import { AuditedBalanceSheets } from '../../imports/api/Inputs/AuditedBalanceSheet';
 
 Meteor.methods({
   /**

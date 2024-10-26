@@ -3,7 +3,7 @@ import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 import { AuditedBalance } from '../Inputs/auditedBalanceCollection';
 // inputing ABS collections
-import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet.js';// inputing ABS collections
+import { AuditedBalanceSheets } from '../Inputs/AuditedBalanceSheet.js';// inputing ABS collections
 
 class MATPClass {
   collections;

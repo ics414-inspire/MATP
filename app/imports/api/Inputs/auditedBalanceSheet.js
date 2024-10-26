@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
@@ -7,9 +6,9 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-export const AuditedBalanceSheetPublications = {
-  AuditedBalanceSheet: 'AuditedBalanceSheet',
-  AuditedBalanceSheetAdmin: 'AuditedBalanceSheetAdmin',
+export const auditedBalanceSheetPublications = {
+  auditedBalanceSheet: 'AuditedBalanceSheet',
+  auditedBalanceSheetAdmin: 'AuditedBalanceSheetAdmin',
 };
 
 class AuditedBalanceSheetCollection extends BaseCollection {
@@ -43,7 +42,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       'otherAssets.$.notesRecAfterYr': { type: Number, defaultValue: 0, optional: true },
       'otherAssets.$.secDeposits': { type: Number, defaultValue: 0, optional: true },
       'otherAssets.$.cashHeldByInvMgr': { type: Number, defaultValue: 0, optional: true },
-      otherAssetsTotal: { type: Number, optional: true },
+      otherAssetsSubtotal: { type: Number, optional: true },
 
       investments: {
         type: Array,
@@ -91,6 +90,10 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       'land.$.construction': { type: Number, defaultValue: 0, optional: true },
       landTotal: { type: Number, optional: true },
 
+      compBAssets: {
+        type: Array,
+        optional: true,
+      },
       'compBAssets.$': Object,
       'compBAssets.$.buildingd': { type: Number, defaultValue: 0, optional: true },
       'compBAssets.$.leaseImprovements': { type: Number, defaultValue: 0, optional: true },
@@ -101,121 +104,73 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       compBAssetsTotal: { type: Number, optional: true },
       capAssetsTotal: { type: Number, optional: true },
 
+      restrictedCash: { type: Number, optional: true },
+      otherAssetsTotal: { type: Number, optional: true },
+      defOutflowsPension: { type: Number, optional: true },
+      defOutflowsOPEB: { type: Number, optional: true },
+      assetsAndDefOutflowsTotal: { type: Number, optional: true },
 
-      Restricted_cash_year6: Number,
-      Restricted_cash_year7: Number,
-      Restricted_cash_year8: Number,
-      Restricted_cash_year9: Number,
+      liabilities: {
+        type: Array,
+        optional: true,
+      },
+      'liabilities.$': Object,
+      'liabilities.$.accountsPayable': { type: Number, defaultValue: 0, optional: true },
+      'liabilities.$.dueToFund': { type: Number, defaultValue: 0, optional: true },
+      'liabilities.$.dueToOtherFund': { type: Number, defaultValue: 0, optional: true },
+      liabilitiesTotal: { type: Number, optional: true },
 
-      Total_Other_Assets_year6: Number,
-      Total_Other_Assets_year7: Number,
-      Total_Other_Assets_year8: Number,
-      Total_Other_Assets_year9: Number,
+      liaWithinYr: {
+        type: Array,
+        optional: true,
+      },
+      'liaWithinYr.$': Object,
+      'liaWithinYr.$.accVacation': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.workComp': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.accMgtRetPlan': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.accLease': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.capLease': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.notesPayBldgA': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.netPensionLia': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.netPensionOPEB': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.lineOfCredBldgA': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.lineOfCredBldgB': { type: Number, defaultValue: 0, optional: true },
+      'liaWithinYr.$.debtServ': { type: Number, defaultValue: 0, optional: true },
+      liaWithinYrTotal: { type: Number, optional: true },
 
-      Deferred_outflows_of_resources_related_to_pensions_year6: Number,
-      Deferred_outflows_of_resources_related_to_pensions_year7: Number,
-      Deferred_outflows_of_resources_related_to_pensions_year8: Number,
-      Deferred_outflows_of_resources_related_to_pensions_year9: Number,
+      liaAfterYr: {
+        type: Array,
+        optional: true,
+      },
+      'liaAfterYr.$': Object,
+      'liaAfterYr.$.accVacation': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.workComp': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.accMgtRetPlan': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.accLease': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.capLease': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.notesPayBldgA': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.netPensionLia': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.netPensionOPEB': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.lineOfCredBldgA': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.lineOfCredBldgB': { type: Number, defaultValue: 0, optional: true },
+      'liaAfterYr.$.debtServ': { type: Number, defaultValue: 0, optional: true },
+      liaAfterYrTotal: { type: Number, optional: true },
+      allLiabilitiesTotal: { type: Number, optional: true },
 
-      Deferred_outflows_of_resources_related_to_OPEB_year6: Number,
-      Deferred_outflows_of_resources_related_to_OPEB_year7: Number,
-      Deferred_outflows_of_resources_related_to_OPEB_year8: Number,
-      Deferred_outflows_of_resources_related_to_OPEB_year9: Number,
+      defInflowsPension: { type: Number, optional: true },
+      defInflowsOPEB: { type: Number, optional: true },
+      liaAndDefInflowsTotal: { type: Number, optional: true },
 
-      Total_assets_and_deferred_outflows_of_resources_year6: Number,
-      Total_assets_and_deferred_outflows_of_resources_year7: Number,
-      Total_assets_and_deferred_outflows_of_resources_year8: Number,
-      Total_assets_and_deferred_outflows_of_resources_year9: Number,
-
-      Accounts_payable_and_accrued_liabilities_year6: Number,
-      Accounts_payable_and_accrued_liabilities_year7: Number,
-      Accounts_payable_and_accrued_liabilities_year8: Number,
-      Accounts_payable_and_accrued_liabilities_year9: Number,
-
-      Due_to_fund_year6: Number,
-      Due_to_fund_year7: Number,
-      Due_to_fund_year8: Number,
-      Due_to_fund_year9: Number,
-
-      Due_to_other_fund_year6: Number,
-      Due_to_other_fund_year7: Number,
-      Due_to_other_fund_year8: Number,
-      Due_to_other_fund_year9: Number,
-
-      Accrued_vacation_year6: Number,
-      Accrued_vacation_year7: Number,
-      Accrued_vacation_year8: Number,
-      Accrued_vacation_year9: Number,
-
-      Workers_compensation_year6: Number,
-      Workers_compensation_year7: Number,
-      Workers_compensation_year8: Number,
-      Workers_compensation_year9: Number,
-
-      Accrued_management_retirement_plan_year6: Number,
-      Accrued_management_retirement_plan_year7: Number,
-      Accrued_management_retirement_plan_year8: Number,
-      Accrued_management_retirement_plan_year9: Number,
-
-      Accrued_lease_guaranty_obligation_year6: Number,
-      Accrued_lease_guaranty_obligation_year7: Number,
-      Accrued_lease_guaranty_obligation_year8: Number,
-      Accrued_lease_guaranty_obligation_year9: Number,
-
-      Capital_lease_obligation_year6: Number,
-      Capital_lease_obligation_year7: Number,
-      Capital_lease_obligation_year8: Number,
-      Capital_lease_obligation_year9: Number,
-
-      Notes_payable_Building_A_acquisition_year6: Number,
-      Notes_payable_Building_A_acquisition_year7: Number,
-      Notes_payable_Building_A_acquisition_year8: Number,
-      Notes_payable_Building_A_acquisition_year9: Number,
-
-      Net_Pension_Liability_year6: Number,
-      Net_Pension_Liability_year7: Number,
-      Net_Pension_Liability_year8: Number,
-      Net_Pension_Liability_year9: Number,
-
-      Net_OPEB_Liability_year6: Number,
-      Net_OPEB_Liability_year7: Number,
-      Net_OPEB_Liability_year8: Number,
-      Net_OPEB_Liability_year9: Number,
-
-      Line_of_Credit_Building_A_year6: Number,
-      Line_of_Credit_Building_A_year7: Number,
-      Line_of_Credit_Building_A_year8: Number,
-      Line_of_Credit_Building_A_year9: Number,
-
-      Line_of_Credit_Building_B_year6: Number,
-      Line_of_Credit_Building_B_year7: Number,
-      Line_of_Credit_Building_B_year8: Number,
-      Line_of_Credit_Building_B_year9: Number,
-
-      Longterm_liabilities_due_within_one_year_year6: Number,
-      Longterm_liabilities_due_within_one_year_year7: Number,
-      Longterm_liabilities_due_within_one_year_year8: Number,
-      Longterm_liabilities_due_within_one_year_year9: Number,
-
-      Total_Liabilities_year6: Number,
-      Total_Liabilities_year7: Number,
-      Total_Liabilities_year8: Number,
-      Total_Liabilities_year9: Number,
-
-      Invested_in_capital_assets_net_of_related_debt_year6: Number,
-      Invested_in_capital_assets_net_of_related_debt_year7: Number,
-      Invested_in_capital_assets_net_of_related_debt_year8: Number,
-      Invested_in_capital_assets_net_of_related_debt_year9: Number,
-
-      Total_net_position_year6: Number,
-      Total_net_position_year7: Number,
-      Total_net_position_year8: Number,
-      Total_net_position_year9: Number,
-
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year6: Number,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year7: Number,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year8: Number,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year9: Number,
+      commitAndContin: {
+        type: Array,
+        optional: true,
+      },
+      'commitAndContin.$': Object,
+      'commitAndContin.$.capAssetInvestments': { type: Number, defaultValue: 0, optional: true },
+      'commitAndContin.$.resFedFunds': { type: Number, defaultValue: 0, optional: true },
+      'commitAndContin.$.unRes': { type: Number, defaultValue: 0, optional: true },
+      totalNetPos: { type: Number, optional: true },
+      totalLiaInflowsNetPos: { type: Number, optional: true },
     }));
   }
 
@@ -223,351 +178,27 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     * @param {Object} data - Contains fields for AuditedBalanceSheet.
     * @return {String} docID - The docID of the newly inserted document.
     */
-  define({ owner }) {
+  define({ owner, year, cashStuff, otherAssets, investments, loanFund, assets, land, compBAssets, restrictedCash, defOutflowsPension, defOutflowsOPEB, liabilities, liaWithinYr, liaAfterYr, defInflowsPension, defInflowsOPEB, commitAndContin }) {
     const auditedBalanceSheetData = {
       owner,
-      Petty_cash_year6: 0,
-      Petty_cash_year7: 0,
-      Petty_cash_year8: 0,
-      Petty_cash_year9: 0,
-      Cash_year6: 0,
-      Cash_year7: 0,
-      Cash_year8: 0,
-      Cash_year9: 0,
-      Cash_in_banksDraw_on_Line_of_Credit_year6: 0,
-      Cash_in_banksDraw_on_Line_of_Credit_year7: 0,
-      Cash_in_banksDraw_on_Line_of_Credit_year8: 0,
-      Cash_in_banksDraw_on_Line_of_Credit_year9: 0,
-      Total_Cash_and_Cash_Equivalents_year6: 0,
-      Total_Cash_and_Cash_Equivalents_year7: 0,
-      Total_Cash_and_Cash_Equivalents_year8: 0,
-      Total_Cash_and_Cash_Equivalents_year9: 0,
-      Accounts_receivable_year6: 0,
-      Accounts_receivable_year7: 0,
-      Accounts_receivable_year8: 0,
-      Accounts_receivable_year9: 0,
-      Due_from_other_fund_year6: 0,
-      Due_from_other_fund_year7: 0,
-      Due_from_other_fund_year8: 0,
-      Due_from_other_fund_year9: 0,
-      Interest_and_dividends_receivable_year6: 0,
-      Interest_and_dividends_receivable_year7: 0,
-      Interest_and_dividends_receivable_year8: 0,
-      Interest_and_dividends_receivable_year9: 0,
-      Inventory_prepaid_items_and_other_assets_year6: 0,
-      Inventory_prepaid_items_and_other_assets_year7: 0,
-      Inventory_prepaid_items_and_other_assets_year8: 0,
-      Inventory_prepaid_items_and_other_assets_year9: 0,
-      Notes_receivable_due_within_one_year_year6: 0,
-      Notes_receivable_due_within_one_year_year7: 0,
-      Notes_receivable_due_within_one_year_year8: 0,
-      Notes_receivable_due_within_one_year_year9: 0,
-      Notes_receivable_due_after_one_year_year6: 0,
-      Notes_receivable_due_after_one_year_year7: 0,
-      Notes_receivable_due_after_one_year_year8: 0,
-      Notes_receivable_due_after_one_year_year9: 0,
-      Security_Deposits_year6: 0,
-      Security_Deposits_year7: 0,
-      Security_Deposits_year8: 0,
-      Security_Deposits_year9: 0,
-      Cash_held_by_investment_manager_year6: 0,
-      Cash_held_by_investment_manager_year7: 0,
-      Cash_held_by_investment_manager_year8: 0,
-      Cash_held_by_investment_manager_year9: 0,
-      Mutual_Funds_year6: 0,
-      Mutual_Funds_year7: 0,
-      Mutual_Funds_year8: 0,
-      Mutual_Funds_year9: 0,
-      Commingled_funds_year6: 0,
-      Commingled_funds_year7: 0,
-      Commingled_funds_year8: 0,
-      Commingled_funds_year9: 0,
-      Hedge_funds_year6: 0,
-      Hedge_funds_year7: 0,
-      Hedge_funds_year8: 0,
-      Hedge_funds_year9: 0,
-      Private_equity_year6: 0,
-      Private_equity_year7: 0,
-      Private_equity_year8: 0,
-      Private_equity_year9: 0,
-      Common_trust_fund_year6: 0,
-      Common_trust_fund_year7: 0,
-      Common_trust_fund_year8: 0,
-      Common_trust_fund_year9: 0,
-      Common_preferred_stock_year6: 0,
-      Common_preferred_stock_year7: 0,
-      Common_preferred_stock_year8: 0,
-      Common_preferred_stock_year9: 0,
-      Private_debt_year6: 0,
-      Private_debt_year7: 0,
-      Private_debt_year8: 0,
-      Private_debt_year9: 0,
-      Other_year6: 0,
-      Other_year7: 0,
-      Other_year8: 0,
-      Other_year9: 0,
-      Subtotal_Investment_year6: 0,
-      Subtotal_Investment_year7: 0,
-      Subtotal_Investment_year8: 0,
-      Subtotal_Investment_year9: 0,
-      US_treasuries_year6: 0,
-      US_treasuries_year7: 0,
-      US_treasuries_year8: 0,
-      US_treasuries_year9: 0,
-      US_agencies_year6: 0,
-      US_agencies_year7: 0,
-      US_agencies_year8: 0,
-      US_agencies_year9: 0,
-      Subtotal_Loan_Fund_year6: 0,
-      Subtotal_Loan_Fund_year7: 0,
-      Subtotal_Loan_Fund_year8: 0,
-      Subtotal_Loan_Fund_year9: 0,
-      Investments_year6: 0,
-      Investments_year7: 0,
-      Investments_year8: 0,
-      Investments_year9: 0,
-      Buildings_year6: 0,
-      Buildings_year7: 0,
-      Buildings_year8: 0,
-      Buildings_year9: 0,
-      Leasehold_improvements_year6: 0,
-      Leasehold_improvements_year7: 0,
-      Leasehold_improvements_year8: 0,
-      Leasehold_improvements_year9: 0,
-      Furniture_fixtures_and_equipment_year6: 0,
-      Furniture_fixtures_and_equipment_year7: 0,
-      Furniture_fixtures_and_equipment_year8: 0,
-      Furniture_fixtures_and_equipment_year9: 0,
-      Less_accumulated_depreciation_year6: 0,
-      Less_accumulated_depreciation_year7: 0,
-      Less_accumulated_depreciation_year8: 0,
-      Less_accumulated_depreciation_year9: 0,
-      Net_year6: 0,
-      Net_year7: 0,
-      Net_year8: 0,
-      Net_year9: 0,
-      Land_A_year6: 0,
-      Land_A_year7: 0,
-      Land_A_year8: 0,
-      Land_A_year9: 0,
-      Land_B_year6: 0,
-      Land_B_year7: 0,
-      Land_B_year8: 0,
-      Land_B_year9: 0,
-      Construction_in_Progress_year6: 0,
-      Construction_in_Progress_year7: 0,
-      Construction_in_Progress_year8: 0,
-      Construction_in_Progress_year9: 0,
-      Subtotal_Capital_Assets_net_year6: 0,
-      Subtotal_Capital_Assets_net_year7: 0,
-      Subtotal_Capital_Assets_net_year8: 0,
-      Subtotal_Capital_Assets_net_year9: 0,
-      Investments_Buildings_year6: 0,
-      Investments_Buildings_year7: 0,
-      Investments_Buildings_year8: 0,
-      Investments_Buildings_year9: 0,
-      Investments_Leasehold_improvements_year6: 0,
-      Investments_Leasehold_improvements_year7: 0,
-      Investments_Leasehold_improvements_year8: 0,
-      Investments_Leasehold_improvements_year9: 0,
-      Investments_Furniture_year6: 0,
-      Investments_Furniture_year7: 0,
-      Investments_Furniture_year8: 0,
-      Investments_Furniture_year9: 0,
-      Investments_fixtures_and_equipment_year6: 0,
-      Investments_fixtures_and_equipment_year7: 0,
-      Investments_fixtures_and_equipment_year8: 0,
-      Investments_fixtures_and_equipment_year9: 0,
-      Vehicles_year6: 0,
-      Vehicles_year7: 0,
-      Vehicles_year8: 0,
-      Vehicles_year9: 0,
-      Investments_Less_accumulated_depreciation_year6: 0,
-      Investments_Less_accumulated_depreciation_year7: 0,
-      Investments_Less_accumulated_depreciation_year8: 0,
-      Investments_Less_accumulated_depreciation_year9: 0,
-      Investments_Net_year6: 0,
-      Investments_Net_year7: 0,
-      Investments_Net_year8: 0,
-      Investments_Net_year9: 0,
-      Land_year6: 0,
-      Land_year7: 0,
-      Land_year8: 0,
-      Land_year9: 0,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year6: 0,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year7: 0,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year8: 0,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year9: 0,
-      Capital_Assets_net_year6: 0,
-      Capital_Assets_net_year7: 0,
-      Capital_Assets_net_year8: 0,
-      Capital_Assets_net_year9: 0,
-      Restricted_cash_year6: 0,
-      Restricted_cash_year7: 0,
-      Restricted_cash_year8: 0,
-      Restricted_cash_year9: 0,
-      Total_Other_Assets_year6: 0,
-      Total_Other_Assets_year7: 0,
-      Total_Other_Assets_year8: 0,
-      Total_Other_Assets_year9: 0,
-      Deferred_outflows_of_resources_related_to_pensions_year6: 0,
-      Deferred_outflows_of_resources_related_to_pensions_year7: 0,
-      Deferred_outflows_of_resources_related_to_pensions_year8: 0,
-      Deferred_outflows_of_resources_related_to_pensions_year9: 0,
-      Deferred_outflows_of_resources_related_to_OPEB_year6: 0,
-      Deferred_outflows_of_resources_related_to_OPEB_year7: 0,
-      Deferred_outflows_of_resources_related_to_OPEB_year8: 0,
-      Deferred_outflows_of_resources_related_to_OPEB_year9: 0,
-      Total_assets_and_deferred_outflows_of_resources_year6: 0,
-      Total_assets_and_deferred_outflows_of_resources_year7: 0,
-      Total_assets_and_deferred_outflows_of_resources_year8: 0,
-      Total_assets_and_deferred_outflows_of_resources_year9: 0,
-      Accounts_payable_and_accrued_liabilities_year6: 0,
-      Accounts_payable_and_accrued_liabilities_year7: 0,
-      Accounts_payable_and_accrued_liabilities_year8: 0,
-      Accounts_payable_and_accrued_liabilities_year9: 0,
-      Due_to_fund_year6: 0,
-      Due_to_fund_year7: 0,
-      Due_to_fund_year8: 0,
-      Due_to_fund_year9: 0,
-      Due_to_other_fund_year6: 0,
-      Due_to_other_fund_year7: 0,
-      Due_to_other_fund_year8: 0,
-      Due_to_other_fund_year9: 0,
-      Accrued_vacation_year6: 0,
-      Accrued_vacation_year7: 0,
-      Accrued_vacation_year8: 0,
-      Accrued_vacation_year9: 0,
-      Workers_compensation_year6: 0,
-      Workers_compensation_year7: 0,
-      Workers_compensation_year8: 0,
-      Workers_compensation_year9: 0,
-      Accrued_management_retirement_plan_year6: 0,
-      Accrued_management_retirement_plan_year7: 0,
-      Accrued_management_retirement_plan_year8: 0,
-      Accrued_management_retirement_plan_year9: 0,
-      Accrued_lease_guaranty_obligation_year6: 0,
-      Accrued_lease_guaranty_obligation_year7: 0,
-      Accrued_lease_guaranty_obligation_year8: 0,
-      Accrued_lease_guaranty_obligation_year9: 0,
-      Capital_lease_obligation_year6: 0,
-      Capital_lease_obligation_year7: 0,
-      Capital_lease_obligation_year8: 0,
-      Capital_lease_obligation_year9: 0,
-      Notes_payable_Building_A_acquisition_year6: 0,
-      Notes_payable_Building_A_acquisition_year7: 0,
-      Notes_payable_Building_A_acquisition_year8: 0,
-      Notes_payable_Building_A_acquisition_year9: 0,
-      Net_Pension_Liability_year6: 0,
-      Net_Pension_Liability_year7: 0,
-      Net_Pension_Liability_year8: 0,
-      Net_Pension_Liability_year9: 0,
-      Net_OPEB_Liability_year6: 0,
-      Net_OPEB_Liability_year7: 0,
-      Net_OPEB_Liability_year8: 0,
-      Net_OPEB_Liability_year9: 0,
-      Line_of_Credit_Building_A_year6: 0,
-      Line_of_Credit_Building_A_year7: 0,
-      Line_of_Credit_Building_A_year8: 0,
-      Line_of_Credit_Building_A_year9: 0,
-      Line_of_Credit_Building_B_year6: 0,
-      Line_of_Credit_Building_B_year7: 0,
-      Line_of_Credit_Building_B_year8: 0,
-      Line_of_Credit_Building_B_year9: 0,
-      Debt_service_year6: 0,
-      Debt_service_year7: 0,
-      Debt_service_year8: 0,
-      Debt_service_year9: 0,
-      Longterm_liabilities_due_within_one_year_year6: 0,
-      Longterm_liabilities_due_within_one_year_year7: 0,
-      Longterm_liabilities_due_within_one_year_year8: 0,
-      Longterm_liabilities_due_within_one_year_year9: 0,
-      Long_term_Accrued_vacation_year6: 0,
-      Long_term_Accrued_vacation_year7: 0,
-      Long_term_Accrued_vacation_year8: 0,
-      Long_term_Accrued_vacation_year9: 0,
-      Long_term_Workers_compensation_year6: 0,
-      Long_term_Workers_compensation_year7: 0,
-      Long_term_Workers_compensation_year8: 0,
-      Long_term_Workers_compensation_year9: 0,
-      Long_term_Accrued_management_retirement_plan_year6: 0,
-      Long_term_Accrued_management_retirement_plan_year7: 0,
-      Long_term_Accrued_management_retirement_plan_year8: 0,
-      Long_term_Accrued_management_retirement_plan_year9: 0,
-      Long_term_Accrued_lease_guaranty_obligation_year6: 0,
-      Long_term_Accrued_lease_guaranty_obligation_year7: 0,
-      Long_term_Accrued_lease_guaranty_obligation_year8: 0,
-      Long_term_Accrued_lease_guaranty_obligation_year9: 0,
-      Long_term_Capital_lease_obligation_year6: 0,
-      Long_term_Capital_lease_obligation_year7: 0,
-      Long_term_Capital_lease_obligation_year8: 0,
-      Long_term_Capital_lease_obligation_year9: 0,
-      Long_term_Notes_payable_Building_A_acquisition_year6: 0,
-      Long_term_Notes_payable_Building_A_acquisition_year7: 0,
-      Long_term_Notes_payable_Building_A_acquisition_year8: 0,
-      Long_term_Notes_payable_Building_A_acquisition_year9: 0,
-      Long_term_Net_Pension_Liability_year6: 0,
-      Long_term_Net_Pension_Liability_year7: 0,
-      Long_term_Net_Pension_Liability_year8: 0,
-      Long_term_Net_Pension_Liability_year9: 0,
-      Long_term_Net_OPEB_Liability_year6: 0,
-      Long_term_Net_OPEB_Liability_year7: 0,
-      Long_term_Net_OPEB_Liability_year8: 0,
-      Long_term_Net_OPEB_Liability_year9: 0,
-      Long_term_Line_of_Credit_Building_A_year6: 0,
-      Long_term_Line_of_Credit_Building_A_year7: 0,
-      Long_term_Line_of_Credit_Building_A_year8: 0,
-      Long_term_Line_of_Credit_Building_A_year9: 0,
-      Long_term_Line_of_Credit_Building_B_year6: 0,
-      Long_term_Line_of_Credit_Building_B_year7: 0,
-      Long_term_Line_of_Credit_Building_B_year8: 0,
-      Long_term_Line_of_Credit_Building_B_year9: 0,
-      Long_term_Debt_service_year6: 0,
-      Long_term_Debt_service_year7: 0,
-      Long_term_Debt_service_year8: 0,
-      Long_term_Debt_service_year9: 0,
-      Longterm_liabilities_due_after_one_year_year6: 0,
-      Longterm_liabilities_due_after_one_year_year7: 0,
-      Longterm_liabilities_due_after_one_year_year8: 0,
-      Longterm_liabilities_due_after_one_year_year9: 0,
-      Total_Liabilities_year6: 0,
-      Total_Liabilities_year7: 0,
-      Total_Liabilities_year8: 0,
-      Total_Liabilities_year9: 0,
-      Deferred_inflows_of_resources_related_to_pensions_year6: 0,
-      Deferred_inflows_of_resources_related_to_pensions_year7: 0,
-      Deferred_inflows_of_resources_related_to_pensions_year8: 0,
-      Deferred_inflows_of_resources_related_to_pensions_year9: 0,
-      Deferred_inflows_of_resources_related_to_OPEB_year6: 0,
-      Deferred_inflows_of_resources_related_to_OPEB_year7: 0,
-      Deferred_inflows_of_resources_related_to_OPEB_year8: 0,
-      Deferred_inflows_of_resources_related_to_OPEB_year9: 0,
-      Total_liabilities_and_deferred_inflows_of_resources_year6: 0,
-      Total_liabilities_and_deferred_inflows_of_resources_year7: 0,
-      Total_liabilities_and_deferred_inflows_of_resources_year8: 0,
-      Total_liabilities_and_deferred_inflows_of_resources_year9: 0,
-      Invested_in_capital_assets_net_of_related_debt_year6: 0,
-      Invested_in_capital_assets_net_of_related_debt_year7: 0,
-      Invested_in_capital_assets_net_of_related_debt_year8: 0,
-      Invested_in_capital_assets_net_of_related_debt_year9: 0,
-      Restricted_federal_funds_year6: 0,
-      Restricted_federal_funds_year7: 0,
-      Restricted_federal_funds_year8: 0,
-      Restricted_federal_funds_year9: 0,
-      Unrestricted_year6: 0,
-      Unrestricted_year7: 0,
-      Unrestricted_year8: 0,
-      Unrestricted_year9: 0,
-      Total_net_position_year6: 0,
-      Total_net_position_year7: 0,
-      Total_net_position_year8: 0,
-      Total_net_position_year9: 0,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year6: 0,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year7: 0,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year8: 0,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year9: 0,
+      year,
+      cashStuff,
+      otherAssets,
+      investments,
+      loanFund,
+      assets,
+      land,
+      compBAssets,
+      restrictedCash,
+      defOutflowsPension,
+      defOutflowsOPEB,
+      liabilities,
+      liaWithinYr,
+      liaAfterYr,
+      defInflowsPension,
+      defInflowsOPEB,
+      commitAndContin,
     };
-
     const docID = this._collection.insert(auditedBalanceSheetData);
     return docID;
   }
@@ -577,14 +208,26 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     * @param {String} docID - The ID of the document to update.
     * @param {Object} updatedFields - The new values for the fields.
     */
-  update(docID, updatedFields) {
+  update(docID, { cashStuff, otherAssets, investments, loanFund, assets, land, compBAssets, restrictedCash, defOutflowsPension, defOutflowsOPEB, liabilities, liaWithinYr, liaAfterYr, defInflowsPension, defInflowsOPEB, commitAndContin }) {
     const updateData = {};
-    Object.entries(updatedFields).forEach(([key, value]) => {
-      if (_.isNumber(value)) {
-        updateData[key] = value;
-      }
-    });
-    this._collection.update(docID, { $set: updateData });
+    if (_.isArray(cashStuff)) { updateData.cashStuff = cashStuff; }
+    if (_.isArray(otherAssets)) { updateData.otherAssets = otherAssets; }
+    if (_.isArray(investments)) { updateData.investments = investments; }
+    if (_.isArray(loanFund)) { updateData.loanFund = loanFund; }
+    if (_.isArray(assets)) { updateData.assets = assets; }
+    if (_.isArray(land)) { updateData.land = land; }
+    if (_.isArray(compBAssets)) { updateData.compBAssets = compBAssets; }
+    updateData.restrictedCash = restrictedCash;
+    updateData.defOutflowsPension = defOutflowsPension;
+    updateData.defOutflowsOPEB = defOutflowsOPEB;
+    if (_.isArray(liabilities)) { updateData.liabilities = liabilities; }
+    if (_.isArray(liaWithinYr)) { updateData.liaWithinYr = liaWithinYr; }
+    if (_.isArray(liaAfterYr)) { updateData.liaAfterYr = liaAfterYr; }
+    updateData.defInflowsPension = defInflowsPension;
+    updateData.defInflowsOPEB = defInflowsOPEB;
+    if (_.isArray(commitAndContin)) { updateData.commitAndContin = commitAndContin; }
+    this._collection.updateTotals(docID, { $set: updateData });
+    this.updateTotals(docID);
   }
 
   /**
@@ -608,7 +251,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       const instance = this;
 
       // Publish only documents associated with the logged-in user
-      Meteor.publish(AuditedBalanceSheetPublications.AuditedBalanceSheet, function publish() {
+      Meteor.publish(auditedBalanceSheetPublications.auditedBalanceSheet, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -616,12 +259,13 @@ class AuditedBalanceSheetCollection extends BaseCollection {
         return this.ready();
       });
 
-      // Publish all documents, but only for admin users
-      Meteor.publish('auditedBalanceSheets', function () {
-        // eslint-disable-next-line no-use-before-define
-        return AuditedBalanceSheets.find(); // Ensure it is correctly publishing documents
+      // Publishes all documents regardless of user, but only if the logged in user is the Admin.
+      Meteor.publish(auditedBalanceSheetPublications.auditedBalanceSheetAdmin, function publish() {
+        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
+          return instance._collection.find();
+        }
+        return this.ready();
       });
-
     }
   }
 
@@ -629,11 +273,10 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     * Subscription method for AuditedBalanceSheet owned by the current user.
     */
   subscribeAuditedBalanceSheet() {
-    return Meteor.subscribe('auditedBalanceSheet');
-  }
-
-  getCollectionName() {
-    return this._collection._name;
+    if (Meteor.isClient) {
+      return Meteor.subscribe(auditedBalanceSheetPublications.auditedBalanceSheet);
+    }
+    return null;
   }
 
   /**
@@ -642,7 +285,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     */
   subscribeAuditedBalanceSheetAdmin() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(AuditedBalanceSheetPublications.AuditedBalanceSheetAdmin);
+      return Meteor.subscribe(auditedBalanceSheetPublications.auditedBalanceSheetAdmin);
     }
     return null;
   }
@@ -665,361 +308,128 @@ class AuditedBalanceSheetCollection extends BaseCollection {
 
   dumpOne(docID) {
     const doc = this.findDoc(docID);
+    const year = doc.year;
+    const owner = doc.owner;
+    const cashStuff = doc.cashStuff;
+    const cashTotal = doc.cashTotal;
+    const otherAssets = doc.otherAssets;
+    const otherAssetsSubtotal = doc.otherAssetsSubtotal;
+    const investments = doc.investments;
+    const investmentsTotal = doc.investmentsTotal;
+    const loanFund = doc.loanFund;
+    const loanFundTotal = doc.loanFundTotal;
+    const investLoanTotal = doc.investLoanTotal;
+    const assets = doc.assets;
+    const assetsTotal = doc.assetsTotal;
+    const land = doc.land;
+    const landTotal = doc.landTotal;
+    const compBAssets = doc.compBAssets;
+    const compBAssetsTotal = doc.compBAssetsTotal;
+    const capAssetsTotal = doc.capAssetsTotal;
+    const restrictedCash = doc.restrictedCash;
+    const otherAssetsTotal = doc.otherAssetsTotal;
+    const defOutflowsPension = doc.defOutflowsPension;
+    const defOutflowsOPEB = doc.defOutflowsOPEB;
+    const assetsAndDefOutflowsTotal = doc.assetsAndDefOutflowsTotal;
+    const liabilities = doc.liabilities;
+    const liabilitiesTotal = doc.liabilitiesTotal;
+    const liaWithinYr = doc.liaWithinYr;
+    const liaWithinYrTotal = doc.liaWithinYrTotal;
+    const liaAfterYr = doc.liaAfterYr;
+    const liaAfterYrTotal = doc.liaAfterYrTotal;
+    const allLiabilitiesTotal = doc.allLiabilitiesTotal;
+    const defInflowsPension = doc.defInflowsPension;
+    const defInflowsOPEB = doc.defInflowsOPEB;
+    const liaAndDefInflowsTotal = doc.liaAndDefInflowsTotal;
+    const commitAndContin = doc.commitAndContin;
+    const totalNetPos = doc.totalNetPos;
+    const totalLiaInflowsNetPos = doc.totalLiaInflowsNetPos;
     return {
-      Petty_cash_year6: doc.Petty_cash_year6,
-      Petty_cash_year7: doc.Petty_cash_year7,
-      Petty_cash_year8: doc.Petty_cash_year8,
-      Petty_cash_year9: doc.Petty_cash_year9,
-      Cash_year6: doc.Cash_year6,
-      Cash_year7: doc.Cash_year7,
-      Cash_year8: doc.Cash_year8,
-      Cash_year9: doc.Cash_year9,
-      Cash_in_banksDraw_on_Line_of_Credit_year6: doc.Cash_in_banksDraw_on_Line_of_Credit_year6,
-      Cash_in_banksDraw_on_Line_of_Credit_year7: doc.Cash_in_banksDraw_on_Line_of_Credit_year7,
-      Cash_in_banksDraw_on_Line_of_Credit_year8: doc.Cash_in_banksDraw_on_Line_of_Credit_year8,
-      Cash_in_banksDraw_on_Line_of_Credit_year9: doc.Cash_in_banksDraw_on_Line_of_Credit_year9,
-      Total_Cash_and_Cash_Equivalents_year6: doc.Total_Cash_and_Cash_Equivalents_year6,
-      Total_Cash_and_Cash_Equivalents_year7: doc.Total_Cash_and_Cash_Equivalents_year7,
-      Total_Cash_and_Cash_Equivalents_year8: doc.Total_Cash_and_Cash_Equivalents_year8,
-      Total_Cash_and_Cash_Equivalents_year9: doc.Total_Cash_and_Cash_Equivalents_year9,
-      Accounts_receivable_year6: doc.Accounts_receivable_year6,
-      Accounts_receivable_year7: doc.Accounts_receivable_year7,
-      Accounts_receivable_year8: doc.Accounts_receivable_year8,
-      Accounts_receivable_year9: doc.Accounts_receivable_year9,
-      Due_from_other_fund_year6: doc.Due_from_other_fund_year6,
-      Due_from_other_fund_year7: doc.Due_from_other_fund_year7,
-      Due_from_other_fund_year8: doc.Due_from_other_fund_year8,
-      Due_from_other_fund_year9: doc.Due_from_other_fund_year9,
-      Interest_and_dividends_receivable_year6: doc.Interest_and_dividends_receivable_year6,
-      Interest_and_dividends_receivable_year7: doc.Interest_and_dividends_receivable_year7,
-      Interest_and_dividends_receivable_year8: doc.Interest_and_dividends_receivable_year8,
-      Interest_and_dividends_receivable_year9: doc.Interest_and_dividends_receivable_year9,
-      Inventory_prepaid_items_and_other_assets_year6: doc.Inventory_prepaid_items_and_other_assets_year6,
-      Inventory_prepaid_items_and_other_assets_year7: doc.Inventory_prepaid_items_and_other_assets_year7,
-      Inventory_prepaid_items_and_other_assets_year8: doc.Inventory_prepaid_items_and_other_assets_year8,
-      Inventory_prepaid_items_and_other_assets_year9: doc.Inventory_prepaid_items_and_other_assets_year9,
-      Notes_receivable_due_within_one_year_year6: doc.Notes_receivable_due_within_one_year_year6,
-      Notes_receivable_due_within_one_year_year7: doc.Notes_receivable_due_within_one_year_year7,
-      Notes_receivable_due_within_one_year_year8: doc.Notes_receivable_due_within_one_year_year8,
-      Notes_receivable_due_within_one_year_year9: doc.Notes_receivable_due_within_one_year_year9,
-      Notes_receivable_due_after_one_year_year6: doc.Notes_receivable_due_after_one_year_year6,
-      Notes_receivable_due_after_one_year_year7: doc.Notes_receivable_due_after_one_year_year7,
-      Notes_receivable_due_after_one_year_year8: doc.Notes_receivable_due_after_one_year_year8,
-      Notes_receivable_due_after_one_year_year9: doc.Notes_receivable_due_after_one_year_year9,
-      Security_Deposits_year6: doc.Security_Deposits_year6,
-      Security_Deposits_year7: doc.Security_Deposits_year7,
-      Security_Deposits_year8: doc.Security_Deposits_year8,
-      Security_Deposits_year9: doc.Security_Deposits_year9,
-      Cash_held_by_investment_manager_year6: doc.Cash_held_by_investment_manager_year6,
-      Cash_held_by_investment_manager_year7: doc.Cash_held_by_investment_manager_year7,
-      Cash_held_by_investment_manager_year8: doc.Cash_held_by_investment_manager_year8,
-      Cash_held_by_investment_manager_year9: doc.Cash_held_by_investment_manager_year9,
-      Mutual_Funds_year6: doc.Mutual_Funds_year6,
-      Mutual_Funds_year7: doc.Mutual_Funds_year7,
-      Mutual_Funds_year8: doc.Mutual_Funds_year8,
-      Mutual_Funds_year9: doc.Mutual_Funds_year9,
-      Commingled_funds_year6: doc.Commingled_funds_year6,
-      Commingled_funds_year7: doc.Commingled_funds_year7,
-      Commingled_funds_year8: doc.Commingled_funds_year8,
-      Commingled_funds_year9: doc.Commingled_funds_year9,
-      Hedge_funds_year6: doc.Hedge_funds_year6,
-      Hedge_funds_year7: doc.Hedge_funds_year7,
-      Hedge_funds_year8: doc.Hedge_funds_year8,
-      Hedge_funds_year9: doc.Hedge_funds_year9,
-      Private_equity_year6: doc.Private_equity_year6,
-      Private_equity_year7: doc.Private_equity_year7,
-      Private_equity_year8: doc.Private_equity_year8,
-      Private_equity_year9: doc.Private_equity_year9,
-      Common_trust_fund_year6: doc.Common_trust_fund_year6,
-      Common_trust_fund_year7: doc.Common_trust_fund_year7,
-      Common_trust_fund_year8: doc.Common_trust_fund_year8,
-      Common_trust_fund_year9: doc.Common_trust_fund_year9,
-      Common_preferred_stock_year6: doc.Common_preferred_stock_year6,
-      Common_preferred_stock_year7: doc.Common_preferred_stock_year7,
-      Common_preferred_stock_year8: doc.Common_preferred_stock_year8,
-      Common_preferred_stock_year9: doc.Common_preferred_stock_year9,
-      Private_debt_year6: doc.Private_debt_year6,
-      Private_debt_year7: doc.Private_debt_year7,
-      Private_debt_year8: doc.Private_debt_year8,
-      Private_debt_year9: doc.Private_debt_year9,
-      Other_year6: doc.Other_year6,
-      Other_year7: doc.Other_year7,
-      Other_year8: doc.Other_year8,
-      Other_year9: doc.Other_year9,
-      Subtotal_Investment_year6: doc.Subtotal_Investment_year6,
-      Subtotal_Investment_year7: doc.Subtotal_Investment_year7,
-      Subtotal_Investment_year8: doc.Subtotal_Investment_year8,
-      Subtotal_Investment_year9: doc.Subtotal_Investment_year9,
-      US_treasuries_year6: doc.US_treasuries_year6,
-      US_treasuries_year7: doc.US_treasuries_year7,
-      US_treasuries_year8: doc.US_treasuries_year8,
-      US_treasuries_year9: doc.US_treasuries_year9,
-      US_agencies_year6: doc.US_agencies_year6,
-      US_agencies_year7: doc.US_agencies_year7,
-      US_agencies_year8: doc.US_agencies_year8,
-      US_agencies_year9: doc.US_agencies_year9,
-      Subtotal_Loan_Fund_year6: doc.Subtotal_Loan_Fund_year6,
-      Subtotal_Loan_Fund_year7: doc.Subtotal_Loan_Fund_year7,
-      Subtotal_Loan_Fund_year8: doc.Subtotal_Loan_Fund_year8,
-      Subtotal_Loan_Fund_year9: doc.Subtotal_Loan_Fund_year9,
-      Investments_year6: doc.Investments_year6,
-      Investments_year7: doc.Investments_year7,
-      Investments_year8: doc.Investments_year8,
-      Investments_year9: doc.Investments_year9,
-      Buildings_year6: doc.Buildings_year6,
-      Buildings_year7: doc.Buildings_year7,
-      Buildings_year8: doc.Buildings_year8,
-      Buildings_year9: doc.Buildings_year9,
-      Leasehold_improvements_year6: doc.Leasehold_improvements_year6,
-      Leasehold_improvements_year7: doc.Leasehold_improvements_year7,
-      Leasehold_improvements_year8: doc.Leasehold_improvements_year8,
-      Leasehold_improvements_year9: doc.Leasehold_improvements_year9,
-      Furniture_fixtures_and_equipment_year6: doc.Furniture_fixtures_and_equipment_year6,
-      Furniture_fixtures_and_equipment_year7: doc.Furniture_fixtures_and_equipment_year7,
-      Furniture_fixtures_and_equipment_year8: doc.Furniture_fixtures_and_equipment_year8,
-      Furniture_fixtures_and_equipment_year9: doc.Furniture_fixtures_and_equipment_year9,
-      Less_accumulated_depreciation_year6: doc.Less_accumulated_depreciation_year6,
-      Less_accumulated_depreciation_year7: doc.Less_accumulated_depreciation_year7,
-      Less_accumulated_depreciation_year8: doc.Less_accumulated_depreciation_year8,
-      Less_accumulated_depreciation_year9: doc.Less_accumulated_depreciation_year9,
-      Net_year6: doc.Net_year6,
-      Net_year7: doc.Net_year7,
-      Net_year8: doc.Net_year8,
-      Net_year9: doc.Net_year9,
-      Land_A_year6: doc.Land_A_year6,
-      Land_A_year7: doc.Land_A_year7,
-      Land_A_year8: doc.Land_A_year8,
-      Land_A_year9: doc.Land_A_year9,
-      Land_B_year6: doc.Land_B_year6,
-      Land_B_year7: doc.Land_B_year7,
-      Land_B_year8: doc.Land_B_year8,
-      Land_B_year9: doc.Land_B_year9,
-      Construction_in_Progress_year6: doc.Construction_in_Progress_year6,
-      Construction_in_Progress_year7: doc.Construction_in_Progress_year7,
-      Construction_in_Progress_year8: doc.Construction_in_Progress_year8,
-      Construction_in_Progress_year9: doc.Construction_in_Progress_year9,
-      Subtotal_Capital_Assets_net_year6: doc.Subtotal_Capital_Assets_net_year6,
-      Subtotal_Capital_Assets_net_year7: doc.Subtotal_Capital_Assets_net_year7,
-      Subtotal_Capital_Assets_net_year8: doc.Subtotal_Capital_Assets_net_year8,
-      Subtotal_Capital_Assets_net_year9: doc.Subtotal_Capital_Assets_net_year9,
-      Investments_Buildings_year6: doc.Investments_Buildings_year6,
-      Investments_Buildings_year7: doc.Investments_Buildings_year7,
-      Investments_Buildings_year8: doc.Investments_Buildings_year8,
-      Investments_Buildings_year9: doc.Investments_Buildings_year9,
-      Investments_Leasehold_improvements_year6: doc.Investments_Leasehold_improvements_year6,
-      Investments_Leasehold_improvements_year7: doc.Investments_Leasehold_improvements_year7,
-      Investments_Leasehold_improvements_year8: doc.Investments_Leasehold_improvements_year8,
-      Investments_Leasehold_improvements_year9: doc.Investments_Leasehold_improvements_year9,
-      Investments_Furniture_year6: doc.Investments_Furniture_year6,
-      Investments_Furniture_year7: doc.Investments_Furniture_year7,
-      Investments_Furniture_year8: doc.Investments_Furniture_year8,
-      Investments_Furniture_year9: doc.Investments_Furniture_year9,
-      Investments_fixtures_and_equipment_year6: doc.Investments_fixtures_and_equipment_year6,
-      Investments_fixtures_and_equipment_year7: doc.Investments_fixtures_and_equipment_year7,
-      Investments_fixtures_and_equipment_year8: doc.Investments_fixtures_and_equipment_year8,
-      Investments_fixtures_and_equipment_year9: doc.Investments_fixtures_and_equipment_year9,
-      Vehicles_year6: doc.Vehicles_year6,
-      Vehicles_year7: doc.Vehicles_year7,
-      Vehicles_year8: doc.Vehicles_year8,
-      Vehicles_year9: doc.Vehicles_year9,
-      Investments_Less_accumulated_depreciation_year6: doc.Investments_Less_accumulated_depreciation_year6,
-      Investments_Less_accumulated_depreciation_year7: doc.Investments_Less_accumulated_depreciation_year7,
-      Investments_Less_accumulated_depreciation_year8: doc.Investments_Less_accumulated_depreciation_year8,
-      Investments_Less_accumulated_depreciation_year9: doc.Investments_Less_accumulated_depreciation_year9,
-      Investments_Net_year6: doc.Investments_Net_year6,
-      Investments_Net_year7: doc.Investments_Net_year7,
-      Investments_Net_year8: doc.Investments_Net_year8,
-      Investments_Net_year9: doc.Investments_Net_year9,
-      Land_year6: doc.Land_year6,
-      Land_year7: doc.Land_year7,
-      Land_year8: doc.Land_year8,
-      Land_year9: doc.Land_year9,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year6: doc.Subtotal_Limited_Liability_Company_Bs_assets_net_year6,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year7: doc.Subtotal_Limited_Liability_Company_Bs_assets_net_year7,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year8: doc.Subtotal_Limited_Liability_Company_Bs_assets_net_year8,
-      Subtotal_Limited_Liability_Company_Bs_assets_net_year9: doc.Subtotal_Limited_Liability_Company_Bs_assets_net_year9,
-      Capital_Assets_net_year6: doc.Capital_Assets_net_year6,
-      Capital_Assets_net_year7: doc.Capital_Assets_net_year7,
-      Capital_Assets_net_year8: doc.Capital_Assets_net_year8,
-      Capital_Assets_net_year9: doc.Capital_Assets_net_year9,
-      Restricted_cash_year6: doc.Restricted_cash_year6,
-      Restricted_cash_year7: doc.Restricted_cash_year7,
-      Restricted_cash_year8: doc.Restricted_cash_year8,
-      Restricted_cash_year9: doc.Restricted_cash_year9,
-      Total_Other_Assets_year6: doc.Total_Other_Assets_year6,
-      Total_Other_Assets_year7: doc.Total_Other_Assets_year7,
-      Total_Other_Assets_year8: doc.Total_Other_Assets_year8,
-      Total_Other_Assets_year9: doc.Total_Other_Assets_year9,
-      Deferred_outflows_of_resources_related_to_pensions_year6: doc.Deferred_outflows_of_resources_related_to_pensions_year6,
-      Deferred_outflows_of_resources_related_to_pensions_year7: doc.Deferred_outflows_of_resources_related_to_pensions_year7,
-      Deferred_outflows_of_resources_related_to_pensions_year8: doc.Deferred_outflows_of_resources_related_to_pensions_year8,
-      Deferred_outflows_of_resources_related_to_pensions_year9: doc.Deferred_outflows_of_resources_related_to_pensions_year9,
-      Deferred_outflows_of_resources_related_to_OPEB_year6: doc.Deferred_outflows_of_resources_related_to_OPEB_year6,
-      Deferred_outflows_of_resources_related_to_OPEB_year7: doc.Deferred_outflows_of_resources_related_to_OPEB_year7,
-      Deferred_outflows_of_resources_related_to_OPEB_year8: doc.Deferred_outflows_of_resources_related_to_OPEB_year8,
-      Deferred_outflows_of_resources_related_to_OPEB_year9: doc.Deferred_outflows_of_resources_related_to_OPEB_year9,
-      Total_assets_and_deferred_outflows_of_resources_year6: doc.Total_assets_and_deferred_outflows_of_resources_year6,
-      Total_assets_and_deferred_outflows_of_resources_year7: doc.Total_assets_and_deferred_outflows_of_resources_year7,
-      Total_assets_and_deferred_outflows_of_resources_year8: doc.Total_assets_and_deferred_outflows_of_resources_year8,
-      Total_assets_and_deferred_outflows_of_resources_year9: doc.Total_assets_and_deferred_outflows_of_resources_year9,
-      Accounts_payable_and_accrued_liabilities_year6: doc.Accounts_payable_and_accrued_liabilities_year6,
-      Accounts_payable_and_accrued_liabilities_year7: doc.Accounts_payable_and_accrued_liabilities_year7,
-      Accounts_payable_and_accrued_liabilities_year8: doc.Accounts_payable_and_accrued_liabilities_year8,
-      Accounts_payable_and_accrued_liabilities_year9: doc.Accounts_payable_and_accrued_liabilities_year9,
-      Due_to_fund_year6: doc.Due_to_fund_year6,
-      Due_to_fund_year7: doc.Due_to_fund_year7,
-      Due_to_fund_year8: doc.Due_to_fund_year8,
-      Due_to_fund_year9: doc.Due_to_fund_year9,
-      Due_to_other_fund_year6: doc.Due_to_other_fund_year6,
-      Due_to_other_fund_year7: doc.Due_to_other_fund_year7,
-      Due_to_other_fund_year8: doc.Due_to_other_fund_year8,
-      Due_to_other_fund_year9: doc.Due_to_other_fund_year9,
-      Accrued_vacation_year6: doc.Accrued_vacation_year6,
-      Accrued_vacation_year7: doc.Accrued_vacation_year7,
-      Accrued_vacation_year8: doc.Accrued_vacation_year8,
-      Accrued_vacation_year9: doc.Accrued_vacation_year9,
-      Workers_compensation_year6: doc.Workers_compensation_year6,
-      Workers_compensation_year7: doc.Workers_compensation_year7,
-      Workers_compensation_year8: doc.Workers_compensation_year8,
-      Workers_compensation_year9: doc.Workers_compensation_year9,
-      Accrued_management_retirement_plan_year6: doc.Accrued_management_retirement_plan_year6,
-      Accrued_management_retirement_plan_year7: doc.Accrued_management_retirement_plan_year7,
-      Accrued_management_retirement_plan_year8: doc.Accrued_management_retirement_plan_year8,
-      Accrued_management_retirement_plan_year9: doc.Accrued_management_retirement_plan_year9,
-      Accrued_lease_guaranty_obligation_year6: doc.Accrued_lease_guaranty_obligation_year6,
-      Accrued_lease_guaranty_obligation_year7: doc.Accrued_lease_guaranty_obligation_year7,
-      Accrued_lease_guaranty_obligation_year8: doc.Accrued_lease_guaranty_obligation_year8,
-      Accrued_lease_guaranty_obligation_year9: doc.Accrued_lease_guaranty_obligation_year9,
-      Capital_lease_obligation_year6: doc.Capital_lease_obligation_year6,
-      Capital_lease_obligation_year7: doc.Capital_lease_obligation_year7,
-      Capital_lease_obligation_year8: doc.Capital_lease_obligation_year8,
-      Capital_lease_obligation_year9: doc.Capital_lease_obligation_year9,
-      Notes_payable_Building_A_acquisition_year6: doc.Notes_payable_Building_A_acquisition_year6,
-      Notes_payable_Building_A_acquisition_year7: doc.Notes_payable_Building_A_acquisition_year7,
-      Notes_payable_Building_A_acquisition_year8: doc.Notes_payable_Building_A_acquisition_year8,
-      Notes_payable_Building_A_acquisition_year9: doc.Notes_payable_Building_A_acquisition_year9,
-      Net_Pension_Liability_year6: doc.Net_Pension_Liability_year6,
-      Net_Pension_Liability_year7: doc.Net_Pension_Liability_year7,
-      Net_Pension_Liability_year8: doc.Net_Pension_Liability_year8,
-      Net_Pension_Liability_year9: doc.Net_Pension_Liability_year9,
-      Net_OPEB_Liability_year6: doc.Net_OPEB_Liability_year6,
-      Net_OPEB_Liability_year7: doc.Net_OPEB_Liability_year7,
-      Net_OPEB_Liability_year8: doc.Net_OPEB_Liability_year8,
-      Net_OPEB_Liability_year9: doc.Net_OPEB_Liability_year9,
-      Line_of_Credit_Building_A_year6: doc.Line_of_Credit_Building_A_year6,
-      Line_of_Credit_Building_A_year7: doc.Line_of_Credit_Building_A_year7,
-      Line_of_Credit_Building_A_year8: doc.Line_of_Credit_Building_A_year8,
-      Line_of_Credit_Building_A_year9: doc.Line_of_Credit_Building_A_year9,
-      Line_of_Credit_Building_B_year6: doc.Line_of_Credit_Building_B_year6,
-      Line_of_Credit_Building_B_year7: doc.Line_of_Credit_Building_B_year7,
-      Line_of_Credit_Building_B_year8: doc.Line_of_Credit_Building_B_year8,
-      Line_of_Credit_Building_B_year9: doc.Line_of_Credit_Building_B_year9,
-      Debt_service_year6: doc.Debt_service_year6,
-      Debt_service_year7: doc.Debt_service_year7,
-      Debt_service_year8: doc.Debt_service_year8,
-      Debt_service_year9: doc.Debt_service_year9,
-      Longterm_liabilities_due_within_one_year_year6: doc.Longterm_liabilities_due_within_one_year_year6,
-      Longterm_liabilities_due_within_one_year_year7: doc.Longterm_liabilities_due_within_one_year_year7,
-      Longterm_liabilities_due_within_one_year_year8: doc.Longterm_liabilities_due_within_one_year_year8,
-      Longterm_liabilities_due_within_one_year_year9: doc.Longterm_liabilities_due_within_one_year_year9,
-      Long_term_Accrued_vacation_year6: doc.Long_term_Accrued_vacation_year6,
-      Long_term_Accrued_vacation_year7: doc.Long_term_Accrued_vacation_year7,
-      Long_term_Accrued_vacation_year8: doc.Long_term_Accrued_vacation_year8,
-      Long_term_Accrued_vacation_year9: doc.Long_term_Accrued_vacation_year9,
-      Long_term_Workers_compensation_year6: doc.Long_term_Workers_compensation_year6,
-      Long_term_Workers_compensation_year7: doc.Long_term_Workers_compensation_year7,
-      Long_term_Workers_compensation_year8: doc.Long_term_Workers_compensation_year8,
-      Long_term_Workers_compensation_year9: doc.Long_term_Workers_compensation_year9,
-      Long_term_Accrued_management_retirement_plan_year6: doc.Long_term_Accrued_management_retirement_plan_year6,
-      Long_term_Accrued_management_retirement_plan_year7: doc.Long_term_Accrued_management_retirement_plan_year7,
-      Long_term_Accrued_management_retirement_plan_year8: doc.Long_term_Accrued_management_retirement_plan_year8,
-      Long_term_Accrued_management_retirement_plan_year9: doc.Long_term_Accrued_management_retirement_plan_year9,
-      Long_term_Accrued_lease_guaranty_obligation_year6: doc.Long_term_Accrued_lease_guaranty_obligation_year6,
-      Long_term_Accrued_lease_guaranty_obligation_year7: doc.Long_term_Accrued_lease_guaranty_obligation_year7,
-      Long_term_Accrued_lease_guaranty_obligation_year8: doc.Long_term_Accrued_lease_guaranty_obligation_year8,
-      Long_term_Accrued_lease_guaranty_obligation_year9: doc.Long_term_Accrued_lease_guaranty_obligation_year9,
-      Long_term_Capital_lease_obligation_year6: doc.Long_term_Capital_lease_obligation_year6,
-      Long_term_Capital_lease_obligation_year7: doc.Long_term_Capital_lease_obligation_year7,
-      Long_term_Capital_lease_obligation_year8: doc.Long_term_Capital_lease_obligation_year8,
-      Long_term_Capital_lease_obligation_year9: doc.Long_term_Capital_lease_obligation_year9,
-      Long_term_Notes_payable_Building_A_acquisition_year6: doc.Long_term_Notes_payable_Building_A_acquisition_year6,
-      Long_term_Notes_payable_Building_A_acquisition_year7: doc.Long_term_Notes_payable_Building_A_acquisition_year7,
-      Long_term_Notes_payable_Building_A_acquisition_year8: doc.Long_term_Notes_payable_Building_A_acquisition_year8,
-      Long_term_Notes_payable_Building_A_acquisition_year9: doc.Long_term_Notes_payable_Building_A_acquisition_year9,
-      Long_term_Net_Pension_Liability_year6: doc.Long_term_Net_Pension_Liability_year6,
-      Long_term_Net_Pension_Liability_year7: doc.Long_term_Net_Pension_Liability_year7,
-      Long_term_Net_Pension_Liability_year8: doc.Long_term_Net_Pension_Liability_year8,
-      Long_term_Net_Pension_Liability_year9: doc.Long_term_Net_Pension_Liability_year9,
-      Long_term_Net_OPEB_Liability_year6: doc.Long_term_Net_OPEB_Liability_year6,
-      Long_term_Net_OPEB_Liability_year7: doc.Long_term_Net_OPEB_Liability_year7,
-      Long_term_Net_OPEB_Liability_year8: doc.Long_term_Net_OPEB_Liability_year8,
-      Long_term_Net_OPEB_Liability_year9: doc.Long_term_Net_OPEB_Liability_year9,
-      Long_term_Line_of_Credit_Building_A_year6: doc.Long_term_Line_of_Credit_Building_A_year6,
-      Long_term_Line_of_Credit_Building_A_year7: doc.Long_term_Line_of_Credit_Building_A_year7,
-      Long_term_Line_of_Credit_Building_A_year8: doc.Long_term_Line_of_Credit_Building_A_year8,
-      Long_term_Line_of_Credit_Building_A_year9: doc.Long_term_Line_of_Credit_Building_A_year9,
-      Long_term_Line_of_Credit_Building_B_year6: doc.Long_term_Line_of_Credit_Building_B_year6,
-      Long_term_Line_of_Credit_Building_B_year7: doc.Long_term_Line_of_Credit_Building_B_year7,
-      Long_term_Line_of_Credit_Building_B_year8: doc.Long_term_Line_of_Credit_Building_B_year8,
-      Long_term_Line_of_Credit_Building_B_year9: doc.Long_term_Line_of_Credit_Building_B_year9,
-      Long_term_Debt_service_year6: doc.Long_term_Debt_service_year6,
-      Long_term_Debt_service_year7: doc.Long_term_Debt_service_year7,
-      Long_term_Debt_service_year8: doc.Long_term_Debt_service_year8,
-      Long_term_Debt_service_year9: doc.Long_term_Debt_service_year9,
-      Longterm_liabilities_due_after_one_year_year6: doc.Longterm_liabilities_due_after_one_year_year6,
-      Longterm_liabilities_due_after_one_year_year7: doc.Longterm_liabilities_due_after_one_year_year7,
-      Longterm_liabilities_due_after_one_year_year8: doc.Longterm_liabilities_due_after_one_year_year8,
-      Longterm_liabilities_due_after_one_year_year9: doc.Longterm_liabilities_due_after_one_year_year9,
-      Total_Liabilities_year6: doc.Total_Liabilities_year6,
-      Total_Liabilities_year7: doc.Total_Liabilities_year7,
-      Total_Liabilities_year8: doc.Total_Liabilities_year8,
-      Total_Liabilities_year9: doc.Total_Liabilities_year9,
-      Deferred_inflows_of_resources_related_to_pensions_year6: doc.Deferred_inflows_of_resources_related_to_pensions_year6,
-      Deferred_inflows_of_resources_related_to_pensions_year7: doc.Deferred_inflows_of_resources_related_to_pensions_year7,
-      Deferred_inflows_of_resources_related_to_pensions_year8: doc.Deferred_inflows_of_resources_related_to_pensions_year8,
-      Deferred_inflows_of_resources_related_to_pensions_year9: doc.Deferred_inflows_of_resources_related_to_pensions_year9,
-      Deferred_inflows_of_resources_related_to_OPEB_year6: doc.Deferred_inflows_of_resources_related_to_OPEB_year6,
-      Deferred_inflows_of_resources_related_to_OPEB_year7: doc.Deferred_inflows_of_resources_related_to_OPEB_year7,
-      Deferred_inflows_of_resources_related_to_OPEB_year8: doc.Deferred_inflows_of_resources_related_to_OPEB_year8,
-      Deferred_inflows_of_resources_related_to_OPEB_year9: doc.Deferred_inflows_of_resources_related_to_OPEB_year9,
-      Total_liabilities_and_deferred_inflows_of_resources_year6: doc.Total_liabilities_and_deferred_inflows_of_resources_year6,
-      Total_liabilities_and_deferred_inflows_of_resources_year7: doc.Total_liabilities_and_deferred_inflows_of_resources_year7,
-      Total_liabilities_and_deferred_inflows_of_resources_year8: doc.Total_liabilities_and_deferred_inflows_of_resources_year8,
-      Total_liabilities_and_deferred_inflows_of_resources_year9: doc.Total_liabilities_and_deferred_inflows_of_resources_year9,
-      Invested_in_capital_assets_net_of_related_debt_year6: doc.Invested_in_capital_assets_net_of_related_debt_year6,
-      Invested_in_capital_assets_net_of_related_debt_year7: doc.Invested_in_capital_assets_net_of_related_debt_year7,
-      Invested_in_capital_assets_net_of_related_debt_year8: doc.Invested_in_capital_assets_net_of_related_debt_year8,
-      Invested_in_capital_assets_net_of_related_debt_year9: doc.Invested_in_capital_assets_net_of_related_debt_year9,
-      Restricted_federal_funds_year6: doc.Restricted_federal_funds_year6,
-      Restricted_federal_funds_year7: doc.Restricted_federal_funds_year7,
-      Restricted_federal_funds_year8: doc.Restricted_federal_funds_year8,
-      Restricted_federal_funds_year9: doc.Restricted_federal_funds_year9,
-      Unrestricted_year6: doc.Unrestricted_year6,
-      Unrestricted_year7: doc.Unrestricted_year7,
-      Unrestricted_year8: doc.Unrestricted_year8,
-      Unrestricted_year9: doc.Unrestricted_year9,
-      Total_net_position_year6: doc.Total_net_position_year6,
-      Total_net_position_year7: doc.Total_net_position_year7,
-      Total_net_position_year8: doc.Total_net_position_year8,
-      Total_net_position_year9: doc.Total_net_position_year9,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year6: doc.Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year6,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year7: doc.Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year7,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year8: doc.Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year8,
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year9: doc.Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position_year9,
+      year,
+      owner,
+      cashStuff,
+      cashTotal,
+      otherAssets,
+      otherAssetsSubtotal,
+      investments,
+      investmentsTotal,
+      loanFund,
+      loanFundTotal,
+      investLoanTotal,
+      assets,
+      assetsTotal,
+      land,
+      landTotal,
+      compBAssets,
+      compBAssetsTotal,
+      capAssetsTotal,
+      restrictedCash,
+      otherAssetsTotal,
+      defOutflowsPension,
+      defOutflowsOPEB,
+      assetsAndDefOutflowsTotal,
+      liabilities,
+      liabilitiesTotal,
+      liaWithinYr,
+      liaWithinYrTotal,
+      liaAfterYr,
+      liaAfterYrTotal,
+      allLiabilitiesTotal,
+      defInflowsPension,
+      defInflowsOPEB,
+      liaAndDefInflowsTotal,
+      commitAndContin,
+      totalNetPos,
+      totalLiaInflowsNetPos,
     };
+  }
+
+  sumArray(array) {
+    if (!array || !array.length) return 0;
+    return array.reduce((total, item) => total + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
+  }
+
+  updateTotals(docId) {
+    const doc = this.findOne(docId);
+    const totalCash = this.sumArray(doc.cashStuff);
+    const subtotalOtherAssets = this.sumArray(doc.otherAssets);
+    const totalInvestments = this.sumArray(doc.investments);
+    const totalLoanFund = this.sumArray(doc.loanFund);
+    const totalAssets = this.sumArray(doc.assets);
+    const totalLand = this.sumArray(doc.land);
+    const totalCompBAssets = this.sumArray(doc.compBAssets);
+    const restrictedCash = doc.restrictedCash;
+    const defOutflowsPension = doc.defOutflowsPension;
+    const defOutflowsOPEB = doc.defOutflowsOPEB;
+    const totalLiabilities = this.sumArray(doc.liabilities);
+    const totalLiaWithinYr = this.sumArray(doc.liaWithinYr);
+    const totalLiaAfterYr = this.sumArray(doc.liaAfterYr);
+    const defInflowsPension = doc.defInflowsPension;
+    const defInflowsOPEB = doc.defInflowsOPEB;
+    const totalCommitAndContin = this.sumArray(doc.commitAndContin);
+
+    this._collection.update(docId, {
+      $set: {
+        cashTotal: totalCash,
+        otherAssetsSubtotal: subtotalOtherAssets,
+        investmentsTotal: totalInvestments,
+        loanFundTotal: totalLoanFund,
+        investLoanTotal: totalInvestments + totalLoanFund,
+        assetsTotal: totalAssets,
+        landTotal: totalLand,
+        compBAssetsTotal: totalCompBAssets,
+        capAssetsTotal: totalAssets + totalLand + totalCompBAssets,
+        otherAssetsTotal: restrictedCash + totalAssets + totalLand + totalCompBAssets + totalInvestments + totalLoanFund + subtotalOtherAssets,
+        assetsAndDefOutflowsTotal: defOutflowsPension + defOutflowsOPEB + restrictedCash + totalAssets + totalLand + totalCompBAssets + totalInvestments + totalLoanFund + subtotalOtherAssets,
+        liabilitiesTotal: totalLiabilities,
+        liaWithinYrTotal: totalLiaWithinYr,
+        liaAfterYrTotal: totalLiaAfterYr,
+        allLiabilitiesTotal: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr,
+        defInflowsOPEBTotal: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr + defInflowsOPEB + defInflowsPension,
+        totalNet: totalCommitAndContin,
+        totalLiaInflowsNetPos: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr + defInflowsOPEB + defInflowsPension + totalCommitAndContin,
+      },
+    });
   }
 }
 export const AuditedBalanceSheets = new AuditedBalanceSheetCollection();
-if (Meteor.isServer) {
-  AuditedBalanceSheets._collection.allow({
-    insert(userId, doc) {
-      return !!userId; // Only logged-in users can insert
-    },
-    update(userId, doc, fields, modifier) {
-      return doc.owner === Meteor.users.findOne(userId).username; // Only owners can update
-    },
-    remove(userId, doc) {
-      return doc.owner === Meteor.users.findOne(userId).username; // Only owners can remove
-    },
-  });
-}
