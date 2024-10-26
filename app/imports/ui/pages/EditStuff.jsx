@@ -5,7 +5,7 @@ import { AutoForm, ErrorsField, NumField, SubmitField, HiddenField } from 'unifo
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
+import { AuditedBalanceSheets } from '../../api/Inputs/AuditedBalanceSheet';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { PAGE_IDS } from '../utilities/PageIDs';

@@ -8,7 +8,7 @@ import SimpleSchema from 'simpl-schema';
 // eslint-disable-next-line no-unused-vars
 import { defineMethod, updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { AuditedBalanceSheets } from '../../api/Inputs/auditedBalanceSheet';
+import { AuditedBalanceSheets } from '../../api/Inputs/AuditedBalanceSheet';
 
 // Create dynamic schema
 const fields = [
