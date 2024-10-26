@@ -13,7 +13,7 @@ export const auditedBalanceSheetPublications = {
 
 class AuditedBalanceSheetCollection extends BaseCollection {
   constructor() {
-    super('AuditedBalanceSheets', new SimpleSchema({
+    super('AuditedBalanceSheet', new SimpleSchema({
       owner: String,
       year: Number,
 
@@ -64,8 +64,8 @@ class AuditedBalanceSheetCollection extends BaseCollection {
         optional: true,
       },
       'loanFund.$': Object,
-      'loanFund.$.USTreasuries': { type: Number, defaultValue: 0, optional: true },
-      'loanFund.$.USAgencies': { type: Number, defaultValue: 0, optional: true },
+      'loanFund.$.usTreasuries': { type: Number, defaultValue: 0, optional: true },
+      'loanFund.$.usAgencies': { type: Number, defaultValue: 0, optional: true },
       loanFundTotal: { type: Number, optional: true },
       investLoanTotal: { type: Number, optional: true },
 
@@ -95,7 +95,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
         optional: true,
       },
       'compBAssets.$': Object,
-      'compBAssets.$.buildingd': { type: Number, defaultValue: 0, optional: true },
+      'compBAssets.$.buildings': { type: Number, defaultValue: 0, optional: true },
       'compBAssets.$.leaseImprovements': { type: Number, defaultValue: 0, optional: true },
       'compBAssets.$.furnitureFixtures': { type: Number, defaultValue: 0, optional: true },
       'compBAssets.$.vehicles': { type: Number, defaultValue: 0, optional: true },
@@ -179,7 +179,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     * @return {String} docID - The docID of the newly inserted document.
     */
   define({ owner, year, cashStuff, otherAssets, investments, loanFund, assets, land, compBAssets, restrictedCash, defOutflowsPension, defOutflowsOPEB, liabilities, liaWithinYr, liaAfterYr, defInflowsPension, defInflowsOPEB, commitAndContin }) {
-    const auditedBalanceSheetData = {
+    const docID = this._collection.insert({
       owner,
       year,
       cashStuff,
@@ -198,8 +198,8 @@ class AuditedBalanceSheetCollection extends BaseCollection {
       defInflowsPension,
       defInflowsOPEB,
       commitAndContin,
-    };
-    const docID = this._collection.insert(auditedBalanceSheetData);
+    });
+    this.updateTotals(docID);
     return docID;
   }
 
@@ -226,7 +226,7 @@ class AuditedBalanceSheetCollection extends BaseCollection {
     updateData.defInflowsPension = defInflowsPension;
     updateData.defInflowsOPEB = defInflowsOPEB;
     if (_.isArray(commitAndContin)) { updateData.commitAndContin = commitAndContin; }
-    this._collection.updateTotals(docID, { $set: updateData });
+    this._collection.update(docID, { $set: updateData });
     this.updateTotals(docID);
   }
 
@@ -391,22 +391,23 @@ class AuditedBalanceSheetCollection extends BaseCollection {
 
   updateTotals(docId) {
     const doc = this.findOne(docId);
-    const totalCash = this.sumArray(doc.cashStuff);
-    const subtotalOtherAssets = this.sumArray(doc.otherAssets);
-    const totalInvestments = this.sumArray(doc.investments);
-    const totalLoanFund = this.sumArray(doc.loanFund);
-    const totalAssets = this.sumArray(doc.assets);
-    const totalLand = this.sumArray(doc.land);
-    const totalCompBAssets = this.sumArray(doc.compBAssets);
-    const restrictedCash = doc.restrictedCash;
-    const defOutflowsPension = doc.defOutflowsPension;
-    const defOutflowsOPEB = doc.defOutflowsOPEB;
-    const totalLiabilities = this.sumArray(doc.liabilities);
-    const totalLiaWithinYr = this.sumArray(doc.liaWithinYr);
-    const totalLiaAfterYr = this.sumArray(doc.liaAfterYr);
-    const defInflowsPension = doc.defInflowsPension;
-    const defInflowsOPEB = doc.defInflowsOPEB;
-    const totalCommitAndContin = this.sumArray(doc.commitAndContin);
+    const totalCash = this.sumArray(doc.cashStuff) || 0;
+    const subtotalOtherAssets = this.sumArray(doc.otherAssets) || 0;
+    const totalInvestments = this.sumArray(doc.investments) || 0;
+    const totalLoanFund = this.sumArray(doc.loanFund) || 0;
+    const totalAssets = this.sumArray(doc.assets) || 0;
+    const totalLand = this.sumArray(doc.land) || 0;
+    const totalCompBAssets = this.sumArray(doc.compBAssets) || 0;
+
+    const restrictedCash = doc.restrictedCash || 0;
+    const defOutflowsPension = doc.defOutflowsPension || 0;
+    const defOutflowsOPEB = doc.defOutflowsOPEB || 0;
+    const totalLiabilities = this.sumArray(doc.liabilities) || 0;
+    const totalLiaWithinYr = this.sumArray(doc.liaWithinYr) || 0;
+    const totalLiaAfterYr = this.sumArray(doc.liaAfterYr) || 0;
+    const defInflowsPension = doc.defInflowsPension || 0;
+    const defInflowsOPEB = doc.defInflowsOPEB || 0;
+    const totalCommitAndContin = this.sumArray(doc.commitAndContin) || 0;
 
     this._collection.update(docId, {
       $set: {
@@ -425,11 +426,14 @@ class AuditedBalanceSheetCollection extends BaseCollection {
         liaWithinYrTotal: totalLiaWithinYr,
         liaAfterYrTotal: totalLiaAfterYr,
         allLiabilitiesTotal: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr,
-        defInflowsOPEBTotal: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr + defInflowsOPEB + defInflowsPension,
+        liaAndDefInflowsTotal: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr + defInflowsOPEB + defInflowsPension,
         totalNet: totalCommitAndContin,
         totalLiaInflowsNetPos: totalLiabilities + totalLiaWithinYr + totalLiaAfterYr + defInflowsOPEB + defInflowsPension + totalCommitAndContin,
       },
     });
   }
 }
-export const AuditedBalanceSheets = new AuditedBalanceSheetCollection();
+/**
+ * Provides the singleton instance of this class to all other entities.
+ */
+export const AuditedBalanceSheet = new AuditedBalanceSheetCollection();

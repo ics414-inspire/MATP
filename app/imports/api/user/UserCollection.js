@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
-import { AuditedBalanceSheets } from '../Inputs/AuditedBalanceSheet.js';
+import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';
 /**
  * Represents a user, which is someone who has a Meteor account.
  *
@@ -94,7 +94,7 @@ class UserCollection {
    * @return {boolean}
    */
   isReferenced(user) {
-    return AuditedBalanceSheets.find({ owner: user }).fetch().length > 0;
+    return AuditedBalanceSheet.find({ owner: user }).fetch().length > 0;
   }
 
   /**

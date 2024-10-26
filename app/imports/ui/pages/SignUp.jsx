@@ -10,7 +10,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-import { AuditedBalanceSheets } from '../../api/Inputs/AuditedBalanceSheet';
+import { AuditedBalanceSheet } from '../../api/Inputs/AuditedBalanceSheetCollection';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -43,7 +43,7 @@ const SignUp = () => {
             setRedirectToRef(true);
 
             // Defining the audited balance sheet for the user
-            AuditedBalanceSheets.define({ owner: email })
+            AuditedBalanceSheet.define({ owner: email })
               .then((docId) => {
                 console.log(`Successfully created audited balance sheet with docId: ${docId}`);
               })
