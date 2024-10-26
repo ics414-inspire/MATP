@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { MATPCollections } from '../../api/matp/MATPCollections';
 import { AuditedBalance } from '../../api/Inputs/auditedBalanceCollection';
-import { AuditedBalanceSheets, AuditedBalanceSheetPublications } from '../../api/Inputs/auditedBalanceSheet';
+import { AuditedBalanceSheets, AuditedBalanceSheetPublications } from '../../api/Inputs/AuditedBalanceSheet';
 
 // Call publish for all the collections.
 MATPCollections.collections.forEach(c => c.publish());
