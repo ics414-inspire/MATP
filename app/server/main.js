@@ -4,7 +4,6 @@ import '/imports/startup/server/Mongo';
 // be sure to import the methods.
 import '../imports/api/base/BaseCollection.methods';
 import '../imports/api/user/UserProfileCollection.methods';
-import '/server/methods/auditedBalanceSheetMethods.js'; // Import the method so it's loaded by the server
 
 import { Meteor } from 'meteor/meteor';
 import { Email } from 'meteor/email';
