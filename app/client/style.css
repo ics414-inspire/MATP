@@ -368,4 +368,8 @@ hr {
   font-size: 13px;
 }
 
-/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+/* DisplayAudBalSheet.jsx STYLES*/
+.custom-card-body .align-items-center.row {
+  padding-left: 5px;
+}
+

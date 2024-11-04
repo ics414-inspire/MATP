@@ -4,13 +4,18 @@
     },
     { "email": "john@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "John", "lastName": "Doe" }
   ],
-
-  "defaultData": [
-    { "name": "Basket", "financial": 3, "owner": "john@foo.com", "formula": "x + y" },
-    { "name": "Bicycle", "financial": 2, "owner": "john@foo.com", "formula": "x + y" },
-    { "name": "Banana", "financial": 2, "owner": "admin@foo.com", "formula": "x + y" },
-    { "name": "Boogie Board", "financial": 2, "owner": "admin@foo.com", "formula": "x + y" }
+  "defaultAuditedBalanceSheets": [
+    { "owner":  "john@foo.com", "year": 1 },
+    { "owner":  "john@foo.com", "year": 2 },
+    { "owner":  "john@foo.com", "year": 3 },
+    { "owner":  "john@foo.com", "year": 4 },
+    { "owner":  "john@foo.com", "year": 5 },
+    { "owner":  "john@foo.com", "year": 6 },
+    { "owner":  "john@foo.com", "year": 7 },
+    { "owner":  "john@foo.com", "year": 8 },
+    { "owner":  "admin@foo.com", "year": 1 }
   ],
+
   "public": {
     "development": true
   }
