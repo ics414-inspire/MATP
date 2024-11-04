@@ -33,6 +33,7 @@ const NavBar = () => {
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE} as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE} as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE} as={NavLink} to="/audited">Audited</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE} as={NavLink} to="/financial-projection">4100</Dropdown.Item>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_CSV_INPUT_PAGE} as={NavLink} to="/csv">CSV File</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,
