@@ -8,7 +8,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { AuditedBalanceSheet } from '../../api/Inputs/AuditedBalanceSheetCollection';
 import DisplayAudBalSheet from '../components/DisplayAudBalSheet';
 import LoadingSpinner from '../components/LoadingSpinner';
-
+// TODO: Reimplement tooltips into form
 // const AuditedBalanceField = ({ label, tooltip, ...rest }) => (
 //   <Form.Group>
 //     <Form.Label>
@@ -34,7 +34,7 @@ const AuditedBalanceInput = () => {
   }, []);
 
   return (ready ? (
-    <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT} className="py-3 mx-5">
+    <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT}>
       <Row className="justify-content-center pb-3">
         <Col className="text-center">
           <h2>Audited Balance Sheet Temp</h2>
@@ -89,10 +89,7 @@ const AuditedBalanceInput = () => {
           <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
             Cash held by investment manager
           </Row>
-          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
-            <hr className="solid my-0" />
-            <h6 className="text-end" style={{ paddingTop: '2px' }}>Total Other</h6>
-          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }} />
           <Row className="align-items-center ps-3 fw-bold">
             Investments:
           </Row>

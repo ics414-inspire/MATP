@@ -97,8 +97,8 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
   }, [audBalSheet]);
   return (
     <AutoForm schema={bridge} onSubmit={data => submit(audBalSheet, data)} model={AuditedBalanceSheet.findOne(audBalSheet._id)}>
-      <Card.Body>
-        <Row>
+      <Card.Body className="custom-card-body">
+        <Row className="justify-content-center" style={{ paddingLeft: '5px' }}>
           Year {audBalSheet.year}
           <hr className="solid" />
         </Row>
@@ -119,7 +119,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalCash.toFixed(2)}</h6>
+            <h6>${totalCash.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
@@ -160,11 +160,6 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         <Row className="align-items-center">
           <Col>
             <NumField name="otherAssets.0.cashHeldByInvMgr" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <h6>$ {subtotalOtherAssets.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
@@ -209,7 +204,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalInvestments.toFixed(2)}</h6>
+            <h6>${totalInvestments.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center ">
@@ -224,13 +219,13 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalLoanFund.toFixed(2)}</h6>
+            <h6>${totalLoanFund.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="justify-content-start" style={{ paddingTop: '18px' }}>
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalInvestLoan.toFixed(2)}</h6>
+            <h6>${totalInvestLoan.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '40px' }}>
@@ -255,7 +250,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalAssets.toFixed(2)}</h6>
+            <h6>${totalAssets.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
@@ -275,7 +270,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalLand.toFixed(2)}</h6>
+            <h6>${totalLand.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
@@ -310,13 +305,13 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalCompBAssets.toFixed(2)}</h6>
+            <h6>${totalCompBAssets.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="justify-content-start" style={{ paddingTop: '3px' }}>
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalCapAssets.toFixed(2)}</h6>
+            <h6>${totalCapAssets.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="justify-content-start" style={{ paddingTop: '2px' }}>
@@ -326,7 +321,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalOtherAssets.toFixed(2)}</h6>
+            <h6>${totalOtherAssets.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="justify-content-start">
@@ -341,7 +336,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalAssetsAndDefOutflows.toFixed(2)}</h6>
+            <h6>${totalAssetsAndDefOutflows.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '18px' }}>
@@ -416,7 +411,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalLiaWithinYr.toFixed(2)}</h6>
+            <h6>${totalLiaWithinYr.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '18px' }}>
@@ -476,13 +471,13 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>$ {totalLiaAfterYr.toFixed(2)}</h6>
+            <h6>${totalLiaAfterYr.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalLiabilities.toFixed(2)}</h6>
+            <h6>${totalLiabilities.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -498,7 +493,7 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         <Row className="align-items-center">
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalLiaAndDefInflows.toFixed(2)}</h6>
+            <h6>${totalLiaAndDefInflows.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '44px' }}>
@@ -519,13 +514,13 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
         <Row className="align-items-center">
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalCommitAndContin.toFixed(2)}</h6>
+            <h6>${totalCommitAndContin.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '1px' }}>
           <Col>
             <hr className="solid my-0" />
-            <h6>$ {totalLiaInflowsNetPos.toFixed(2)}</h6>
+            <h6>${totalLiaInflowsNetPos.toFixed(2)}</h6>
           </Col>
         </Row>
         <Col>
