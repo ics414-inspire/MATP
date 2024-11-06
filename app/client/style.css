@@ -33,6 +33,55 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Add soft shadow */
 }
 
+.landingPage {
+  background-image: url('../images/spirebackground.jpg');
+  background-size: cover;
+  background-position: 50% 75% ;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+.landingPage img {
+  display: none;
+}
+
+/* This will add space below the background image */
+/*noinspection ALL*/
+.landingPage .content-section {
+  padding-top: 50px 20px;
+}
+
+/* Position the text over the image, aligned to the left */
+.landingPage .overlay-text {
+  position: absolute;
+  font-size: 3rem;
+  font-weight: lighter;
+  top: 250px;
+  left: 180px;
+  color: white;
+  z-index: 25;
+  max-width: 800px;
+}
+
+.get-started-button {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.get-started-button:hover {
+  background-color: #0056b3;
+}
+
 /* Text and heading styles */
 h2 {
   font-size: 2rem;
@@ -43,7 +92,7 @@ h2 {
 
 /* Button styling */
 .submit-button {
-  background-color: #FFFFFF; /* Submit button color */
+  background-color: #FFFFFF;
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
@@ -55,6 +104,20 @@ h2 {
 
 .submit-button:hover {
   background-color: #B3EBF2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.g-col-4 {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Link styling */
@@ -365,10 +428,35 @@ hr {
 }
 
 .navbar-logo {
-  width: 125px; /* Adjust logo size */
+  width: 250px;
+  position: 15px 20px;
   height: auto;
-
-
+  transition: transform 0.3s ease;
 }
 
+.navbar-logo:hover {
+  transform: scale(1.1);
+  width: 70px;
+  height: auto
+}
+
+/* Make Navbar Links on the Right Larger */
+.navbar .nav-link {
+  font-size: 1.2rem;
+  padding: 10px 15px;
+}
+
+
+
+
 /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+=======
+.custom-label {
+  font-size: 13px;
+}
+
+/* DisplayAudBalSheet.jsx STYLES*/
+.custom-card-body .align-items-center.row {
+  padding-left: 5px;
+}
+

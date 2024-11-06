@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
-import { AuditedBalanceSheets } from '../Inputs/auditedBalanceSheet.js';// inputing ABS collections
+// inputing ABS collections
+import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';// inputing ABS collections
 
 class MATPClass {
   collections;
@@ -14,7 +15,7 @@ class MATPClass {
     // list of all the MATPCollections collections
     this.collections = [
       AdminProfiles,
-      AuditedBalanceSheets, // inputing ABS collections
+      AuditedBalanceSheet, // inputing ABS collections
       UserProfiles,
     ];
     /*
@@ -23,7 +24,7 @@ class MATPClass {
     this.collectionLoadSequence = [
       AdminProfiles,
       UserProfiles,
-      AuditedBalanceSheets, // inputing ABS collections
+      AuditedBalanceSheet, // inputing ABS collections
     ];
 
     /*
@@ -46,7 +47,7 @@ class MATPClass {
     // console.log('MATPCollections', collectionName, this.collectionAssociation);
     const collection = this.collectionAssociation[collectionName];
     if (!collection) {
-      throw new Meteor.Error(`Called MARTPCollections.getCollection with unknown collection name: ${collectionName}`);
+      throw new Meteor.Error(`Called MATPCollections.getCollection with unknown collection name: ${collectionName}`);
     }
     return collection;
   }

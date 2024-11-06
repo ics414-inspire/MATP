@@ -7,8 +7,8 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 const StuffItem = ({ stuff }) => (
   <tr>
     <td>{stuff.name}</td>
-    <td>{stuff.financial}</td>
-    <td>{stuff.formula}</td>
+    <td>{stuff.quantity}</td>
+    <td>{stuff.condition}</td>
     <td>
       <Link className={COMPONENT_IDS.LIST_STUFF_EDIT} to={`/edit/${stuff._id}`}>Edit</Link>
     </td>
@@ -19,8 +19,8 @@ const StuffItem = ({ stuff }) => (
 StuffItem.propTypes = {
   stuff: PropTypes.shape({
     name: PropTypes.string,
-    financial: PropTypes.number,
-    formula: PropTypes.string,
+    quantity: PropTypes.number,
+    condition: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

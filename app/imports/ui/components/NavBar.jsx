@@ -18,7 +18,7 @@ const NavBar = () => {
     <Navbar expand="lg" style={{ backgroundColor: '#FFFFFF', menuStyle }}>
       <Container>
         <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/">
-          <Image className="navbar-logo" alt="spire logo" src="/images/inspireLogo1.png" />
+          <Image className="navbar-logo" alt="spire logo" src="/images/inspire.gif" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
@@ -33,6 +33,8 @@ const NavBar = () => {
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_BALANCE_INPUT_PAGE} as={NavLink} to="/auditedbalanceinput">Audited Balance</Dropdown.Item>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_BUDGET_PL_INPUT_PAGE} as={NavLink} to="/budgetplinput">Budget P&L</Dropdown.Item>
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE} as={NavLink} to="/audited">Audited</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_AUDITED_INPUT_PAGE} as={NavLink} to="/financial-projection">4100</Dropdown.Item>
+                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_CSV_INPUT_PAGE} as={NavLink} to="/csv">CSV File</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,
               <Nav.Link as={NavLink} to="/information" key="add">Information</Nav.Link>,
@@ -47,6 +49,7 @@ const NavBar = () => {
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? ([
+              <Nav.Link as={NavLink} to="/about" key="about">About Us</Nav.Link>,
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
               <Nav.Link href="https://www.spirenewyork.com/" key="spire-ny" target="_blank">Spire NY</Nav.Link>,
               <Nav.Link href="https://www.spirehawaii.com/" key="spire-hi" target="_blank">Spire HI</Nav.Link>,

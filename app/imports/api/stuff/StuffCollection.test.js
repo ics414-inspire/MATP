@@ -1,4 +1,4 @@
-/* import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import faker from 'faker';
 import fc from 'fast-check';
@@ -10,7 +10,6 @@ import { testDefine, testDumpRestore, testUpdate } from '../utilities/test-helpe
 /* eslint prefer-arrow-callback: "off",  no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-/*
 const collectionName = Stuffs.getCollectionName();
 
 if (Meteor.isServer) {
@@ -86,4 +85,4 @@ if (Meteor.isServer) {
       testDumpRestore(collection);
     });
   });
-} */
+}
