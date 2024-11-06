@@ -15,6 +15,6 @@ const Information = () => (
 
     </Row>
   </Container>
-);
 
+);
 export default Information;

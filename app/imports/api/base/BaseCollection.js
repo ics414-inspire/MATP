@@ -76,19 +76,12 @@ class BaseCollection {
    * @throws { Meteor.Error } If the document cannot be found.
    */
   findDoc(name) {
-    if (_.isNull(name) || _.isUndefined(name)) {
-      throw new Meteor.Error(`${name} is not a defined ${this.type}`);
+    if (!name) {
+      throw new Meteor.Error(`${name} is not a defined ${this._type}`);
     }
-    const doc = (
-      this._collection.findOne(name)
-      || this._collection.findOne({ name })
-      || this._collection.findOne({ _id: name }));
+    const doc = this._collection.findOne(name) || this._collection.findOne({ _id: name });
     if (!doc) {
-      if (typeof name !== 'string') {
-        throw new Meteor.Error(`${JSON.stringify(name)} is not a defined ${this._type}`, '', Error().stack);
-      } else {
-        throw new Meteor.Error(`${name} is not a defined ${this._type}`, '', Error().stack);
-      }
+      throw new Meteor.Error(`${name} is not a defined ${this._type}`);
     }
     return doc;
   }

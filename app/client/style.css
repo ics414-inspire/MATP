@@ -427,7 +427,6 @@ hr {
   margin-top: 1.5rem;
 }
 
-/*noinspection ALL*/
 .navbar-logo {
   width: 250px;
   position: 15px 20px;
@@ -451,3 +450,13 @@ hr {
 
 
 /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+=======
+.custom-label {
+  font-size: 13px;
+}
+
+/* DisplayAudBalSheet.jsx STYLES*/
+.custom-card-body .align-items-center.row {
+  padding-left: 5px;
+}
+

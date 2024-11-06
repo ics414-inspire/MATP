@@ -1,6 +1,23 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { QuestionCircle } from 'react-bootstrap-icons';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { TOOLTIP_TEXTS } from '../utilities/TooltipTexts';
+import TooltipOverlay from '../components/TooltipOverlay';
+
+// eslint-disable-next-line react/prop-types
+const AuditedField = ({ label, tooltip, ...rest }) => (
+  <Form.Group>
+    <Form.Label>
+      {label}{' '}
+      <TooltipOverlay tooltipText={tooltip}>
+        <QuestionCircle />
+      </TooltipOverlay>
+    </Form.Label>
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+    <Form.Control type="number" {...rest} />
+  </Form.Group>
+);
 
 /* This is used as a mockup and doesn't require the schema. Uses the same format */
 const Audited = () => (
@@ -15,22 +32,15 @@ const Audited = () => (
         </Row>
         <Row className="inputDataWidth w-100 px-3">
           <Col>
-            <Form.Group>
-              <Form.Label>Petty Cash</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+
+            <AuditedField label="Petty Cash" tooltip={TOOLTIP_TEXTS.PETTY_CASH} />
+
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Cash</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Cash" tooltip={TOOLTIP_TEXTS.CASH} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Cash in banks/Draw on Line of Credit</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Cash in banks/Draw on Line of Credit" tooltip={TOOLTIP_TEXTS.CASH_IN_BANKS} />
           </Col>
         </Row>
         <hr className="my-5" />
@@ -43,54 +53,31 @@ const Audited = () => (
         <Row className="inputDataWidth w-100 px-3">
           <Row className="mb-3">
             <Col>
-              <Form.Group>
-                <Form.Label>Accounts receivable</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Accounts receivable" tooltip={TOOLTIP_TEXTS.ACCOUNTS_RECEIVE} />
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Due from other fund</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Due from other fund" tooltip={TOOLTIP_TEXTS.DUE_FUNDS} />
+
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Interest & dividends receivable</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Interest & dividends receivable" tooltip={TOOLTIP_TEXTS.INTEREST} />
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Inv prepaid items & assets</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Inv prepaid items & assets" tooltip={TOOLTIP_TEXTS.PREPAID} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <Form.Group>
-                <Form.Label>Notes Receivable (1 yr)</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Notes Receivable (1 yr)" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE} />
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Notes Receivable (after 1 yr)</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Notes Receivable (after 1 yr)" tooltip={TOOLTIP_TEXTS.NOTES_RECEIVE_AFTER} />
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Security Deposits</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Security Deposits" tooltip={TOOLTIP_TEXTS.SECURITY} />
             </Col>
             <Col>
-              <Form.Group>
-                <Form.Label>Cash Held by Invest Manager</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
+              <AuditedField label="Cash Held by Invest Manager" tooltip={TOOLTIP_TEXTS.CASH_HELD} />
             </Col>
           </Row>
         </Row>
@@ -101,28 +88,16 @@ const Audited = () => (
         </Row>
         <Row className="mb-3 w-100 px-3">
           <Col>
-            <Form.Group>
-              <Form.Label>Mutual Funds</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Mutual Funds" tooltip={TOOLTIP_TEXTS.MUTUAL_FUNDS} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Commingled Funds</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Commingled Funds" tooltip={TOOLTIP_TEXTS.COMMINGLED_FUNDS} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Hedge Funds</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Hedge Funds" tooltip={TOOLTIP_TEXTS.HEDGE_FUNDS} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Private Equity</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Private Equity" tooltip={TOOLTIP_TEXTS.PRIVATE_EQUITY} />
           </Col>
         </Row>
         <hr className="my-5" />
@@ -134,22 +109,13 @@ const Audited = () => (
         </Row>
         <Row className="inputDataWidth w-100 px-3">
           <Col>
-            <Form.Group>
-              <Form.Label>Accounts payable and accrued liabilities</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Accounts payable and accrued liabilities" tooltip={TOOLTIP_TEXTS.ACCOUNTS_PAYABLE} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Due to fund</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Due to fund" tooltip={TOOLTIP_TEXTS.DUE_TO_FUND} />
           </Col>
           <Col>
-            <Form.Group>
-              <Form.Label>Due to other fund</Form.Label>
-              <Form.Control type="number" />
-            </Form.Group>
+            <AuditedField label="Due to other fund" tooltip={TOOLTIP_TEXTS.DUE_TO_OTHER_FUND} />
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
