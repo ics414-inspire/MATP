@@ -8,8 +8,7 @@ const ImageCarousel = () => {
   const [index, setIndex] = useState(0);
 
   // Function to handle when a slide is selected
-  // eslint-disable-next-line no-unused-vars
-  const handleSelect = (selectedIndex, e) => {
+  const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
@@ -125,19 +124,6 @@ const ImageCarousel = () => {
           </Container>
         </div>
       </Carousel.Item>
-
-      {/* Third Slide */}
-      {/* <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="images/third-slide.jpg"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>Third Slide Label</h3>
-          <p>Some description for the third slide.</p>
-        </Carousel.Caption>
-      </Carousel.Item> */}
     </Carousel>
   );
 };
