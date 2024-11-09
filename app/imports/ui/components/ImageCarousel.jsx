@@ -8,8 +8,7 @@ const ImageCarousel = () => {
   const [index, setIndex] = useState(0);
 
   // Function to handle when a slide is selected
-  // eslint-disable-next-line no-unused-vars
-  const handleSelect = (selectedIndex, e) => {
+  const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
 
@@ -55,7 +54,7 @@ const ImageCarousel = () => {
               <Col md={6} className="text-start">
                 <h2 className="py-3 carousel-text-border">Streamlined Financial Data Entry</h2>
                 <h3 className="pt-2 pb-1">
-                  <a href="/app/imports/ui/pages/AuditedBalanceSchemaInput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
+                  <a href="/app/imports/ui/pages/AuditedBalanceInput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
                     Audited Balance Form
                   </a>
                   <h6>Data on financial position, including assets, liabilities, and equity</h6>
@@ -125,19 +124,6 @@ const ImageCarousel = () => {
           </Container>
         </div>
       </Carousel.Item>
-
-      {/* Third Slide */}
-      {/* <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="images/third-slide.jpg"
-          alt="Third slide"
-        />
-        <Carousel.Caption>
-          <h3>Third Slide Label</h3>
-          <p>Some description for the third slide.</p>
-        </Carousel.Caption>
-      </Carousel.Item> */}
     </Carousel>
   );
 };

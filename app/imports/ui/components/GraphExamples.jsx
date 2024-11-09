@@ -1,5 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+const Chart = ({ data, lines, title }) => (
+  <ResponsiveContainer width="100%" height={300} className="text-center">
+    <LineChart data={data}>
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="year" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      {lines.map((line, index) => (
+        <Line
+          key={index}
+          type="monotone"
+          dataKey={line.dataKey}
+          stroke={line.stroke}
+          name={line.name}
+        />
+      ))}
+    </LineChart>
+    <h7>{title}</h7>
+  </ResponsiveContainer>
+);
+
+// Define PropTypes with a specific shape for `data`
+Chart.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      year: PropTypes.string.isRequired,
+      cashInflow: PropTypes.number, // replace or add properties based on your specific data structure
+      cashOutflow: PropTypes.number,
+      cashOnHand: PropTypes.number,
+      debt: PropTypes.number,
+      budget: PropTypes.number,
+      actual: PropTypes.number,
+    }),
+  ).isRequired,
+  lines: PropTypes.arrayOf(
+    PropTypes.shape({
+      dataKey: PropTypes.string.isRequired,
+      stroke: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 const cashFlowTrendsData = [
   { year: 'YEAR 6', cashInflow: 35, cashOutflow: 36 },
@@ -38,50 +84,35 @@ const budgetData = [
   { year: 'YEAR 6', budget: 37, actual: 35 },
 ];
 
+// Line configurations
+const cashFlowTrendsLines = [
+  { dataKey: 'cashInflow', stroke: '#8884d8', name: 'Cash Inflow' },
+  { dataKey: 'cashOutflow', stroke: '#82ca9d', name: 'Cash Outflow' },
+];
+
+const financingLines = [
+  { dataKey: 'cashOnHand', stroke: '#8884d8', name: 'Cash on Hand' },
+  { dataKey: 'debt', stroke: '#82ca9d', name: 'Debt' },
+];
+
+const budgetLines = [
+  { dataKey: 'budget', stroke: '#8884d8', name: 'Budget' },
+  { dataKey: 'actual', stroke: '#82ca9d', name: 'Actual' },
+];
+
 /* Cash Flow Trends Chart From Dashboard 12 yr */
 export const CashFlowTrendsChart = () => (
-  <ResponsiveContainer width="100%" height={300} className="text-center">
-    <LineChart data={cashFlowTrendsData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="year" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="cashInflow" stroke="#8884d8" name="Cash Inflow" />
-      <Line type="monotone" dataKey="cashOutflow" stroke="#82ca9d" name="Cash Outflow" />
-    </LineChart>
-    <h7>Cash Flow Trends</h7>
-  </ResponsiveContainer>
+  <Chart data={cashFlowTrendsData} lines={cashFlowTrendsLines} title="Cash Flow Trends" />
 );
 
 /* Financing Chart From Dashboard 12 yr */
+
 export const FinancingChart = () => (
-  <ResponsiveContainer width="100%" height={300} className="text-center">
-    <LineChart data={financingData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="year" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="cashOnHand" stroke="#8884d8" name="Cash on Hand" />
-      <Line type="monotone" dataKey="debt" stroke="#82ca9d" name="Debt" />
-    </LineChart>
-    <h7>Financing</h7>
-  </ResponsiveContainer>
+  <Chart data={financingData} lines={financingLines} title="Financing" />
 );
 
 /* Budget Chart From Dashboard 12 yr */
+
 export const BudgetChart = () => (
-  <ResponsiveContainer width="100%" height={300} className="text-center">
-    <LineChart data={budgetData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="year" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="budget" stroke="#8884d8" name="Budget" />
-      <Line type="monotone" dataKey="actual" stroke="#82ca9d" name="Actual" />
-    </LineChart>
-    <h7>Budget</h7>
-  </ResponsiveContainer>
+  <Chart data={budgetData} lines={budgetLines} title="Budget" />
 );

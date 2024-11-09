@@ -6,15 +6,15 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-// Run this in meteor terminal to check the database: db.AuditedBalanceCollection.find().pretty();
-export const AuditedBalancePublications = {
-  AuditedBalance: 'AuditedBalance',
-  AuditedBalanceAdmin: 'AuditedBalanceAdmin',
+// Run this in meteor terminal to check the database: db.BudgetCollection.find().pretty();
+export const BudgetPublications = {
+  Budget: 'Budget',
+  BudgetAdmin: 'BudgetAdmin',
 };
 
-class AuditedBalanceCollection extends BaseCollection {
+class BudgetCollection extends BaseCollection {
   constructor() {
-    super('AuditedBalance', new SimpleSchema({
+    super('Budget', new SimpleSchema({
       Year: Number,
       Petty_cash: Number,
       Cash: Number,
@@ -181,7 +181,7 @@ class AuditedBalanceCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(AuditedBalancePublications.AuditedBalance, function () {
+      Meteor.publish(BudgetPublications.Budget, function () {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -189,7 +189,7 @@ class AuditedBalanceCollection extends BaseCollection {
         return this.ready();
       });
 
-      Meteor.publish(AuditedBalancePublications.AuditedBalanceAdmin, function () {
+      Meteor.publish(BudgetPublications.BudgetAdmin, function () {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -198,16 +198,16 @@ class AuditedBalanceCollection extends BaseCollection {
     }
   }
 
-  subscribeAuditedBalance() {
+  subscribeBudget() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(AuditedBalancePublications.AuditedBalance);
+      return Meteor.subscribe(BudgetPublications.Budget);
     }
     return null;
   }
 
-  subscribeAuditedBalanceSheet() {
+  subscribeBudgetSheet() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(AuditedBalancePublications.AuditedBalanceAdmin);
+      return Meteor.subscribe(BudgetPublications.BudgetAdmin);
     }
     return null;
   }
@@ -230,4 +230,4 @@ class AuditedBalanceCollection extends BaseCollection {
   }
 }
 
-export const AuditedBalance = new AuditedBalanceCollection();
+export const Budget = new BudgetCollection();
