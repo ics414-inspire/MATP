@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router';
-import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Col, Row } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
-/**
- * SignUpForm component is similar to signin component, but we create a new user instead.
- */
+
 const SignUpForm = () => {
+  const [step, setStep] = useState(1); // State to track the form step
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
+  const [validationError, setValidationError] = useState(''); // New state to track validation errors
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setValidationError(''); // Clear validation error when user starts typing
   };
 
   const schema = new SimpleSchema({
@@ -28,11 +27,45 @@ const SignUpForm = () => {
     password: String,
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
+  const validatePassword = (password) => password.length >= 6;
+
+  const validateName = (name) => name.trim() !== '';
+
+  const nextStep = () => {
+    if (step === 1) {
+      // Validate email and password on Step 1
+      if (!validateEmail(formData.email)) {
+        setValidationError('Please enter a valid email address.');
+      } else if (!validatePassword(formData.password)) {
+        setValidationError('Password must be at least 6 characters long.');
+      } else {
+        setValidationError('');
+        setStep(step + 1);
+      }
+    } else if (step === 2) {
+      // Validate first and last names on Step 2
+      if (!validateName(formData.firstName)) {
+        setValidationError('Please enter a valid first name.');
+      } else if (!validateName(formData.lastName)) {
+        setValidationError('Please enter a valid last name.');
+      } else {
+        setValidationError('');
+        handleSubmit(); // Call handleSubmit after both steps are validated
+      }
+    }
+  };
+
+  const prevStep = () => setStep(step - 1);
+
+  const handleSubmit = () => {
+    // Validate all fields one last time before submission
     try {
-      schema.validate(formData); // Correct schema reference
+      schema.validate(formData);
 
       const collectionName = UserProfiles.getCollectionName();
       const definitionData = formData;
@@ -51,8 +84,9 @@ const SignUpForm = () => {
         })
         .catch((err) => setError(err.reason));
 
+      // eslint-disable-next-line no-shadow
     } catch (validationError) {
-      setError(validationError.message);
+      setValidationError(validationError.message);
     }
   };
 
@@ -62,10 +96,36 @@ const SignUpForm = () => {
 
   return (
     <div id={PAGE_IDS.SIGN_UP} className="form-container sign-up-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <h1>Create Account</h1>
-        <Row>
-          <Col>
+
+        {step === 1 && (
+          <>
+            <input
+              id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <input
+              id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {validationError && <p className="validation-error">{validationError}</p>}
+            <button type="button" onClick={nextStep} className="signin-button my-2">
+              Next
+            </button>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
             <input
               id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}
               type="text"
@@ -73,10 +133,7 @@ const SignUpForm = () => {
               placeholder="First name"
               value={formData.firstName}
               onChange={handleChange}
-              required
             />
-          </Col>
-          <Col>
             <input
               id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}
               type="text"
@@ -84,44 +141,27 @@ const SignUpForm = () => {
               placeholder="Last name"
               value={formData.lastName}
               onChange={handleChange}
-              required
             />
-          </Col>
-        </Row>
-
-        <input
-          id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} type="submit" className="custom-button my-2">
-          Sign Up
-        </button>
+            {validationError && <p className="validation-error">{validationError}</p>}
+            <div className="button-row">
+              <button type="button" onClick={prevStep} className="signin-button my-2 mx-2">
+                Previous
+              </button>
+              <button type="button" onClick={nextStep} className="signin-button my-2 mx-2">
+                Sign Up
+              </button>
+            </div>
+          </>
+        )}
       </form>
 
-      <div className="custom-alert">
-        <Link to="/signin" />
-      </div>
-
       {error && (
-        <div className="custom-error">
+        <div className="custom-error ">
           <h3>Registration was not successful</h3>
           <p>{error}</p>
         </div>
       )}
+
     </div>
   );
 };
