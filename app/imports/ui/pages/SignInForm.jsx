@@ -11,6 +11,7 @@ const SignInForm = () => {
     email: '',
     password: '',
   });
+  const [validationError, setValidationError] = useState(''); // New state for validation error
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,11 +19,29 @@ const SignInForm = () => {
       ...state,
       [name]: value,
     });
+    setValidationError(''); // Clear validation error when user starts typing
   };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => password.length >= 6;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = state;
+
+    // Basic validation before submitting
+    if (!validateEmail(email)) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+    if (!validatePassword(password)) {
+      setValidationError('Password must be at least 6 characters long.');
+      return;
+    }
 
     // authenticate user with Meteor
     Meteor.loginWithPassword(email, password, (err) => {
@@ -50,7 +69,7 @@ const SignInForm = () => {
             placeholder="email"
             value={state.email}
             onChange={handleChange}
-            required
+
           />
           <input
             type="password"
@@ -59,12 +78,13 @@ const SignInForm = () => {
             placeholder="password"
             value={state.password}
             onChange={handleChange}
-            required
+
           />
+          {validationError && <p className="validation-error">{validationError}</p>}
           <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} className="my-2">Sign In</button>
         </form>
         <div className="link-container">
-          <Link to="/signup"></Link>
+          <Link to="/signup">Don’t have an account? Sign up here</Link>
         </div>
 
         {error && (
