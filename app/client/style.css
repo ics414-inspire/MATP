@@ -121,8 +121,7 @@ a {
 .footer {
   background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true"); /* Light background */
   padding: 40px 0;
-  margin-top: 10px;
-}
+  margin-top: 0;}
 
 .footer h5 {
   font-weight: bold;
@@ -540,18 +539,12 @@ hr {
 }
 
 #signin-signup-page .container {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  position: relative;
-  overflow: hidden;
-  width: 800px;
-  height: 800px;
-  max-width: 100%;
-  min-height: 100px;
+  width: 100vw;
   display: flex;
-  padding: 20px;
-  margin: 50px auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 #signin-signup-page .form-container {
@@ -616,7 +609,7 @@ hr {
 
 #signin-signup-page .overlay {
   background: #1c92d2; /* fallback */
-  background: -webkit-linear-gradient(to right, #1c92d2, #9bdbe8); /* Safari */
+  background: -webkit-linear-gradient(to right, #1c92d2, #9bdbe8);
   background: linear-gradient(to right, #1c92d2, #9bdbe8);
   background-repeat: no-repeat;
   background-size: cover;
@@ -669,6 +662,14 @@ hr {
 .navbar .dropdown-menu .dropdown-item.active{
   background-color: transparent !important;
   color: inherit !important;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above other content, signin/signup page (important) */
 }
 
 
