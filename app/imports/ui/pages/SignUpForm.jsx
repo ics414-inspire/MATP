@@ -105,7 +105,7 @@ const SignUpForm = () => {
               id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="email"
               value={formData.email}
               onChange={handleChange}
             />
@@ -113,7 +113,7 @@ const SignUpForm = () => {
               id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="password"
               value={formData.password}
               onChange={handleChange}
             />
@@ -130,7 +130,7 @@ const SignUpForm = () => {
               id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}
               type="text"
               name="firstName"
-              placeholder="First name"
+              placeholder="first name"
               value={formData.firstName}
               onChange={handleChange}
             />
@@ -138,7 +138,7 @@ const SignUpForm = () => {
               id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}
               type="text"
               name="lastName"
-              placeholder="Last name"
+              placeholder="last name"
               value={formData.lastName}
               onChange={handleChange}
             />
