@@ -37,12 +37,11 @@ test('Sign In - Valid Credentials', async t => {
 
 test('Sign In - Invalid Credentials', async t => {
   await t
-      .typeText(page.signInEmail, 'invaliduser@example.com')
-      .typeText(page.signInPassword, 'wrongpassword')
-      .click(page.signInButton)
-      .expect(Selector('#sign-in-container h3').withText('Login was not successful').exists)
-      .ok('Error heading should be displayed when invalid credentials are entered')
-      .expect(Selector('#sign-in-container p').withText('User not found').exists)
-      .ok('Error detail should display "User not found" when invalid credentials are entered');
+    .typeText(page.signInEmail, 'invaliduser@example.com')
+    .typeText(page.signInPassword, 'wrongpassword')
+    .click(page.signInButton)
+    .expect(Selector('#sign-in-container h3').withText('Login was not successful').exists)
+    .ok('Error heading should be displayed when invalid credentials are entered')
+    .expect(Selector('#sign-in-container p').withText('User not found').exists)
+    .ok('Error detail should display "User not found" when invalid credentials are entered');
 });
-
