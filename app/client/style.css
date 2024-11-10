@@ -717,10 +717,15 @@ hr {
 
 }
 
-.form-container {
-  position: relative;
-  padding-top: 20px; /* Create space at the top if needed */
+.error-message {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  top: 690px;
+  right: 470px;
 }
+
+
 
 
 /* DisplayAudBalSheet.jsx STYLES*/
