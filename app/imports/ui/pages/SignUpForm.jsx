@@ -153,14 +153,15 @@ const SignUpForm = () => {
             </div>
           </>
         )}
-      </form>
 
-      {error && (
-        <div className="custom-error ">
-          <h3>Registration was not successful</h3>
-          <p>{error}</p>
-        </div>
-      )}
+        {error && (
+          <div className="custom-error ">
+            <h3>Registration was not successful</h3>
+            <p>{error}</p>
+          </div>
+        )}
+
+      </form>
 
     </div>
   );

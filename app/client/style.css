@@ -709,25 +709,6 @@ hr {
   color: #ffffff;
 }
 
-.custom-error {
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  top: 690px;
-
-}
-
-.error-message {
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  top: 690px;
-  right: 470px;
-}
-
-
-
-
 /* DisplayAudBalSheet.jsx STYLES*/
 .custom-card-body .align-items-center.row {
   padding-left: 5px;

@@ -82,17 +82,16 @@ const SignInForm = () => {
           />
           {validationError && <p className="validation-error">{validationError}</p>}
           <button type="submit" id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} className="my-2">Sign In</button>
-        </form>
-        <div className="link-container">
-          <Link to="/signup">Don’t have an account? Sign up here</Link>
-        </div>
 
-        {error && (
-          <div className="error-message">
-            <h3>Login was not successful</h3>
-            <p>{error}</p>
-          </div>
-        )}
+          {error && (
+            <div className="error-message">
+              <h3>Login was not successful</h3>
+              <p>{error}</p>
+            </div>
+          )}
+
+        </form>
+
       </div>
     </div>
   );
