@@ -14,18 +14,18 @@ const SignUpForm = () => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
   const [validationError, setValidationError] = useState(''); // New state to track validation errors
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setValidationError(''); // Clear validation error when user starts typing
-  };
-
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,
     email: String,
     password: String,
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setValidationError(''); // Clear validation error when user starts typing
+  };
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,6 +35,32 @@ const SignUpForm = () => {
   const validatePassword = (password) => password.length >= 6;
 
   const validateName = (name) => name.trim() !== '';
+
+  const handleSubmit = () => {
+    // Validate all fields one last time before submission
+    try {
+      schema.validate(formData);
+
+      const collectionName = UserProfiles.getCollectionName();
+      const definitionData = formData;
+
+      defineMethod.callPromise({ collectionName, definitionData })
+        .then(() => {
+          const { email, password } = formData;
+          Meteor.loginWithPassword(email, password, (err) => {
+            if (err) {
+              setError(err.reason);
+            } else {
+              setError('');
+              setRedirectToRef(true);
+            }
+          });
+        })
+        .catch((err) => setError(err.reason));
+    } catch (schemaValidationError) {
+      setValidationError(schemaValidationError.message);
+    }
+  };
 
   const nextStep = () => {
     if (step === 1) {
@@ -61,34 +87,6 @@ const SignUpForm = () => {
   };
 
   const prevStep = () => setStep(step - 1);
-
-  const handleSubmit = () => {
-    // Validate all fields one last time before submission
-    try {
-      schema.validate(formData);
-
-      const collectionName = UserProfiles.getCollectionName();
-      const definitionData = formData;
-
-      defineMethod.callPromise({ collectionName, definitionData })
-        .then(() => {
-          const { email, password } = formData;
-          Meteor.loginWithPassword(email, password, (err) => {
-            if (err) {
-              setError(err.reason);
-            } else {
-              setError('');
-              setRedirectToRef(true);
-            }
-          });
-        })
-        .catch((err) => setError(err.reason));
-
-      // eslint-disable-next-line no-shadow
-    } catch (validationError) {
-      setValidationError(validationError.message);
-    }
-  };
 
   if (redirectToReferer) {
     return <Navigate to="/" />;
@@ -155,14 +153,12 @@ const SignUpForm = () => {
         )}
 
         {error && (
-          <div className="custom-error ">
+          <div className="custom-error">
             <h3>Registration was not successful</h3>
             <p>{error}</p>
           </div>
         )}
-
       </form>
-
     </div>
   );
 };
