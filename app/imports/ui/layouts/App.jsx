@@ -32,10 +32,11 @@ import FinancialProjection from '../pages/4100';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
-  const { ready } = useTracker(() => {
+  const { ready, isLogged } = useTracker(() => {
     const rdy = Roles.subscription.ready();
     return {
       ready: rdy,
+      isLogged: Meteor.userId() !== null,
     };
   });
   return (
@@ -43,7 +44,7 @@ const App = () => {
       <div className="d-flex flex-column min-vh-100">
         <NavBar />
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/" element={isLogged ? <Dashboard /> : <Landing />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/signin" element={<SignIn />} />
