@@ -17,13 +17,6 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
 }
-/* Sign-in form container */
-#sign-in-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
 /* Card styling */
 .card {
@@ -128,8 +121,7 @@ a {
 .footer {
   background-image: url("https://github.com/manoa-inspire/MATP/blob/Issue-22/app/public/images/background.png?raw=true"); /* Light background */
   padding: 40px 0;
-  margin-top: 10px;
-}
+  margin-top: 0;}
 
 .footer h5 {
   font-weight: bold;
@@ -449,6 +441,272 @@ hr {
 /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
 .custom-label {
   font-size: 13px;
+}
+
+/* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/ /* USER PAGE STYLES*/
+
+#signin-signup-page .App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#signin-signup-page * {
+  box-sizing: border-box;
+}
+
+#signin-signup-page body {
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  margin: -20px 0 50px;
+}
+
+#signin-signup-page h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+#signin-signup-page h2 {
+  text-align: center;
+}
+
+#signin-signup-page p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin: 20px 0 30px;
+}
+
+#signin-signup-page span {
+  font-size: 12px;
+}
+
+#signin-signup-page a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+#signin-signup-page button {
+  border-radius: 20px;
+  border: 1px solid #1c92d2;
+  background-color: #1c92d2;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+#signin-signup-page button:active {
+  transform: scale(0.95);
+}
+
+#signin-signup-page button:focus {
+  outline: none;
+}
+
+#signin-signup-page button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
+}
+
+#signin-signup-page form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+#signin-signup-page input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 60%;
+}
+
+#signin-signup-page .container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#signin-signup-page .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+#signin-signup-page .sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+#signin-signup-page .container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+
+#signin-signup-page .sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+#signin-signup-page .container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+#signin-signup-page .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+#signin-signup-page .container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+#signin-signup-page .overlay {
+  background: #1c92d2; /* fallback */
+  background: -webkit-linear-gradient(to right, #1c92d2, #9bdbe8);
+  background: linear-gradient(to right, #1c92d2, #9bdbe8);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+#signin-signup-page .container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+#signin-signup-page .overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+#signin-signup-page .overlay-left {
+  transform: translateX(-20%);
+}
+
+#signin-signup-page .container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+#signin-signup-page .overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+#signin-signup-page .container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+.navbar .dropdown-menu .dropdown-item.active{
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above other content, signin/signup page (important) */
+}
+
+/* Styles specifically for Sign In buttons */
+#signin-signup-page .signin-button {
+  background-color: #1c92d2; /* Main color for the button */
+  color: #ffffff;
+  border: 1px solid #1c92d2;
+  padding: 12px 45px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 80ms ease-in;
+}
+
+#signin-signup-page .signin-button:hover {
+  background-color: #9bdbe8; /* Lighter shade on hover */
+}
+
+#signin-signup-page .signin-button:active {
+  transform: scale(0.95); /* Slightly scale down on click*/
+}
+
+#signin-signup-page .signin-button:focus {
+  outline: none; /* Remove default outline */
+}
+
+#signin-signup-page .signin-button.secondary {
+  background-color: transparent;
+  color: #1c92d2;
+  border: 1px solid #1c92d2;
+}
+
+#signin-signup-page .signin-button.secondary:hover {
+  background-color: #1c92d2;
+  color: #ffffff;
 }
 
 /* DisplayAudBalSheet.jsx STYLES*/
