@@ -449,18 +449,10 @@ hr {
 }
 
 .carousel-wrapper {
-  width: 100vw;
-  height: 100vh;
   background-image: url('https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative; /* Try fixed if this doesn't work */
-  top: 0;
-  left: 0;
 }
 
 /* Ensure carousel itself takes full width and height */

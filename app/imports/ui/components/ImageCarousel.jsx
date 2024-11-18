@@ -8,9 +8,13 @@ const ImageCarousel = () => {
   const handleSelect = (selectedIndex) => setIndex(selectedIndex);
 
   return (
-    <div className="carousel-wrapper">
+    <div style={{ display: 'block', width: '100vw', height: '100vh', padding: 30, margin: 0,
+      backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
+      backgroundSize: 'cover',
+      backgroundPosition: '50% 75%' }}
+    >
       <Carousel activeIndex={index} onSelect={handleSelect}>
-        <Carousel.Item>
+        <Carousel.Item interval={1500}>
           <FirstSlideContent />
         </Carousel.Item>
         {/* <Carousel.Item>
