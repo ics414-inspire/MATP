@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import faker from 'faker';
 import fc from 'fast-check';
-import { stuffConditions, Stuffs } from './StuffCollection';
+import { stuffConditions } from './StuffCollection';
 import { removeAllEntities } from '../base/BaseUtilities';
 import { MATPCollections } from '../matp/MATPCollections';
 import { testDefine, testDumpRestore, testUpdate } from '../utilities/test-helpers';
@@ -10,10 +10,11 @@ import { testDefine, testDumpRestore, testUpdate } from '../utilities/test-helpe
 /* eslint prefer-arrow-callback: "off",  no-unused-expressions: "off" */
 /* eslint-env mocha */
 
-const collectionName = Stuffs.getCollectionName();
+const collectionName = MATPCollections.getCollectionName();
 
 if (Meteor.isServer) {
   describe(collectionName, function testSuite() {
+    this.timeout(5000); // Set timeout to 5000ms for all tests in this suite.
     const collection = MATPCollections.getCollection(collectionName);
 
     before(function setup() {
