@@ -59,12 +59,19 @@ const Landing = () => {
 
           {/* Integrated Carousel */}
           <div className="carousel-section mt-5">
-            <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
-              <Carousel.Item>
-                <ImageCarousel />
-              </Carousel.Item>
-              <Carousel.Item>
-                <ImageCarousel />
+            <Carousel
+              activeIndex={index}
+              onSelect={handleSelect}
+              style={{ width: '1300px', height: '300px', margin: 'auto', backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
+                backgroundSize: 'cover' }}
+            >
+              <Carousel.Item interval={1500}>
+                <img
+                  className="d-block w-100"
+                  src="https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg"
+                  alt="First slide"
+                  style={{ height: '300px', objectFit: 'cover' }}
+                />
               </Carousel.Item>
             </Carousel>
           </div>

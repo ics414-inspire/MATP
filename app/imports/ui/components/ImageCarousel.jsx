@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-import { Carousel, Col, Container, Row, Button } from 'react-bootstrap';
+import { Carousel, Col, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CashFlowTrendsChart, FinancingChart, BudgetChart } from './GraphExamples';
 
 const ImageCarousel = () => {
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex) => setIndex(selectedIndex);
 
   return (
-    <div style={{ display: 'block', width: '100vw', height: '100vh', padding: 30, margin: 0,
-      backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: '50% 75%' }}
+    <Carousel
+      activeIndex={index}
+      onSelect={handleSelect}
+      style={{ width: '600px', height: '300px', margin: 'auto' }}
     >
-      <Carousel activeIndex={index} onSelect={handleSelect}>
-        <Carousel.Item interval={1500}>
-          <FirstSlideContent />
-        </Carousel.Item>
-        {/* <Carousel.Item>
-          <SecondSlideContent />
-        </Carousel.Item> */}
-      </Carousel>
-    </div>
+      <Carousel.Item interval={1500}>
+        <ImageSlideContent />
+      </Carousel.Item>
+      {/* <Carousel.Item>
+        <SecondSlideContent />
+      </Carousel.Item> */}
+    </Carousel>
   );
 };
 
@@ -36,6 +33,15 @@ const FirstSlideContent = () => (
       </Col>
     </Row>
   </div>
+);
+
+const ImageSlideContent = () => (
+  <img
+    className="d-block w-100"
+    src="https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg"
+    alt="First slide"
+    style={{ height: '300px', objectFit: 'cover' }}
+  />
 );
 
 /* const SecondSlideContent = () => (
