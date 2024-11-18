@@ -16,6 +16,41 @@
     { "owner":  "admin@foo.com", "year": 1 }
   ],
 
+  "defaultPercentages": [
+    {
+      "year": 2,
+      "percentages": {
+        "pension_accumulation": 15.0,
+        "retiree_health_insurance": 7.96,
+        "other_post_employment_benefits": 0.0,
+        "employees_health_fund": 7.02,
+        "social_security": 6.2,
+        "medicare": 1.45,
+        "workers_compensation": 1.22,
+        "unemployment_compensation": 0.91,
+        "pension_administration": 0.0,
+        "composite_rate": 39.76
+      },
+      "owner": "admin@foo.com"
+    },
+    {
+      "year": 3,
+      "percentages": {
+        "pension_accumulation": 15.5,
+        "retiree_health_insurance": 10.35,
+        "other_post_employment_benefits": 0.0,
+        "employees_health_fund": 6.84,
+        "social_security": 6.2,
+        "medicare": 1.45,
+        "workers_compensation": 0.88,
+        "unemployment_compensation": 0.31,
+        "pension_administration": 0.01,
+        "composite_rate": 41.54
+      },
+      "owner": "admin@foo.com"
+    }
+  ],
+
   "public": {
     "development": true
   }
