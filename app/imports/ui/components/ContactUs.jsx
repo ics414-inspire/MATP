@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Image } from 'react-bootstrap';
 
 const ContactUs = () => {
   // Place the handleSubmit function inside the component
@@ -43,6 +44,7 @@ const ContactUs = () => {
         <div className="col-md-6">
           {/* Attach handleSubmit to the form */}
           <form onSubmit={handleSubmit}>
+            <Image src="/images/spire_line.png" fluid width="14%" />
             <h4>Mahalo!</h4>
             <div className="mb-3">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
