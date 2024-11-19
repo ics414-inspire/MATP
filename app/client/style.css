@@ -753,3 +753,17 @@ hr {
 .btn-primary {
   background-color: #0056b3 !important;
 }
+
+.contact-background {
+  background-image: url("/images/contactUsBackground.png");
+
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Adjust as needed */
+  width: 100%;
+
+}
+
+.contact-foreground {
+  background-color: white;
+}
