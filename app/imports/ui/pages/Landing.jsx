@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container, Carousel } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
+import { Container, Carousel, Row, Col, Button } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ImageCarousel from '../components/ImageCarousel';
 
@@ -56,28 +56,9 @@ const Landing = () => {
               </div>
             </div>
           </div>
-
-          {/* Integrated Carousel */}
-          <div className="carousel-section mt-5">
-            <Carousel
-              activeIndex={index}
-              onSelect={handleSelect}
-              style={{ width: '1300px', height: '300px', margin: 'auto', backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
-                backgroundSize: 'cover' }}
-            >
-              <Carousel.Item interval={1500}>
-                <img
-                  className="d-block w-100"
-                  src="https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg"
-                  alt="First slide"
-                  style={{ height: '300px', objectFit: 'cover' }}
-                />
-              </Carousel.Item>
-            </Carousel>
-          </div>
-
         </Container>
       </div>
+      <ImageCarousel />
     </>
   );
 };

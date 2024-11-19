@@ -10,7 +10,8 @@ const ImageCarousel = () => {
     <Carousel
       activeIndex={index}
       onSelect={handleSelect}
-      style={{ width: '600px', height: '300px', margin: 'auto' }}
+      style={{ width: '1425px', height: '300px', margin: 'auto', backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
+        backgroundSize: 'cover', marginTop: '20px' }}
     >
       <Carousel.Item interval={1500}>
         <ImageSlideContent />
