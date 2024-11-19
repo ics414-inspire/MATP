@@ -754,16 +754,28 @@ hr {
   background-color: #0056b3 !important;
 }
 
+
 .contact-background {
   background-image: url("/images/contactUsBackground.png");
-
+/*
   background-size: cover;
   background-position: center;
-  height: 100vh; /* Adjust as needed */
+  height: 100vh; /* Adjust as needed
   width: 100%;
-
+*/
 }
 
 .contact-foreground {
   background-color: white;
+  padding: 50px;
+  opacity: 0.92;
+}
+
+.contact-text-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#contact-email {
+  color:#0056b3;
 }
