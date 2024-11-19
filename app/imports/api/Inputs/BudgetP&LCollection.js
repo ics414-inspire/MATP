@@ -149,6 +149,11 @@ const percentages = [
   },
 ];
 
+function getPercentageForYear(year, key) {
+  const yearData = percentages.find((entry) => entry.year === year);
+  return yearData?.percentages?.[key] || 0; // Return 0 if no match is found
+}
+
 class BudgetCollection extends BaseCollection {
   constructor() {
     super('Budget', new SimpleSchema({
@@ -241,15 +246,17 @@ class BudgetCollection extends BaseCollection {
       'fringeBenefitsManage.$.pensionAdmin': { type: Number, defaultValue: 0, optional: true },
       fringeBenefitsManageTotal: { type: Number, optional: true },
 
-      surplus: {
+      surplus: { type: Number, optional: true },
+
+      expenditure: {
         type: Array,
         optional: true,
       },
-      'surplus.$': Object,
-      'surplus.$.management': { type: Number, defaultValue: 0, optional: true },
-      'surplus.$.supportServices': { type: Number, defaultValue: 0, optional: true },
-      'surplus.$.beneficialAdvocacy': { type: Number, defaultValue: 0, optional: true },
-      surplusTotal: { type: Number, optional: true },
+      'expenditure.$': Object,
+      'expenditure.$.management': { type: Number, defaultValue: 0, optional: true },
+      'expenditure.$.supportServices': { type: Number, defaultValue: 0, optional: true },
+      'expenditure.$.beneficialAdvocacy': { type: Number, defaultValue: 0, optional: true },
+      expenditureTotal: { type: Number, optional: true },
     }));
   }
 
@@ -383,25 +390,71 @@ class BudgetCollection extends BaseCollection {
 
   updateTotals(docId) {
     const doc = this.findOne(docId);
+    // Retrieve the year from the document
+    const year = doc.year;
+
+    // Retrieve the percentage for the year
+    const pensionAccumulationPercentage = getPercentageForYear(year, 'pension_accumulation');
+    const retireeHealthPercentage = getPercentageForYear(year, 'retiree_health_insurance');
+    const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits');
+    const employeeHealthFundPercentage = getPercentageForYear(year, 'employee_health_fund');
+    const socialSecurityPercentage = getPercentageForYear(year, 'social_security');
+    const medicarePercentage = getPercentageForYear(year, 'medicare');
+    const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
+    const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation');
+    const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration');
+
+    const manageSalary = doc.manageSalary || 0;
+
+    // Calculate fringeBenefitsManage array with updated values for all fields
+    const fringeBenefitsManage = (doc.fringeBenefitsManage || []).map((entry) => {
+      const pensionAccumulation = (manageSalary * pensionAccumulationPercentage) / 100;
+      const retireeHealthIns = (manageSalary * retireeHealthPercentage) / 100;
+      const postEmploymentBen = (manageSalary * otherPostEmpBenefitsPercentage) / 100;
+      const employeeHealthFund = (manageSalary * employeeHealthFundPercentage) / 100;
+      const socialSecurity = (manageSalary * socialSecurityPercentage) / 100;
+      const medicare = (manageSalary * medicarePercentage) / 100;
+      const workersComp = (manageSalary * workersCompPercentage) / 100;
+      const unemploymentComp = (manageSalary * unemploymentCompPercentage) / 100;
+      const pensionAdmin = (manageSalary * pensionAdminPercentage) / 100;
+
+      return {
+        ...entry,
+        pensionAccumulation,
+        retireeHealthIns,
+        postEmploymentBen,
+        employeeHealthFund,
+        socialSecurity,
+        medicare,
+        workersComp,
+        unemploymentComp,
+        pensionAdmin,
+      };
+    });
+
     const totalRevenue = this.sumArray(doc.revenue) || 0;
     const totalExpenses = this.sumArray(doc.expenses) || 0;
     const totalFriBenAdmin = this.sumArray(doc.fringeBenefitsAdmin) || 0;
     const totalFriBenAdStaff = this.sumArray(doc.fringeBenefitsAdStaff) || 0;
     const totalFriBenManage = this.sumArray(doc.fringeBenefitsManage) || 0;
-    const totalSurplus = this.sumArray(doc.surplus) || 0;
 
-    const manageSalary = doc.manageSalary || 0;
+    const expendManage = doc.expenditure?.[0]?.management || 0;
+    const personnelExpenses = doc.expenses?.[0]?.personnel || 0;
 
     this._collection.update(docId, {
       $set: {
+        fringeBenefitsManage,
+        fringeBenefitsManageTotal: totalFriBenManage,
+
         revenueTotal: totalRevenue,
-        expensesTotal: totalExpenses,
         fringeBenefitsAdminTotal: totalFriBenAdmin,
         fringeBenefitsAdStaffTotal: totalFriBenAdStaff,
-        fringeBenefitsManageTotal: totalFriBenManage,
-        surplusTotal: totalSurplus,
 
         manageTotal: manageSalary + totalFriBenManage,
+        adStaffTotal: expendManage - this.manageTotal,
+        adminTotal: personnelExpenses - this.manageTotal - this.addStaffTotal,
+        expensesTotal: totalExpenses + personnelExpenses,
+        surplus: totalRevenue - this.expensesTotal,
       },
     });
   }
