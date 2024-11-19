@@ -6,171 +6,281 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-// Run this in meteor terminal to check the database: db.BudgetCollection.find().pretty();
 export const BudgetPublications = {
   Budget: 'Budget',
   BudgetAdmin: 'BudgetAdmin',
 };
 
+const percentages = [
+  {
+    year: 2,
+    percentages: {
+      pension_accumulation: 15.00,
+      retiree_health_insurance: 7.96,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 7.02,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.22,
+      unemployment_compensation: 0.91,
+      pension_administration: 0.00,
+      composite_rate: 39.76,
+    },
+  },
+  {
+    year: 3,
+    percentages: {
+      pension_accumulation: 15.50,
+      retiree_health_insurance: 10.35,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.84,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 0.88,
+      unemployment_compensation: 0.31,
+      pension_administration: 0.01,
+      composite_rate: 41.54,
+    },
+  },
+  {
+    year: 4,
+    percentages: {
+      pension_accumulation: 16.00,
+      retiree_health_insurance: 10.12,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.81,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.16,
+      unemployment_compensation: 0.25,
+      pension_administration: 0.00,
+      composite_rate: 41.99,
+    },
+  },
+  {
+    year: 5,
+    percentages: {
+      pension_accumulation: 16.50,
+      retiree_health_insurance: 10.12,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.81,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.16,
+      unemployment_compensation: 0.25,
+      pension_administration: 0.00,
+      composite_rate: 42.49,
+    },
+  },
+  {
+    year: 6,
+    percentages: {
+      pension_accumulation: 17.00,
+      retiree_health_insurance: 8.07,
+      other_post_employment_benefits: 7.78,
+      employees_health_fund: 7.62,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.27,
+      unemployment_compensation: 0.15,
+      pension_administration: 0.00,
+      composite_rate: 49.54,
+    },
+  },
+  {
+    year: 7,
+    percentages: {
+      pension_accumulation: 17.00,
+      retiree_health_insurance: 9.39,
+      other_post_employment_benefits: 12.69,
+      employees_health_fund: 7.60,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.06,
+      unemployment_compensation: 0.09,
+      pension_administration: 0.01,
+      composite_rate: 55.48,
+    },
+  },
+  {
+    year: 8,
+    percentages: {
+      pension_accumulation: 18.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 59.08,
+    },
+  },
+  {
+    year: 9,
+    percentages: {
+      pension_accumulation: 19.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 60.08,
+    },
+  },
+  {
+    year: 10,
+    percentages: {
+      pension_accumulation: 22.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 63.08,
+    },
+  },
+];
+
 class BudgetCollection extends BaseCollection {
   constructor() {
     super('Budget', new SimpleSchema({
-      Year: Number,
-      Petty_cash: Number,
-      Cash: Number,
-      Cash_in_banksDraw_on_Line_of_Credit: Number,
-      Total_Cash_and_Cash_Equivalents: {
-        type: Number,
+      owner: String,
+      year: Number,
+
+      revenue: {
+        type: Array,
+        optional: true,
+        defaultValue: [],
+      },
+      'revenue.$': Object,
+      'revenue.$.a': { type: Number, defaultValue: 0, optional: true },
+      'revenue.$.revenues': { type: Number, defaultValue: 0, optional: true },
+      'revenue.$.generalFund': { type: Number, defaultValue: 0, optional: true },
+      'revenue.$.coreOpBudgetNotAuth': { type: Number, defaultValue: 0, optional: true },
+      revenueTotal: { type: Number, optional: true },
+
+      expenses: {
+        type: Array,
+        optional: true,
+        defaultValue: [],
+      },
+      'expenses.$': Object,
+      'expenses.$.personnel': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.program': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.contracts': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.grants': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.travel': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.equipment': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.overhead': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.debtService': { type: Number, defaultValue: 0, optional: true },
+      'expenses.$.other': { type: Number, defaultValue: 0, optional: true },
+      expensesTotal: { type: Number, optional: true },
+
+      adminSalary: { type: Number, optional: true },
+      adminTotal: { type: Number, optional: true },
+
+      fringeBenefitsAdmin: {
+        type: Array,
         optional: true,
       },
-      Accounts_receivable: Number,
-      Due_from_other_fund: Number,
-      Interest_and_dividends_receivable: Number,
-      Inventory_prepaid_items_and_other_assets: Number,
-      Notes_receivable_due_within_one_year: Number,
-      Notes_receivable_due_after_one_year: Number,
-      Security_Deposits: Number,
-      Cash_held_by_investment_manager: Number,
-      Mutual_Funds: Number,
-      Commingled_funds: Number,
-      Hedge_funds: Number,
-      Private_equity: Number,
-      Common_trust_fund: Number,
-      Common_preferred_stock: Number,
-      Private_debt: Number,
-      Other: Number,
-      Subtotal_Investment: {
-        type: Number,
+      'fringeBenefitsAdmin.$': Object,
+      'fringeBenefitsAdmin.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.retireeHealthIns': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.postEmploymentBen': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.employeeHealthFund': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.socialSecurity': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.medicare': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.workersComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.unemploymentComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdmin.$.pensionAdmin': { type: Number, defaultValue: 0, optional: true },
+      fringeBenefitsAdminTotal: { type: Number, optional: true },
+
+      adStaffSalary: { type: Number, optional: true },
+      adStaffTotal: { type: Number, optional: true },
+
+      fringeBenefitsAdStaff: {
+        type: Array,
         optional: true,
       },
-      US_treasuries: Number,
-      US_agencies: Number,
-      Subtotal_Loan_Fund: {
-        type: Number,
+      'fringeBenefitsAdStaff.$': Object,
+      'fringeBenefitsAdStaff.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.retireeHealthIns': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.postEmploymentBen': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.employeeHealthFund': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.socialSecurity': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.medicare': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.workersComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.unemploymentComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsAdStaff.$.pensionAdmin': { type: Number, defaultValue: 0, optional: true },
+      fringeBenefitsAdStaffTotal: { type: Number, optional: true },
+
+      manageSalary: { type: Number, defaultValue: 0, optional: true },
+      manageTotal: { type: Number, optional: true },
+
+      fringeBenefitsManage: {
+        type: Array,
         optional: true,
       },
-      Investments: {
-        type: Number,
+      'fringeBenefitsManage.$': Object,
+      'fringeBenefitsManage.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.retireeHealthIns': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.postEmploymentBen': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.employeeHealthFund': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.socialSecurity': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.medicare': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.workersComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.unemploymentComp': { type: Number, defaultValue: 0, optional: true },
+      'fringeBenefitsManage.$.pensionAdmin': { type: Number, defaultValue: 0, optional: true },
+      fringeBenefitsManageTotal: { type: Number, optional: true },
+
+      surplus: {
+        type: Array,
         optional: true,
       },
-      Buildings: Number,
-      Leasehold_improvements: Number,
-      Furniture_fixtures_and_equipment: Number,
-      Less_accumulated_depreciation: Number,
-      Net: {
-        type: Number,
-        optional: true,
-      },
-      Land_A: Number,
-      Land_B: Number,
-      Construction_in_Progress: Number,
-      Subtotal_Capital_Assets_net: {
-        type: Number,
-        optional: true,
-      },
-      Investments_Buildings: Number,
-      Investments_Leasehold_improvements: Number,
-      Investments_Furniture_fixtures_and_equipment: Number,
-      Vehicles: Number,
-      Investments_Less_accumulated_depreciation: Number,
-      Investments_Net: {
-        type: Number,
-        optional: true,
-      },
-      Land: Number,
-      Subtotal_Limited_Liability_Company_Bs_assets_net: {
-        type: Number,
-        optional: true,
-      },
-      Capital_Assets_net: {
-        type: Number,
-        optional: true,
-      },
-      Restricted_cash: Number,
-      Total_Other_Assets: {
-        type: Number,
-        optional: true,
-      },
-      Deferred_outflows_of_resources_related_to_pensions: Number,
-      Deferred_outflows_of_resources_related_to_OPEB: Number,
-      Total_assets_and_deferred_outflows_of_resources: {
-        type: Number,
-        optional: true,
-      },
-      Accounts_payable_and_accrued_liabilities: Number,
-      Due_to_fund: Number,
-      Due_to_other_fund: Number,
-      Accrued_vacation: Number,
-      Workers_compensation: Number,
-      Accrued_management_retirement_plan: Number,
-      Accrued_lease_guaranty_obligation: Number,
-      Capital_lease_obligation: Number,
-      Notes_payable_Building_A_acquisition: Number,
-      Net_Pension_Liability: Number,
-      Net_OPEB_Liability: Number,
-      Line_of_Credit_Building_A: Number,
-      Line_of_Credit_Building_B: Number,
-      Debt_service: Number,
-      Longterm_liabilities_due_within_one_year: {
-        type: Number,
-        optional: true,
-      },
-      Long_term_Accrued_vacation: Number,
-      Long_term_Workers_compensation: Number,
-      Long_term_Accrued_management_retirement_plan: Number,
-      Long_term_Accrued_lease_guaranty_obligation: Number,
-      Long_term_Capital_lease_obligation: Number,
-      Long_term_Notes_payable_Building_A_acquisition: Number,
-      Long_term_Net_Pension_Liability: Number,
-      Long_term_Net_OPEB_Liability: Number,
-      Long_term_Line_of_Credit_Building_A: Number,
-      Long_term_Line_of_Credit_Building_B: Number,
-      Long_term_Debt_service: Number,
-      Longterm_liabilities_due_after_one_year: {
-        type: Number,
-        optional: true,
-      },
-      Total_Liabilities: {
-        type: Number,
-        optional: true,
-      },
-      Deferred_inflows_of_resources_related_to_pensions: Number,
-      Deferred_inflows_of_resources_related_to_OPEB: Number,
-      Total_liabilities_and_deferred_inflows_of_resources: {
-        type: Number,
-        optional: true,
-      },
-      Invested_in_capital_assets_net_of_related_debt: Number,
-      Restricted_federal_funds: Number,
-      Unrestricted: Number,
-      Total_net_position: {
-        type: Number,
-        optional: true,
-      },
-      Total_Liabilities_Deferred_Inflows_of_Resources_and_Net_Position: {
-        type: Number,
-        optional: true,
-      },
+      'surplus.$': Object,
+      'surplus.$.management': { type: Number, defaultValue: 0, optional: true },
+      'surplus.$.supportServices': { type: Number, defaultValue: 0, optional: true },
+      'surplus.$.beneficialAdvocacy': { type: Number, defaultValue: 0, optional: true },
+      surplusTotal: { type: Number, optional: true },
     }));
   }
 
-  define(data) {
-    const docID = this._collection.insert(data);
+  define({ owner, year, revenue, expenses, manageSalary, surplus }) {
+    const docID = this._collection.insert({
+      owner,
+      year,
+      revenue,
+      expenses,
+      manageSalary,
+      surplus,
+    });
+    this.updateTotals(docID);
     return docID;
   }
 
-  update(docID, data) {
+  update(docID, { revenue, expenses, manageSalary, surplus }) {
     const updateData = {};
-
-    Object.entries(data).forEach(([key, value]) => {
-      if (_.isNumber(value)) {
-        updateData[key] = value;
-      }
-    });
-
+    if (_.isArray(revenue)) { updateData.revenue = revenue; }
+    if (_.isArray(expenses)) { updateData.expenses = expenses; }
+    updateData.manageSalary = manageSalary;
+    if (_.isArray(surplus)) { updateData.surplus = surplus; }
     this._collection.update(docID, { $set: updateData });
+    this.updateTotals(docID);
   }
 
+  /**
+   * A stricter form of remove that throws an error if the document or docID could not be found.
+   * @param {String | Object} name - A document or docID in this collection.
+   * @return {Boolean} true
+   */
   removeIt(name) {
     const doc = this.findDoc(name);
     check(doc, Object);
@@ -178,6 +288,10 @@ class BudgetCollection extends BaseCollection {
     return true;
   }
 
+  /**
+   * Default publication method for entities.
+   * It publishes the entire collection for admin and just the AuditedBalanceSheet associated to an owner.
+   */
   publish() {
     if (Meteor.isServer) {
       const instance = this;
@@ -189,7 +303,7 @@ class BudgetCollection extends BaseCollection {
         return this.ready();
       });
 
-      Meteor.publish(BudgetPublications.BudgetAdmin, function () {
+      Meteor.publish(BudgetPublications.BudgetAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }
@@ -218,15 +332,78 @@ class BudgetCollection extends BaseCollection {
 
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const result = {};
+    const year = doc.year;
+    const owner = doc.owner;
+    const revenue = doc.revenue;
+    const revenueTotal = doc.revenueTotal;
+    const expenses = doc.expenses;
+    const expensesTotal = doc.expensesTotal;
+    const adminSalary = doc.adminSalary;
+    const adminTotal = doc.adminTotal;
+    const fringeBenefitsAdmin = doc.fringeBenefitsAdmin;
+    const fringeBenefitsAdminTotal = doc.fringeBenefitsAdminTotal;
+    const adStaffSalary = doc.adStaffSalary;
+    const adStaffTotal = doc.adStaffTotal;
+    const fringeBenefitsAdStaff = doc.fringeBenefitsAdStaff;
+    const fringeBenefitsAdStaffTotal = doc.fringeBenefitsAdStaffTotal;
+    const manageSalary = doc.manageSalary;
+    const manageTotal = doc.manageTotal;
+    const fringeBenefitsManage = doc.fringeBenefitsManage;
+    const fringeBenefitsManageTotal = doc.fringeBenefitsManageTotal;
+    const surplus = doc.surplus;
+    const surplusTotal = doc.surplusTotal;
+    return {
+      year,
+      owner,
+      revenue,
+      revenueTotal,
+      expenses,
+      expensesTotal,
+      adminSalary,
+      adminTotal,
+      fringeBenefitsAdmin,
+      fringeBenefitsAdminTotal,
+      adStaffSalary,
+      adStaffTotal,
+      fringeBenefitsAdStaff,
+      fringeBenefitsAdStaffTotal,
+      manageSalary,
+      manageTotal,
+      fringeBenefitsManage,
+      fringeBenefitsManageTotal,
+      surplus,
+      surplusTotal,
+    };
+  }
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key in doc) {
-      if (Object.prototype.hasOwnProperty.call(doc, key)) {
-        result[key] = doc[key];
-      }
-    }
-    return result;
+  sumArray(array) {
+    if (!array || !array.length) return 0;
+    return array.reduce((total, item) => total + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
+  }
+
+  updateTotals(docId) {
+    const doc = this.findOne(docId);
+    const totalRevenue = this.sumArray(doc.revenue) || 0;
+    const totalExpenses = this.sumArray(doc.expenses) || 0;
+    const totalFriBenAdmin = this.sumArray(doc.fringeBenefitsAdmin) || 0;
+    const totalFriBenAdStaff = this.sumArray(doc.fringeBenefitsAdStaff) || 0;
+    const totalFriBenManage = this.sumArray(doc.fringeBenefitsManage) || 0;
+    const totalSurplus = this.sumArray(doc.surplus) || 0;
+
+    const manageSalary = doc.manageSalary || 0;
+
+    this._collection.update(docId, {
+      $set: {
+        revenueTotal: totalRevenue,
+        expensesTotal: totalExpenses,
+        fringeBenefitsAdminTotal: totalFriBenAdmin,
+        fringeBenefitsAdStaffTotal: totalFriBenAdStaff,
+        fringeBenefitsManageTotal: totalFriBenManage,
+        surplusTotal: totalSurplus,
+
+        manageTotal: manageSalary + totalFriBenManage,
+      },
+    });
   }
 }
 
