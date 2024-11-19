@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Carousel, Col, Row, Button } from 'react-bootstrap';
+import { Carousel, Col, Row, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { CashFlowTrendsChart, FinancingChart, BudgetChart } from './GraphExamples';
 
 const ImageCarousel = () => {
   const [index, setIndex] = useState(0);
@@ -17,9 +18,9 @@ const ImageCarousel = () => {
       <Carousel.Item interval={1500} className="p-5">
         <FirstSlideContent />
       </Carousel.Item>
-      {/* <Carousel.Item>
+      <Carousel.Item interval={1500} className="p-5">
         <SecondSlideContent />
-      </Carousel.Item> */}
+      </Carousel.Item>
     </Carousel>
   );
 };
@@ -28,7 +29,7 @@ const FirstSlideContent = () => (
   <div className="d-block w-100 text-white">
     <Row className="text-center grey-box">
       <Col md={6} className="text-start">
-        <h2 className="py-3 carousel-text-border">Streamlined Financial Data Entry</h2>
+        <h2 className="py-3 carousel-text-border">Financial Data Entry</h2>
         <ButtonLink path="/auditedbalanceinput" text="Audited Balance Form" description="Data on financial position, including assets, liabilities, and equity" />
         <ButtonLink path="/budgetplinput" text="Budget P&L Form" description="Capture income and expenses for a given fiscal year" />
         <ButtonLink path="/audited" text="Audited Form" description="Gather comprehensive financial information" />
@@ -37,30 +38,30 @@ const FirstSlideContent = () => (
   </div>
 );
 
-/* const SecondSlideContent = () => (
+const SecondSlideContent = () => (
   <Container className="d-block w-100">
-    <Row className="mt-4">
-      <Col md={6} className="ps-5">
-        <Row className="text-center pt-3 ps-3">
-          <h1>Explore Interactive Dashboards</h1>
-        </Row>
+    <Row>
+      <Col md={6} className="d-flex align-items-center pt-3 mt-5 white-box">
+        <h1>Interactive Graphs</h1>
+        <FinancingChart />
+      </Col>
+      <Col md={6} className="mt-5 justify-content-center">
         <Row className="justify-content-center pt-3">
           <DashboardButton text="Snapshot Data" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
           <DashboardButton text="Dashboard 4yr" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
           <DashboardButton text="Dashboard 8yr" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
           <DashboardButton text="Dashboard 12yr" path="/budgetplinput" />
         </Row>
       </Col>
-      <Col md={6} className="pt-5">
-        <CashFlowTrendsChart />
-      </Col>
-    </Row>
-    <Row className="mt-4 pb-3">
-      <Col md={6}><FinancingChart /></Col>
-      <Col md={6}><BudgetChart /></Col>
     </Row>
   </Container>
-); */
+);
 
 const ButtonLink = ({ path, text, description }) => (
   <div className="py-1">

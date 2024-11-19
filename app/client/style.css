@@ -471,3 +471,12 @@ hr {
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a "floating" effect */
 }
+
+.white-box {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent grey */
+  width: 50%;
+  color: #444444;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a "floating" effect */
+  height: auto;
+}

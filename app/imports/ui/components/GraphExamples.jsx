@@ -108,7 +108,7 @@ export const CashFlowTrendsChart = () => (
 /* Financing Chart From Dashboard 12 yr */
 
 export const FinancingChart = () => (
-  <Chart data={financingData} lines={financingLines} title="Financing" />
+  <Chart data={financingData} lines={financingLines} title=" " />
 );
 
 /* Budget Chart From Dashboard 12 yr */
