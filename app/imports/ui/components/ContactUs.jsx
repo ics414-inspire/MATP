@@ -37,7 +37,7 @@ const ContactUs = () => {
           <div className="row">
             <div className="col-md-6">
               <p><strong>(808) 536-0066</strong></p>
-              <p><a href="mailto:ContactUs@spirehi.com" id="contact-email">ContactUs@spirehi.com</a></p>
+              <p><a href="mailto:contactUs@spirehi.com" className="contact-email">ContactUs@spirehi.com</a></p>
               <h5>Headquarters</h5>
               <p>700 Bishop Street, Suite 2001<br />Honolulu, Hawaiʻi 96813</p>
               <h5>New York Office</h5>
