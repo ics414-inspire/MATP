@@ -10,11 +10,12 @@ const ImageCarousel = () => {
     <Carousel
       activeIndex={index}
       onSelect={handleSelect}
-      style={{ width: '1425px', height: '300px', margin: 'auto', backgroundImage: 'url("https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg")',
-        backgroundSize: 'cover', marginTop: '20px' }}
+      controls={false}
+      style={{ width: '1425px', height: '500px' }}
+      className="carousel-background py-0"
     >
-      <Carousel.Item interval={1500}>
-        <ImageSlideContent />
+      <Carousel.Item interval={1500} className="p-5">
+        <FirstSlideContent />
       </Carousel.Item>
       {/* <Carousel.Item>
         <SecondSlideContent />
@@ -25,7 +26,7 @@ const ImageCarousel = () => {
 
 const FirstSlideContent = () => (
   <div className="d-block w-100 text-white">
-    <Row className="text-center">
+    <Row className="text-center grey-box">
       <Col md={6} className="text-start">
         <h2 className="py-3 carousel-text-border">Streamlined Financial Data Entry</h2>
         <ButtonLink path="/auditedbalanceinput" text="Audited Balance Form" description="Data on financial position, including assets, liabilities, and equity" />
@@ -34,15 +35,6 @@ const FirstSlideContent = () => (
       </Col>
     </Row>
   </div>
-);
-
-const ImageSlideContent = () => (
-  <img
-    className="d-block w-100"
-    src="https://cdn.prod.website-files.com/5fdc0b9dd1ec174b0890bf37/601d7376aaa536a141d25d41_spire-case-study-major-state-agencies.jpg"
-    alt="First slide"
-    style={{ height: '300px', objectFit: 'cover' }}
-  />
 );
 
 /* const SecondSlideContent = () => (
