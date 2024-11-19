@@ -13,9 +13,7 @@ export const percentagePublications = {
 class PercentageCollection extends BaseCollection {
   constructor() {
     super('Percentages', new SimpleSchema({
-      year: {
-        type: Number,
-      },
+      year: Number,
       percentages: {
         type: Object,
       },
@@ -29,7 +27,7 @@ class PercentageCollection extends BaseCollection {
       'percentages.unemployment_compensation': { type: Number },
       'percentages.pension_administration': { type: Number },
       'percentages.composite_rate': { type: Number },
-      owner: { type: String, optional: true },
+      owner: String,
     }));
   }
 
@@ -39,17 +37,16 @@ class PercentageCollection extends BaseCollection {
       percentages,
       owner,
     });
-    console.log(`Inserted document with ID: ${docID}`);
-    console.log('Inserted data:', { year, percentages, owner });
     return docID;
   }
 
-  update(docID, { year, percentages }) {
+  update(docID, { year, percentages, owner }) {
     const updateData = {};
     if (year) updateData.year = year;
     if (percentages) {
       updateData.percentages = { ...updateData.percentages, ...percentages };
     }
+    if (owner) updateData.owner = owner;
 
     this._collection.update(docID, { $set: updateData });
   }
@@ -94,10 +91,6 @@ class PercentageCollection extends BaseCollection {
       return Meteor.subscribe(percentagePublications.percentageAdmin);
     }
     return null;
-  }
-
-  assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
   }
 
   dumpOne(docID) {
