@@ -738,3 +738,14 @@ hr {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a "floating" effect */
   height: auto;
 }
+
+.custom-btn {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+  color: white !important; /* Optional: Ensures white text on the button */
+}
+
+.custom-btn:hover {
+  background-color: #004494 !important; /* Slightly darker shade for hover */
+  border-color: #004494 !important;
+}

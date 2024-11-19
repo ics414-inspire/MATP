@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel, Col, Row, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CashFlowTrendsChart, FinancingChart, BudgetChart } from './GraphExamples';
+import { FinancingChart } from './GraphExamples';
 
 const ImageCarousel = () => {
   const [index, setIndex] = useState(0);
@@ -15,10 +15,10 @@ const ImageCarousel = () => {
       style={{ width: '1425px', height: '500px' }}
       className="carousel-background py-0"
     >
-      <Carousel.Item interval={1500} className="p-5">
+      <Carousel.Item interval={3000} className="p-5">
         <FirstSlideContent />
       </Carousel.Item>
-      <Carousel.Item interval={1500} className="p-5">
+      <Carousel.Item interval={3000} className="p-5">
         <SecondSlideContent />
       </Carousel.Item>
     </Carousel>
