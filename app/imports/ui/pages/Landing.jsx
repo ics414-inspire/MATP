@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container, Carousel } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
+import { Container, Carousel, Row, Col, Button } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ImageCarousel from '../components/ImageCarousel';
 
@@ -56,21 +56,9 @@ const Landing = () => {
               </div>
             </div>
           </div>
-
-          {/* Integrated Carousel */}
-          <div className="carousel-section mt-5">
-            <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
-              <Carousel.Item>
-                <ImageCarousel />
-              </Carousel.Item>
-              <Carousel.Item>
-                <ImageCarousel />
-              </Carousel.Item>
-            </Carousel>
-          </div>
-
         </Container>
       </div>
+      <ImageCarousel />
     </>
   );
 };

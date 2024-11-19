@@ -235,22 +235,6 @@ hr {
 
 }
 
-.carousel-item-custom {
-  max-width: 95%;
-  max-height: 800px;
-  padding: 20px;
-  /* background-color: #f0f0f0; */
-  margin: 0 auto;
-}
-
-.carousel-text-border {
-  border: 3px solid white;
-  margin-top: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  display: inline-block;
-}
-
 /* Slightly enlarges the button on hover */
 .btn-enlarge:hover {
   transform: scale(1.1);
@@ -714,3 +698,54 @@ hr {
   padding-left: 5px;
 }
 
+.carousel-background {
+  position: relative; /* Make sure the parent container is positioned for the pseudo-element */
+}
+
+.carousel-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/spire-carousel.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5; /* Apply transparency only to the background */
+  z-index: 0; /* Place the pseudo-element behind the content */
+}
+
+.carousel-background > * {
+  position: relative;
+  z-index: 1; /* Ensure content stays above the background */
+}
+
+.grey-box {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent grey */
+  width: 50%;
+  color: white;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a "floating" effect */
+}
+
+.white-box {
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent grey */
+  width: 50%;
+  color: #444444;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a "floating" effect */
+  height: auto;
+}
+
+.custom-btn {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+  color: white !important; /* Optional: Ensures white text on the button */
+}
+
+.custom-btn:hover {
+  background-color: #004494 !important; /* Slightly darker shade for hover */
+  border-color: #004494 !important;
+}
