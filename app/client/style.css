@@ -410,12 +410,6 @@ hr {
   transition: transform 0.3s ease;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.1);
-  width: 70px;
-  height: auto
-}
-
 /* Make Navbar Links on the Right Larger */
 .navbar .nav-link {
   font-size: 1.2rem;
@@ -748,4 +742,34 @@ hr {
 .custom-btn:hover {
   background-color: #004494 !important; /* Slightly darker shade for hover */
   border-color: #004494 !important;
+}
+
+.btn-primary {
+  background-color: #0056b3 !important;
+}
+
+
+.contact-background {
+  background-image: url("/images/contactUsBackground.png");
+/*
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Adjust as needed
+  width: 100%;
+*/
+}
+
+.contact-foreground {
+  background-color: white;
+  padding: 50px;
+  opacity: 0.92;
+}
+
+.contact-text-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.contact-email {
+  color:#0056b3;
 }
