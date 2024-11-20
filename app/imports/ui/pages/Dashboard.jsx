@@ -3,6 +3,7 @@ import { Table, Col, Container, Row, Button } from 'react-bootstrap';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+
 // Sample Dashboard Content
 const SnapShot = () => {
   // Hardcoded Snap Shot data
@@ -559,7 +560,6 @@ const Dashboard12yr = () => { // Hardcoded data for each chart (based on the ima
 const Dashboard = () => {
   // State to track which dashboard is selected
   const [activeDashboard, setActiveDashboard] = useState('Snap Shot');
-
   // Function to render the appropriate dashboard based on the state
   const renderDashboard = () => {
     switch (activeDashboard) {

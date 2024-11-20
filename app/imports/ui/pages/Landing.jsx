@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Container, Carousel, Row, Col, Button } from 'react-bootstrap';
+import { useNavigate} from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ImageCarousel from '../components/ImageCarousel';
 

@@ -12,7 +12,7 @@ const ImageCarousel = () => {
       activeIndex={index}
       onSelect={handleSelect}
       controls={false}
-      style={{ width: '1440px', height: '500px' }}
+      style={{ width: '100vw', height: '500px' }}
       className="carousel-background py-0"
     >
       <Carousel.Item interval={3000} className="p-5">
