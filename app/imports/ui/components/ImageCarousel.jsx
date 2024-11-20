@@ -1,131 +1,83 @@
 import React, { useState } from 'react';
-import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import { Carousel, Col, Row, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CashFlowTrendsChart, FinancingChart, BudgetChart } from './GraphExamples';
+import { FinancingChart } from './GraphExamples';
 
 const ImageCarousel = () => {
-  // State to track the currently active slide
   const [index, setIndex] = useState(0);
-
-  // Function to handle when a slide is selected
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
+  const handleSelect = (selectedIndex) => setIndex(selectedIndex);
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      {/* First Slide: "Data Input Made Simple" */}
-      <Carousel.Item>
-        <div className="carousel-item-custom" style={{ backgroundColor: '#B7E2F2' }}>
-          <Container className="d-block w-100">
-            <Row className="text-center">
-              <Col md={6}>
-                <Link to="/auditedbalanceinput">
-                  <img
-                    className="img-fluid small-enlarge"
-                    src="images/audited-balance-form.jpg"
-                    alt="Audited Balance Form"
-                    style={{ width: '80%' }}
-                  />
-                </Link>
-              </Col>
-              <Col md={6}>
-                <Link to="/budgetplinput">
-                  <img
-                    className="img-fluid small-enlarge"
-                    src="images/budget-form.jpeg"
-                    alt="budget form"
-                    style={{ width: '80%' }}
-                  />
-                </Link>
-              </Col>
-            </Row>
-            <Row className="text-center">
-              <Col md={6}>
-                <Link to="/audited">
-                  <img
-                    className="img-fluid small-enlarge"
-                    src="images/audited-form.jpeg"
-                    alt="audited form"
-                    style={{ width: '80%' }}
-                  />
-                </Link>
-              </Col>
-              <Col md={6} className="text-start">
-                <h2 className="py-3 carousel-text-border">Streamlined Financial Data Entry</h2>
-                <h3 className="pt-2 pb-1">
-                  <a href="/app/imports/ui/pages/AuditedBalanceInput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
-                    Audited Balance Form
-                  </a>
-                  <h6>Data on financial position, including assets, liabilities, and equity</h6>
-                </h3>
-                <h4 className="py-1">
-                  <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
-                    Budget P&L Form
-                  </a>
-                  <h6>Capture income and expenses for a given fiscal year</h6>
-                </h4>
-                <h4 className="py-1">
-                  <a href="/audited" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#25479D', borderColor: '#4CAF50' }}>
-                    Audited Form
-                  </a>
-                  <h6>Gather comprehensive financial information</h6>
-                </h4>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+    <Carousel
+      activeIndex={index}
+      onSelect={handleSelect}
+      controls={false}
+      style={{ width: '1425px', height: '500px' }}
+      className="carousel-background py-0"
+    >
+      <Carousel.Item interval={3000} className="p-5">
+        <FirstSlideContent />
       </Carousel.Item>
-
-      {/* Second Slide: Examples of Dashboard Graphs */}
-      <Carousel.Item>
-        <div className="carousel-item-custom" style={{ backgroundColor: '#B7E2F2' }}>
-          <Container className="d-block w-100">
-            <Row className="mt-4">
-              <Col md={6} className="ps-5">
-                <Row className="text-center pt-3 ps-3"><h1>Explore Interactive Dashboards</h1></Row>
-                <Row className="justify-content-center pt-3">
-                  <Col md={4}>
-                    <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#8884D8', borderColor: '#4CAF50' }}>
-                      Snapshot Data
-                    </a>
-                  </Col>
-                  <Col md={4}>
-                    <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#8884D8', borderColor: '#4CAF50' }}>
-                      Dashboard 4yr
-                    </a>
-                  </Col>
-                </Row>
-                <Row className="justify-content-center py-5">
-                  <Col md={4}>
-                    <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#8884D8', borderColor: '#4CAF50' }}>
-                      Dashboard 8yr
-                    </a>
-                  </Col>
-                  <Col md={4}>
-                    <a href="/budgetplinput" className="btn btn-primary btn-lg btn-enlarge" style={{ backgroundColor: '#8884D8', borderColor: '#4CAF50' }}>
-                      Dashboard 12yr
-                    </a>
-                  </Col>
-                </Row>
-              </Col>
-              <Col md={6} className="pt-5">
-                <CashFlowTrendsChart />
-              </Col>
-            </Row>
-            <Row className="mt-4 pb-3">
-              <Col md={6}>
-                <FinancingChart />
-              </Col>
-              <Col md={6}>
-                <BudgetChart />
-              </Col>
-            </Row>
-          </Container>
-        </div>
+      <Carousel.Item interval={3000} className="p-5">
+        <SecondSlideContent />
       </Carousel.Item>
     </Carousel>
   );
 };
+
+const FirstSlideContent = () => (
+  <div className="d-block w-100 text-white">
+    <Row className="text-center grey-box">
+      <Col md={6} className="text-start">
+        <h2 className="py-3 carousel-text-border">Financial Data Entry</h2>
+        <ButtonLink path="/auditedbalanceinput" text="Audited Balance Form" description="Data on financial position, including assets, liabilities, and equity" />
+        <ButtonLink path="/budgetplinput" text="Budget P&L Form" description="Capture income and expenses for a given fiscal year" />
+        <ButtonLink path="/audited" text="Audited Form" description="Gather comprehensive financial information" />
+      </Col>
+    </Row>
+  </div>
+);
+
+const SecondSlideContent = () => (
+  <Container className="d-block w-100">
+    <Row>
+      <Col md={6} className="d-flex align-items-center pt-3 mt-5 white-box">
+        <h1>Interactive Graphs</h1>
+        <FinancingChart />
+      </Col>
+      <Col md={6} className="mt-5 justify-content-center">
+        <Row className="justify-content-center pt-3">
+          <DashboardButton text="Snapshot Data" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
+          <DashboardButton text="Dashboard 4yr" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
+          <DashboardButton text="Dashboard 8yr" path="/budgetplinput" />
+        </Row>
+        <Row className="justify-content-center pt-3">
+          <DashboardButton text="Dashboard 12yr" path="/budgetplinput" />
+        </Row>
+      </Col>
+    </Row>
+  </Container>
+);
+
+const ButtonLink = ({ path, text, description }) => (
+  <div className="py-1">
+    <Link to={path} className="btn btn-primary btn-lg btn-enlarge custom-btn">
+      {text}
+    </Link>
+    <h6>{description}</h6>
+  </div>
+);
+
+const DashboardButton = ({ text, path }) => (
+  <Col md={4} className="py-2">
+    <Button as={Link} to={path} className="btn btn-primary btn-lg btn-enlarge custom-btn">
+      {text}
+    </Button>
+  </Col>
+);
 
 export default ImageCarousel;

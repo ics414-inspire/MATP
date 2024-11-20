@@ -44,7 +44,7 @@ const Footer = () => (
             Honolulu, Hawaii<br />
             96813<br />
             (808) 536-0066<br />
-            <a href="mailto:contactus@spirehi.com">contactus@spirehi.com</a>
+            <a href="mailto:contactus@spirehi.com" className="contact-email">Contactus@spirehi.com</a>
           </address>
         </Col>
         <Col md={2}>
