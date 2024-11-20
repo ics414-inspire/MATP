@@ -51,7 +51,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard/*" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/information" element={<ProtectedRoute><Information /></ProtectedRoute>} />
           <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
           <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
