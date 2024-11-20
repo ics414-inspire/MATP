@@ -260,25 +260,25 @@ class BudgetCollection extends BaseCollection {
     }));
   }
 
-  define({ owner, year, revenue, expenses, manageSalary, surplus }) {
+  define({ owner, year, revenue, expenses, manageSalary, expenditure }) {
     const docID = this._collection.insert({
       owner,
       year,
       revenue,
       expenses,
       manageSalary,
-      surplus,
+      expenditure,
     });
     this.updateTotals(docID);
     return docID;
   }
 
-  update(docID, { revenue, expenses, manageSalary, surplus }) {
+  update(docID, { revenue, expenses, manageSalary, expenditure }) {
     const updateData = {};
     if (_.isArray(revenue)) { updateData.revenue = revenue; }
     if (_.isArray(expenses)) { updateData.expenses = expenses; }
     updateData.manageSalary = manageSalary;
-    if (_.isArray(surplus)) { updateData.surplus = surplus; }
+    if (_.isArray(expenditure)) { updateData.expenditure = expenditure; }
     this._collection.update(docID, { $set: updateData });
     this.updateTotals(docID);
   }
@@ -469,7 +469,7 @@ class BudgetCollection extends BaseCollection {
       };
     });
 
-    // Calculate fringeBenefitsAdmin values
+    // Calculate fringeBenefitsAdAdmin values
     const fringeBenefitsAdStaff = (doc.fringeBenefitsAdmin || []).map((entry) => {
       const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1);
 
@@ -521,11 +521,6 @@ class BudgetCollection extends BaseCollection {
         revenueTotal: totalRevenue,
         expensesTotal: totalExpenses + personnelExpenses,
         surplus: totalRevenue - totalExpenses,
-
-        /* manageTotal: manageSalary + totalFriBenManage,
-        adStaffTotal: expendManage - this.manageTotal,
-        adminTotal: personnelExpenses - this.manageTotal - this.addStaffTotal,
-        */
       },
     });
   }

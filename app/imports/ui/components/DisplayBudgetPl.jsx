@@ -4,523 +4,511 @@ import swal from 'sweetalert';
 import { Card, Col, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, HiddenField, NumField, SubmitField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AuditedBalanceSheet } from '../../api/Inputs/AuditedBalanceSheetCollection';
+import { Budget } from '../../api/Inputs/BudgetP&LCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 
-const bridge = new SimpleSchema2Bridge(AuditedBalanceSheet._schema);
+const bridge = new SimpleSchema2Bridge(Budget._schema);
+
+const percentages = [
+  {
+    year: 2,
+    percentages: {
+      pension_accumulation: 15.00,
+      retiree_health_insurance: 7.96,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 7.02,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.22,
+      unemployment_compensation: 0.91,
+      pension_administration: 0.00,
+      composite_rate: 39.76,
+    },
+  },
+  {
+    year: 3,
+    percentages: {
+      pension_accumulation: 15.50,
+      retiree_health_insurance: 10.35,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.84,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 0.88,
+      unemployment_compensation: 0.31,
+      pension_administration: 0.01,
+      composite_rate: 41.54,
+    },
+  },
+  {
+    year: 4,
+    percentages: {
+      pension_accumulation: 16.00,
+      retiree_health_insurance: 10.12,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.81,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.16,
+      unemployment_compensation: 0.25,
+      pension_administration: 0.00,
+      composite_rate: 41.99,
+    },
+  },
+  {
+    year: 5,
+    percentages: {
+      pension_accumulation: 16.50,
+      retiree_health_insurance: 10.12,
+      other_post_employment_benefits: 0.00,
+      employees_health_fund: 6.81,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.16,
+      unemployment_compensation: 0.25,
+      pension_administration: 0.00,
+      composite_rate: 42.49,
+    },
+  },
+  {
+    year: 6,
+    percentages: {
+      pension_accumulation: 17.00,
+      retiree_health_insurance: 8.07,
+      other_post_employment_benefits: 7.78,
+      employees_health_fund: 7.62,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.27,
+      unemployment_compensation: 0.15,
+      pension_administration: 0.00,
+      composite_rate: 49.54,
+    },
+  },
+  {
+    year: 7,
+    percentages: {
+      pension_accumulation: 17.00,
+      retiree_health_insurance: 9.39,
+      other_post_employment_benefits: 12.69,
+      employees_health_fund: 7.60,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.06,
+      unemployment_compensation: 0.09,
+      pension_administration: 0.01,
+      composite_rate: 55.48,
+    },
+  },
+  {
+    year: 8,
+    percentages: {
+      pension_accumulation: 18.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 59.08,
+    },
+  },
+  {
+    year: 9,
+    percentages: {
+      pension_accumulation: 19.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 60.08,
+    },
+  },
+  {
+    year: 10,
+    percentages: {
+      pension_accumulation: 22.00,
+      retiree_health_insurance: 10.14,
+      other_post_employment_benefits: 14.33,
+      employees_health_fund: 7.69,
+      social_security: 6.20,
+      medicare: 1.45,
+      workers_compensation: 1.24,
+      unemployment_compensation: 0.02,
+      pension_administration: 0.01,
+      composite_rate: 63.08,
+    },
+  },
+];
+
+function getPercentageForYear(year, key) {
+  const yearData = percentages.find((entry) => entry.year === year);
+  return yearData?.percentages?.[key] || 0; // Return 0 if no match is found
+}
 
 const sumArray = (array) => array.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
 
-const submit = (audBalSheet, data) => {
-  const { cashStuff, otherAssets, investments, loanFund, assets, land, compBAssets, restrictedCash, defOutflowsPension, defOutflowsOPEB, liabilities, liaWithinYr, liaAfterYr, defInflowsPension, defInflowsOPEB, commitAndContin } = data;
-  const docID = audBalSheet._id;
-  const collectionName = AuditedBalanceSheet.getCollectionName();
+const submit = (budget, data) => {
+  const { revenue, expenses, manageSalary, expenditure } = data;
+  const docID = budget._id;
+  const collectionName = Budget.getCollectionName();
   const updateData = {
-    id: docID, cashStuff, otherAssets, investments, loanFund, assets, land, compBAssets, restrictedCash, defOutflowsPension, defOutflowsOPEB, liabilities, liaWithinYr, liaAfterYr, defInflowsPension, defInflowsOPEB, commitAndContin };
+    id: docID, revenue, expenses, manageSalary, expenditure };
 
   updateMethod.callPromise({ collectionName, updateData })
     .catch(error => swal('Error', error.message, 'error'))
     .then(() => swal('Success', 'Item updated successfully', 'success'));
 };
 
-const DisplayAudBalSheet = ({ audBalSheet }) => {
-  const [totalCash, setTotalCash] = useState(0);
-  const [subtotalOtherAssets, setSubtotalOtherAssets] = useState(0);
-  const [totalInvestments, setTotalInvestments] = useState(0);
-  const [totalLoanFund, setTotalLoanFund] = useState(0);
-  const [totalInvestLoan, setTotalInvestLoan] = useState(0);
-  const [totalAssets, setTotalAssets] = useState(0);
-  const [totalLand, setTotalLand] = useState(0);
-  const [totalCompBAssets, setTotalCompBAssets] = useState(0);
-  const [totalCapAssets, setTotalCapAssets] = useState(0);
-  const [totalOtherAssets, setTotalOtherAssets] = useState(0);
-  const [totalAssetsAndDefOutflows, setTotalAssetsAndDefOutflows] = useState(0);
-  const [totalLiaWithinYr, setTotalLiaWithinYr] = useState(0);
-  const [totalLiaAfterYr, setTotalLiaAfterYr] = useState(0);
-  const [totalLiabilities, setTotalLiabilities] = useState(0);
-  const [totalLiaAndDefInflows, setTotalLiaAndDefInflows] = useState(0);
-  const [totalCommitAndContin, setTotalCommitAndContin] = useState(0);
-  const [totalLiaInflowsNetPos, setTotalLiaInflowsNetPos] = useState(0);
+const DisplayBudgetPl = ({ budget }) => {
+  // State variables for totals and key calculations
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [totalExpenses, setTotalExpenses] = useState(0);
+  const [manageTotal, setManageTotal] = useState(0);
+  const [adStaffTotal, setAdStaffTotal] = useState(0);
+  const [adminTotal, setAdminTotal] = useState(0);
+  const [fringeBenefitsManageTotal, setFringeBenefitsManageTotal] = useState(0);
+  const [fringeBenefitsAdminTotal, setFringeBenefitsAdminTotal] = useState(0);
+  const [fringeBenefitsAdStaffTotal, setFringeBenefitsAdStaffTotal] = useState(0);
+  const [adminSalary, setAdminSalary] = useState(0);
+  const [adStaffSalary, setAdStaffSalary] = useState(0);
+  const [surplus, setSurplus] = useState(0);
 
+  // Dynamic calculations using `useEffect`
   useEffect(() => {
-    const cashArray = audBalSheet.cashStuff || [];
-    const otherAssetsArray = audBalSheet.otherAssets || [];
-    const investmentsArray = audBalSheet.investments || [];
-    const loanFundArray = audBalSheet.loanFund || [];
-    const assetsArray = audBalSheet.assets || [];
-    const landArray = audBalSheet.land || [];
-    const compBAssetsArray = audBalSheet.compBAssets || [];
-    const restrictedCash = audBalSheet.restrictedCash || 0;
-    const defOutflowsPension = audBalSheet.defOutflowsPension || 0;
-    const defOutflowsOPEB = audBalSheet.defOutflowsOPEB || 0;
-    const liabilitiesArray = audBalSheet.liabilities || [];
-    const liaWithinYrArray = audBalSheet.liaWithinYr || [];
-    const liaAfterYrArray = audBalSheet.liaAfterYr || [];
-    const defInflowsPension = audBalSheet.defInflowsPension || 0;
-    const defInflowsOPEB = audBalSheet.defInflowsOPEB || 0;
-    const commitAndContinArray = audBalSheet.commitAndContin || [];
-    const cashTotal = sumArray(cashArray);
-    const otherAssetsSubtotal = sumArray(otherAssetsArray);
-    const investmentsTotal = investmentsArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const loanFundTotal = loanFundArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const investLoanTotal = investmentsTotal + loanFundTotal;
-    const assetsTotal = assetsArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const landTotal = landArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const compBAssetsTotal = compBAssetsArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const capAssetsTotal = assetsTotal + landTotal + compBAssetsTotal;
-    const otherAssetsTotal = restrictedCash + capAssetsTotal + investLoanTotal + otherAssetsSubtotal;
-    const assetsAndDefOutflowsTotal = defOutflowsPension + defOutflowsOPEB + otherAssetsTotal;
-    const liaWithinYrTotal = liaWithinYrArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const liaAfterYrTotal = liaAfterYrArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const liabilitiesTotal = liaWithinYrTotal + liaAfterYrTotal + liabilitiesArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const liaAndDefInflowsTotal = liabilitiesTotal + defInflowsPension + defInflowsOPEB;
-    const commitAndContinTotal = commitAndContinArray.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
-    const liaInflowsNetPosTotal = liaAndDefInflowsTotal + commitAndContinTotal;
+    if (!budget) return;
 
-    setTotalCash(cashTotal);
-    setSubtotalOtherAssets(subtotalOtherAssets);
-    setTotalInvestments(investmentsTotal);
-    setTotalLoanFund(loanFundTotal);
-    setTotalInvestLoan(investLoanTotal);
-    setTotalAssets(assetsTotal);
-    setTotalLand(landTotal);
-    setTotalCompBAssets(compBAssetsTotal);
-    setTotalCapAssets(capAssetsTotal);
-    setTotalOtherAssets(otherAssetsTotal);
-    setTotalAssetsAndDefOutflows(assetsAndDefOutflowsTotal);
-    setTotalLiaWithinYr(liaWithinYrTotal);
-    setTotalLiaAfterYr(liaAfterYrTotal);
-    setTotalLiabilities(liabilitiesTotal);
-    setTotalLiaAndDefInflows(liaAndDefInflowsTotal);
-    setTotalCommitAndContin(commitAndContinTotal);
-    setTotalLiaInflowsNetPos(liaInflowsNetPosTotal);
-  }, [audBalSheet]);
+    // Extract budget arrays and values
+    const revenueArray = budget.revenue || [];
+    const expensesArray = budget.expenses || [];
+    const fringeBenefitsManageArray = budget.fringeBenefitsManage || [];
+    const fringeBenefitsAdminArray = budget.fringeBenefitsAdmin || [];
+    const fringeBenefitsAdStaffArray = budget.fringeBenefitsAdStaff || [];
+    const expenditureArray = budget.expenditure || [];
+
+    // Calculate totals
+    const totalRevenueValue = sumArray(revenueArray);
+    const totalExpensesValue = sumArray(expensesArray);
+
+    const fringeBenefitsManageTotalValue = sumArray(fringeBenefitsManageArray);
+    const fringeBenefitsAdminTotalValue = sumArray(fringeBenefitsAdminArray);
+    const fringeBenefitsAdStaffTotalValue = sumArray(fringeBenefitsAdStaffArray);
+
+    const surplusValue = totalRevenueValue - totalExpensesValue;
+
+    const manageSalary = budget.manageSalary || 0;
+    const personnelExpenses = expensesArray[0]?.personnel || 0;
+    const manageTotalValue = manageSalary + fringeBenefitsManageTotalValue;
+    const adStaffTotalValue = (expenditureArray[0]?.management || 0) - manageTotalValue;
+    const adminTotalValue = personnelExpenses - manageTotalValue - adStaffTotalValue;
+
+    const compositeRate = getPercentageForYear(budget.year, 'composite_rate') || 0;
+
+    const adminSalaryValue = adminTotalValue / (1 + compositeRate);
+    const adStaffSalaryValue = adStaffTotalValue / (1 + compositeRate);
+
+    // Update state
+    setTotalRevenue(totalRevenueValue);
+    setTotalExpenses(totalExpensesValue);
+    setSurplus(surplusValue);
+
+    setFringeBenefitsManageTotal(fringeBenefitsManageTotalValue);
+    setFringeBenefitsAdminTotal(fringeBenefitsAdminTotalValue);
+    setFringeBenefitsAdStaffTotal(fringeBenefitsAdStaffTotalValue);
+
+    setManageTotal(manageTotalValue);
+    setAdStaffTotal(adStaffTotalValue);
+    setAdminTotal(adminTotalValue);
+
+    setAdminSalary(adminSalaryValue);
+    setAdStaffSalary(adStaffSalaryValue);
+  }, [budget]);
   return (
-    <AutoForm schema={bridge} onSubmit={data => submit(audBalSheet, data)} model={AuditedBalanceSheet.findOne(audBalSheet._id)}>
+    <AutoForm schema={bridge} onSubmit={data => submit(budget, data)} model={Budget.findOne(budget._id)}>
       <Card.Body className="custom-card-body">
         <Row className="justify-content-center" style={{ paddingLeft: '5px' }}>
-          Year {audBalSheet.year}
+          Year {budget.year}
           <hr className="solid" />
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
           <Col>
-            <NumField name="cashStuff.0.pettyCash" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="revenue.0.A" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="cashStuff.0.cash" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="revenue.0.revenues" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="cashStuff.0.cashInBanksLineofCredit" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="revenue.0.generalFund" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalCash.toFixed(2)}</h6>
+            <NumField name="revenue.0.coreOpBudgetNotAuth" style={{ height: '25px' }} decimal label={null} />
+          </Col>
+        </Row>
+        <Row className="align-items-center">
+          <Col>
+            <h6>${totalRevenue.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
           <Col>
-            <NumField name="otherAssets.0.accountsRec" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.personnel" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="otherAssets.0.dueFromOtherFund" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.program" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center ">
           <Col>
-            <NumField name="otherAssets.0.interestAndDividends" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.contracts" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center ">
           <Col>
-            <NumField name="otherAssets.0.invPrepaidItems" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.grants" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center ">
           <Col>
-            <NumField name="otherAssets.0.notesRecWithinYr" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.travel" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center ">
           <Col>
-            <NumField name="otherAssets.0.notesRecAfterYr" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.equipment" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center ">
           <Col>
-            <NumField name="otherAssets.0.secDeposits" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.overhead" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="otherAssets.0.cashHeldByInvMgr" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.debtService" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
           <Col>
-            <NumField name="investments.0.mutualFunds" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenses.0.other" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.commingledFunds" style={{ height: '25px' }} decimal label={null} />
+            <h6>${totalExpenses.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.hedgeFunds" style={{ height: '25px' }} decimal label={null} />
+            <h6>${adminSalary.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.privateEquity" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.commonTrustFund" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.commonPreferredStock" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.privateDebt" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="investments.0.other" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalInvestments.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center ">
-          <Col>
-            <NumField name="loanFund.0.usTreasuries" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.medicare" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="loanFund.0.usAgencies" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.workersComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalLoanFund.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="justify-content-start" style={{ paddingTop: '18px' }}>
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalInvestLoan.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '40px' }}>
-          <Col>
-            <NumField name="assets.0.buildings" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="assets.0.leaseImprovements" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="assets.0.furnitureFixtures" style={{ height: '25px' }} decimal label={null} />
+            <h6>${fringeBenefitsAdminTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="assets.0.lessAccDep" style={{ height: '25px' }} decimal label={null} />
+            <h6>${adminTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalAssets.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '20px' }}>
-          <Col>
-            <NumField name="land.0.landA" style={{ height: '25px' }} decimal label={null} />
+            <h6>${adStaffSalary.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="land.0.landB" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center ">
-          <Col>
-            <NumField name="land.0.construction" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalLand.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '20px' }}>
-          <Col>
-            <NumField name="compBAssets.0.buildings" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="compBAssets.0.leaseImprovements" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="compBAssets.0.furnitureFixtures" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="compBAssets.0.vehicles" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="compBAssets.0.lessAccDep" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.medicare" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="compBAssets.0.land" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.workersComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalCompBAssets.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="justify-content-start" style={{ paddingTop: '3px' }}>
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalCapAssets.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="justify-content-start" style={{ paddingTop: '2px' }}>
-          <Col>
-            <NumField name="restrictedCash" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalOtherAssets.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="justify-content-start">
-          <Col>
-            <NumField name="defOutflowsPension" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="justify-content-start">
-          <Col>
-            <NumField name="defOutflowsOPEB" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalAssetsAndDefOutflows.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '18px' }}>
-          <Col>
-            <NumField name="liabilities.0.accountsPayable" style={{ height: '25px' }} decimal label={null} />
+            <h6>${fringeBenefitsAdStaffTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liabilities.0.dueToFund" style={{ height: '25px' }} decimal label={null} />
+            <h6>${adStaffTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liabilities.0.dueToOtherFund" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '41px' }}>
-          <Col>
-            <NumField name="liaWithinYr.0.accVacation" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="manageSalary" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.workComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.accMgtRetPlan" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.accLease" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.capLease" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.notesPayBldgA" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.netPensionLia" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.medicare" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.netPensionOPEB" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '41px' }}>
-          <Col>
-            <NumField name="liaWithinYr.0.lineOfCredBldgA" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.workersComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.lineOfCredBldgB" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaWithinYr.0.debtServ" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <h6>${totalLiaWithinYr.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '18px' }}>
-          <Col>
-            <NumField name="liaAfterYr.0.accVacation" style={{ height: '25px' }} decimal label={null} />
+            <h6>${fringeBenefitsManageTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaAfterYr.0.workComp" style={{ height: '25px' }} decimal label={null} />
+            <h6>${manageTotal.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaAfterYr.0.accMgtRetPlan" style={{ height: '25px' }} decimal label={null} />
+            <h6>${surplus.toFixed(2)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaAfterYr.0.accLease" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenditure.0.management" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaAfterYr.0.capLease" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="expenditure.0.supportServices" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="liaAfterYr.0.notesPayBldgA" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="liaAfterYr.0.netPensionLia" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="liaAfterYr.0.netPensionOPEB" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '40px' }}>
-          <Col>
-            <NumField name="liaAfterYr.0.lineOfCredBldgA" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="liaAfterYr.0.lineOfCredBldgB" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="liaAfterYr.0.debtServ" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <h6>${totalLiaAfterYr.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalLiabilities.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="defInflowsPension" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="defInflowsOPEB" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalLiaAndDefInflows.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '44px' }}>
-          <Col>
-            <NumField name="commitAndContin.0.capAssetInvestments" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="commitAndContin.0.resFedFunds" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <NumField name="commitAndContin.0.unRes" style={{ height: '25px' }} decimal label={null} />
-          </Col>
-        </Row>
-        <Row className="align-items-center">
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalCommitAndContin.toFixed(2)}</h6>
-          </Col>
-        </Row>
-        <Row className="align-items-center" style={{ paddingTop: '1px' }}>
-          <Col>
-            <hr className="solid my-0" />
-            <h6>${totalLiaInflowsNetPos.toFixed(2)}</h6>
+            <NumField name="expenditure.0.beneficialAdvocacy" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Col>
@@ -534,119 +522,75 @@ const DisplayAudBalSheet = ({ audBalSheet }) => {
 };
 
 // Require a document to be passed to this component.
-DisplayAudBalSheet.propTypes = {
-  audBalSheet: PropTypes.shape({
-    owner: PropTypes.string,
-    year: PropTypes.number,
-    cashStuff: PropTypes.arrayOf(PropTypes.shape({
-      pettyCash: PropTypes.number,
-      cash: PropTypes.number,
-      cashInBanksLineofCredit: PropTypes.number,
+DisplayBudgetPl.propTypes = {
+  budget: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    revenue: PropTypes.arrayOf(PropTypes.shape({
+      a: PropTypes.number,
+      revenues: PropTypes.number,
+      generalFund: PropTypes.number,
+      coreOpBudgetNotAuth: PropTypes.number,
     })),
-    cashTotal: PropTypes.number,
-    otherAssets: PropTypes.arrayOf(PropTypes.shape({
-      accountsRec: PropTypes.number,
-      dueFromOtherFund: PropTypes.number,
-      interestAndDividends: PropTypes.number,
-      invPrepaidItems: PropTypes.number,
-      notesRecWithinYr: PropTypes.number,
-      notesRecAfterYr: PropTypes.number,
-      secDeposits: PropTypes.number,
-      cashHeldByInvMgr: PropTypes.number,
-    })),
-    otherAssetsSubtotal: PropTypes.number,
-    investments: PropTypes.arrayOf(PropTypes.shape({
-      mutualFunds: PropTypes.number,
-      commingledFunds: PropTypes.number,
-      hedgeFunds: PropTypes.number,
-      privateEquity: PropTypes.number,
-      commonTrustFund: PropTypes.number,
-      commonPreferredStock: PropTypes.number,
-      privateDebt: PropTypes.number,
+    revenueTotal: PropTypes.number,
+    expenses: PropTypes.arrayOf(PropTypes.shape({
+      personnel: PropTypes.number,
+      program: PropTypes.number,
+      contracts: PropTypes.number,
+      grants: PropTypes.number,
+      travel: PropTypes.number,
+      equipment: PropTypes.number,
+      overhead: PropTypes.number,
+      debtService: PropTypes.number,
       other: PropTypes.number,
     })),
-    investmentsTotal: PropTypes.number,
-    loanFund: PropTypes.arrayOf(PropTypes.shape({
-      usTreasuries: PropTypes.number,
-      usAgencies: PropTypes.number,
+    expensesTotal: PropTypes.number,
+    adminSalary: PropTypes.number,
+    fringeBenefitsAdmin: PropTypes.arrayOf(PropTypes.shape({
+      pensionAccumulation: PropTypes.number,
+      retireeHealthIns: PropTypes.number,
+      postEmploymentBen: PropTypes.number,
+      employeeHealthFund: PropTypes.number,
+      socialSecurity: PropTypes.number,
+      medicare: PropTypes.number,
+      workersComp: PropTypes.number,
+      unemploymentComp: PropTypes.number,
+      pensionAdmin: PropTypes.number,
     })),
-    loanFundTotal: PropTypes.number,
-    investLoanTotal: PropTypes.number,
-    assets: PropTypes.arrayOf(PropTypes.shape({
-      buildings: PropTypes.number,
-      leaseImprovements: PropTypes.number,
-      furnitureFixtures: PropTypes.number,
-      lessAccDep: PropTypes.number,
+    adminTotal: PropTypes.number,
+    adStaffSalary: PropTypes.number,
+    fringeBenefitsAdStaff: PropTypes.arrayOf(PropTypes.shape({
+      pensionAccumulation: PropTypes.number,
+      retireeHealthIns: PropTypes.number,
+      postEmploymentBen: PropTypes.number,
+      employeeHealthFund: PropTypes.number,
+      socialSecurity: PropTypes.number,
+      medicare: PropTypes.number,
+      workersComp: PropTypes.number,
+      unemploymentComp: PropTypes.number,
+      pensionAdmin: PropTypes.number,
     })),
-    assetsTotal: PropTypes.number,
-    land: PropTypes.arrayOf(PropTypes.shape({
-      landA: PropTypes.number,
-      landB: PropTypes.number,
-      construction: PropTypes.number,
+    adStaffTotal: PropTypes.number,
+    manageSalary: PropTypes.number,
+    fringeBenefitsManage: PropTypes.arrayOf(PropTypes.shape({
+      pensionAccumulation: PropTypes.number,
+      retireeHealthIns: PropTypes.number,
+      postEmploymentBen: PropTypes.number,
+      employeeHealthFund: PropTypes.number,
+      socialSecurity: PropTypes.number,
+      medicare: PropTypes.number,
+      workersComp: PropTypes.number,
+      unemploymentComp: PropTypes.number,
+      pensionAdmin: PropTypes.number,
     })),
-    landTotal: PropTypes.number,
-    compBAssets: PropTypes.arrayOf(PropTypes.shape({
-      buildings: PropTypes.number,
-      leaseImprovements: PropTypes.number,
-      furnitureFixtures: PropTypes.number,
-      vehicles: PropTypes.number,
-      lessAccDep: PropTypes.number,
-      land: PropTypes.number,
+    manageTotal: PropTypes.number,
+    surplus: PropTypes.number,
+    expenditure: PropTypes.arrayOf(PropTypes.shape({
+      management: PropTypes.number,
+      supportServices: PropTypes.number,
+      beneficialAdvocacy: PropTypes.number,
     })),
-    compBAssetsTotal: PropTypes.number,
-    capAssetsTotal: PropTypes.number,
-    restrictedCash: PropTypes.number,
-    otherAssetsTotal: PropTypes.number,
-    defOutflowsPension: PropTypes.number,
-    defOutflowsOPEB: PropTypes.number,
-    assetsAndDefOutflowsTotal: PropTypes.number,
-    liabilities: PropTypes.arrayOf(PropTypes.shape({
-      accountsPayable: PropTypes.number,
-      dueToFund: PropTypes.number,
-      dueToOtherFund: PropTypes.number,
-    })),
-    liabilitiesTotal: PropTypes.number,
-    liaWithinYr: PropTypes.arrayOf(PropTypes.shape({
-      accVacation: PropTypes.number,
-      workComp: PropTypes.number,
-      accMgtRetPlan: PropTypes.number,
-      accLease: PropTypes.number,
-      capLease: PropTypes.number,
-      notesPayBldgA: PropTypes.number,
-      netPensionLia: PropTypes.number,
-      netPensionOPEB: PropTypes.number,
-      lineOfCredBldgA: PropTypes.number,
-      lineOfCredBldgB: PropTypes.number,
-      debtServ: PropTypes.number,
-    })),
-    liaWithinYrTotal: PropTypes.number,
-    liaAfterYr: PropTypes.arrayOf(PropTypes.shape({
-      accVacation: PropTypes.number,
-      workComp: PropTypes.number,
-      accMgtRetPlan: PropTypes.number,
-      accLease: PropTypes.number,
-      capLease: PropTypes.number,
-      notesPayBldgA: PropTypes.number,
-      netPensionLia: PropTypes.number,
-      netPensionOPEB: PropTypes.number,
-      lineOfCredBldgA: PropTypes.number,
-      lineOfCredBldgB: PropTypes.number,
-      debtServ: PropTypes.number,
-    })),
-    liaAfterYrTotal: PropTypes.number,
-    allLiabilitiesTotal: PropTypes.number,
-    defInflowsPension: PropTypes.number,
-    defInflowsOPEB: PropTypes.number,
-    liaAndDefInflowsTotal: PropTypes.number,
-    commitAndContin: PropTypes.arrayOf(PropTypes.shape({
-      capAssetInvestments: PropTypes.number,
-      resFedFunds: PropTypes.number,
-      unRes: PropTypes.number,
-    })),
-    totalNetPos: PropTypes.number,
-    totalLiaInflowsNetPos: PropTypes.number,
-    _id: PropTypes.string,
   }).isRequired,
 };
 
-export default DisplayAudBalSheet;
+export default DisplayBudgetPl;

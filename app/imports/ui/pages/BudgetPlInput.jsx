@@ -3,14 +3,14 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Budget } from '../../api/Inputs/BudgetP&LCollection';
-import DisplayAudBalSheet from '../components/DisplayAudBalSheet';
+import DisplayBudgetPl from '../components/DisplayBudgetPl';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const BudgetPlInput = () => {
   const { budget, ready } = useTracker(() => {
-    const subscription = Budget.subscribeAuditedBalanceSheet();
+    const subscription = Budget.subscribeBudget();
     const rdy = subscription.ready();
-    const data = Budget.find({}, { sort: { name: 1 } }).fetch();
+    const data = Budget.find({}, { sort: { year: 1 } }).fetch();
     return {
       budget: data,
       ready: rdy,
@@ -239,7 +239,7 @@ const BudgetPlInput = () => {
         </Col>
         {budget.map((data) => (
           <Col key={data._id}>
-            <DisplayAudBalSheet budget={data} />
+            <DisplayBudgetPl budget={data} />
           </Col>
         ))}
       </Row>
