@@ -410,12 +410,6 @@ hr {
   transition: transform 0.3s ease;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.1);
-  width: 70px;
-  height: auto
-}
-
 /* Make Navbar Links on the Right Larger */
 .navbar .nav-link {
   font-size: 1.2rem;
