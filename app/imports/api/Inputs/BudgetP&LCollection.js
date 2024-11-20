@@ -260,12 +260,15 @@ class BudgetCollection extends BaseCollection {
     }));
   }
 
-  define({ owner, year, revenue, expenses, manageSalary, expenditure }) {
+  define({ owner, year, revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
     const docID = this._collection.insert({
       owner,
       year,
       revenue,
       expenses,
+      fringeBenefitsAdmin,
+      fringeBenefitsAdStaff,
+      fringeBenefitsManage,
       manageSalary,
       expenditure,
     });

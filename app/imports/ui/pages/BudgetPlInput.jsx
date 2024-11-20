@@ -10,12 +10,14 @@ const BudgetPlInput = () => {
   const { budget, ready } = useTracker(() => {
     const subscription = Budget.subscribeBudget();
     const rdy = subscription.ready();
-    const data = Budget.find({}, { sort: { year: 1 } }).fetch();
+    const data = Budget.find({}, { sort: { name: 1 } }).fetch();
     return {
       budget: data,
       ready: rdy,
     };
   }, []);
+
+  console.log({ ready, budget });
 
   return (ready ? (
     <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT}>
