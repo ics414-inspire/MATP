@@ -358,7 +358,8 @@ class BudgetCollection extends BaseCollection {
     const fringeBenefitsManage = doc.fringeBenefitsManage;
     const fringeBenefitsManageTotal = doc.fringeBenefitsManageTotal;
     const surplus = doc.surplus;
-    const surplusTotal = doc.surplusTotal;
+    const expenditure = doc.expenditure;
+    const expenditureTotal = doc.expenditureTotal;
     return {
       year,
       owner,
@@ -379,7 +380,8 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsManage,
       fringeBenefitsManageTotal,
       surplus,
-      surplusTotal,
+      expenditure,
+      expenditureTotal,
     };
   }
 
@@ -403,8 +405,15 @@ class BudgetCollection extends BaseCollection {
     const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
     const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation');
     const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration');
+    const compositeRate = getPercentageForYear(year, 'composite_rate');
 
     const manageSalary = doc.manageSalary || 0;
+    const personnelExpenses = doc.expenses?.[0]?.personnel || 0;
+    const manageTotal = manageSalary + (doc.fringeBenefitsManageTotal || 0);
+    const adStaffTotal = (doc.expenditure?.[0]?.management || 0) - manageTotal;
+    const adminTotal = personnelExpenses - manageTotal - adStaffTotal;
+    const adminSalary = adminTotal / (1 + compositeRate);
+    const adStaffSalary = adStaffTotal / (1 + compositeRate);
 
     // Calculate fringeBenefitsManage array with updated values for all fields
     const fringeBenefitsManage = (doc.fringeBenefitsManage || []).map((entry) => {
@@ -432,29 +441,91 @@ class BudgetCollection extends BaseCollection {
       };
     });
 
+    // Calculate fringeBenefitsAdmin values
+    const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin || []).map((entry) => {
+      const adminCalculationBase = adminTotal / ((1 / compositeRate) + 1);
+
+      const pensionAccumulation = (adminCalculationBase * pensionAccumulationPercentage) / compositeRate;
+      const retireeHealthIns = (adminCalculationBase * retireeHealthPercentage) / compositeRate;
+      const postEmploymentBen = (adminCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate;
+      const employeeHealthFund = (adminCalculationBase * employeeHealthFundPercentage) / compositeRate;
+      const socialSecurity = (adminCalculationBase * socialSecurityPercentage) / compositeRate;
+      const medicare = (adminCalculationBase * medicarePercentage) / compositeRate;
+      const workersComp = (adminCalculationBase * workersCompPercentage) / compositeRate;
+      const unemploymentComp = (adminCalculationBase * unemploymentCompPercentage) / compositeRate;
+      const pensionAdmin = (adminCalculationBase * pensionAdminPercentage) / compositeRate;
+
+      return {
+        ...entry,
+        pensionAccumulation,
+        retireeHealthIns,
+        postEmploymentBen,
+        employeeHealthFund,
+        socialSecurity,
+        medicare,
+        workersComp,
+        unemploymentComp,
+        pensionAdmin,
+      };
+    });
+
+    // Calculate fringeBenefitsAdmin values
+    const fringeBenefitsAdStaff = (doc.fringeBenefitsAdmin || []).map((entry) => {
+      const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1);
+
+      const pensionAccumulation = (adStaffCalculationBase * pensionAccumulationPercentage) / compositeRate;
+      const retireeHealthIns = (adStaffCalculationBase * retireeHealthPercentage) / compositeRate;
+      const postEmploymentBen = (adStaffCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate;
+      const employeeHealthFund = (adStaffCalculationBase * employeeHealthFundPercentage) / compositeRate;
+      const socialSecurity = (adStaffCalculationBase * socialSecurityPercentage) / compositeRate;
+      const medicare = (adStaffCalculationBase * medicarePercentage) / compositeRate;
+      const workersComp = (adStaffCalculationBase * workersCompPercentage) / compositeRate;
+      const unemploymentComp = (adStaffCalculationBase * unemploymentCompPercentage) / compositeRate;
+      const pensionAdmin = (adStaffCalculationBase * pensionAdminPercentage) / compositeRate;
+
+      return {
+        ...entry,
+        pensionAccumulation,
+        retireeHealthIns,
+        postEmploymentBen,
+        employeeHealthFund,
+        socialSecurity,
+        medicare,
+        workersComp,
+        unemploymentComp,
+        pensionAdmin,
+      };
+    });
+
     const totalRevenue = this.sumArray(doc.revenue) || 0;
     const totalExpenses = this.sumArray(doc.expenses) || 0;
     const totalFriBenAdmin = this.sumArray(doc.fringeBenefitsAdmin) || 0;
     const totalFriBenAdStaff = this.sumArray(doc.fringeBenefitsAdStaff) || 0;
     const totalFriBenManage = this.sumArray(doc.fringeBenefitsManage) || 0;
 
-    const expendManage = doc.expenditure?.[0]?.management || 0;
-    const personnelExpenses = doc.expenses?.[0]?.personnel || 0;
-
     this._collection.update(docId, {
       $set: {
         fringeBenefitsManage,
         fringeBenefitsManageTotal: totalFriBenManage,
+        fringeBenefitsAdmin,
+        fringeBenefitsAdminTotal: totalFriBenAdmin,
+        fringeBenefitsAdStaff,
+        fringeBenefitsAdStaffTotal: totalFriBenAdStaff,
+        manageTotal,
+        adStaffTotal,
+        adminTotal,
+        adminSalary,
+        adStaffSalary,
+        manageSalary,
 
         revenueTotal: totalRevenue,
-        fringeBenefitsAdminTotal: totalFriBenAdmin,
-        fringeBenefitsAdStaffTotal: totalFriBenAdStaff,
+        expensesTotal: totalExpenses + personnelExpenses,
+        surplus: totalRevenue - totalExpenses,
 
-        manageTotal: manageSalary + totalFriBenManage,
+        /* manageTotal: manageSalary + totalFriBenManage,
         adStaffTotal: expendManage - this.manageTotal,
         adminTotal: personnelExpenses - this.manageTotal - this.addStaffTotal,
-        expensesTotal: totalExpenses + personnelExpenses,
-        surplus: totalRevenue - this.expensesTotal,
+        */
       },
     });
   }
