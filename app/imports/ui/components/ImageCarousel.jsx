@@ -12,7 +12,7 @@ const ImageCarousel = () => {
       activeIndex={index}
       onSelect={handleSelect}
       controls={false}
-      style={{ width: '1425px', height: '500px' }}
+      style={{ width: '100vw', height: '500px' }}
       className="carousel-background py-0"
     >
       <Carousel.Item interval={3000} className="p-5">
@@ -47,16 +47,16 @@ const SecondSlideContent = () => (
       </Col>
       <Col md={6} className="mt-5 justify-content-center">
         <Row className="justify-content-center pt-3">
-          <DashboardButton text="Snapshot Data" path="/budgetplinput" />
+          <DashboardButton text="Snapshot Data" path="/dashboard/snapshot" />
         </Row>
         <Row className="justify-content-center pt-3">
-          <DashboardButton text="Dashboard 4yr" path="/budgetplinput" />
+          <DashboardButton text="Dashboard 4yr" path="/dashboard/4yr" />
         </Row>
         <Row className="justify-content-center pt-3">
-          <DashboardButton text="Dashboard 8yr" path="/budgetplinput" />
+          <DashboardButton text="Dashboard 8yr" path="/dashboard/8yr" />
         </Row>
         <Row className="justify-content-center pt-3">
-          <DashboardButton text="Dashboard 12yr" path="/budgetplinput" />
+          <DashboardButton text="Dashboard 12yr" path="/dashboard/12yr" />
         </Row>
       </Col>
     </Row>
