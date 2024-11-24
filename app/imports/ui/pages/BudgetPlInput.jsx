@@ -1,126 +1,252 @@
 import React from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { QuestionCircle } from 'react-bootstrap-icons';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { TOOLTIP_TEXTS } from '../utilities/TooltipTexts';
-import TooltipOverlay from '../components/TooltipOverlay';
+import { Budget } from '../../api/Inputs/BudgetP&LCollection';
+import DisplayBudgetPl from '../components/DisplayBudgetPl';
+import LoadingSpinner from '../components/LoadingSpinner';
 
-// eslint-disable-next-line react/prop-types
-const BudgetField = ({ label, tooltip, ...rest }) => (
-  <Form.Group>
-    <Form.Label>
-      {label}{' '}
-      <TooltipOverlay tooltipText={tooltip}>
-        <QuestionCircle />
-      </TooltipOverlay>
-    </Form.Label>
-    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-    <Form.Control type="number" {...rest} />
-  </Form.Group>
-);
+const BudgetPlInput = () => {
+  const { budget, ready } = useTracker(() => {
+    const subscription = Budget.subscribeBudget();
+    const rdy = subscription.ready();
+    const data = Budget.find({}, { sort: { name: 1 } }).fetch();
+    return {
+      budget: data,
+      ready: rdy,
+    };
+  }, []);
 
-const BudgetPlInput = () => (
-  <div>
-    <Container id={PAGE_IDS.BUDGET_PL_INPUT} className="input-data-background">
-      <Row className="justify-content-center">
-        <Col className="mx-auto">
-          <Col className="text-center-heading">
-            <h2>Budget P&L</h2>
-          </Col>
-          <Row className="input-data-width">
-            <Col>
-              <h5 id="top" className="section-title">Revenue</h5>
-            </Col>
-          </Row>
-          <Row className="input-data-width">
-            <Col>
-              <BudgetField label="5% of the Investment Portfolio" tooltip={TOOLTIP_TEXTS.INVESTMENT_PORTFOLIO} />
-            </Col>
-            <Col>
-              <BudgetField label="Revenues" tooltip={TOOLTIP_TEXTS.REVENUES} />
-            </Col>
-            <Col>
-              <BudgetField label="General Funds" tooltip={TOOLTIP_TEXTS.GENERAL_FUNDS} />
-            </Col>
-          </Row>
-          <hr className="separator" />
+  console.log({ ready, budget });
 
-          <Row className="input-data-width margin-top-large margin-bottom-small">
-            <Col>
-              <h5 className="section-title">Expenses</h5>
-            </Col>
-          </Row>
-          <Row className="input-data-width">
-            <Row className="margin-bottom-medium">
-              <Col>
-                <BudgetField label="Personnel" tooltip={TOOLTIP_TEXTS.PERSONNEL} />
-              </Col>
-              <Row className="input-data-width margin-y-medium">
-                <Col>
-                  <h5 className="section-title">Personnel & Fringe</h5>
-                </Col>
-              </Row>
-              <Col>
-                <BudgetField label="Program" tooltip={TOOLTIP_TEXTS.PROGRAM} />
-              </Col>
-              <Col>
-                <BudgetField label="Contacts" tooltip={TOOLTIP_TEXTS.CONTACTS} />
-              </Col>
-              <Col>
-                <BudgetField label="Grants" tooltip={TOOLTIP_TEXTS.GRANTS} />
-              </Col>
-              <Col>
-                <BudgetField label="Travel" tooltip={TOOLTIP_TEXTS.TRAVEL} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <BudgetField label="Equipment" tooltip={TOOLTIP_TEXTS.EQUIPMENT} />
-              </Col>
-              <Col>
-                <BudgetField label="Overhead" tooltip={TOOLTIP_TEXTS.OVERHEAD} />
-              </Col>
-              <Col>
-                <BudgetField label="Debt Service" tooltip={TOOLTIP_TEXTS.DEBT_SERVICE} />
-              </Col>
-              <Col>
-                <BudgetField label="Other" tooltip={TOOLTIP_TEXTS.OTHER} />
-              </Col>
-            </Row>
-          </Row>
-          <hr className="separator" />
-
-          <Row className="input-data-width margin-top-large margin-bottom-small">
-            <Col>
-              <h5 className="section-title">Surplus Deficit</h5>
-            </Col>
-          </Row>
-          <Row className="input-data-width">
-            <Col>
-              <BudgetField label="Management" tooltip={TOOLTIP_TEXTS.MANAGEMENT} />
-            </Col>
-            <Col>
-              <BudgetField label="Support Services" tooltip={TOOLTIP_TEXTS.SUPPORT_SERVICES} />
-            </Col>
-            <Col>
-              <BudgetField label="Beneficiary Advocacy" tooltip={TOOLTIP_TEXTS.BENEFICIARY_ADVOCACY} />
-            </Col>
-          </Row>
-          <Row className="justify-content-center margin-top-medium">
-            <Col xs="auto">
-              <Button className="padding-x-large margin-all-large" type="button">Submit</Button>
-            </Col>
-          </Row>
-          <Row className="justify-content-center">
-            <Col xs="auto">
-              <Button href="/auditedbalanceinput" className="px-4 mx-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Balance Input</Button>
-              <Button href="/audited" className="px-5 mx-5" type="button" style={{ backgroundColor: 'gray', borderColor: 'gray' }}>Audited Page</Button>
-            </Col>
-          </Row>
+  return (ready ? (
+    <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT}>
+      <Row className="justify-content-center pb-3">
+        <Col className="text-center">
+          <h2>Budget P&L</h2>
         </Col>
       </Row>
+      <Row>
+        <Col className="col-lg-4">
+          <Row className="fw-bold">
+            Fiscal Year
+            <hr className="solid" />
+          </Row>
+          <Row className="justify-content-start fw-bold">
+            Revenue
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '3px' }}>
+            A
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Revenues
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            General Funds
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Core Op Budget NOT Auth
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Total Revenue</h6>
+          </Row>
+          <Row className="justify-content-start fw-bold">
+            Expenses
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '3px' }}>
+            Personnel
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Program
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Contracts
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Grants
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Travel
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Equipment
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Overhead
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Data Service
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '17px' }}>
+            Other
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Total Expenses</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }} />
+          <Row className="justify-content-start ps-3 fw-bold" style={{ paddingTop: '20px' }}>
+            <hr className="solid my-0" />
+            Personnel & Fringe (Admin)
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '3px' }}>
+            Salary
+          </Row>
+          <Row className="justify-content-start ps-3 fw-bold">
+            Fringe Benefits
+          </Row>
+          <Row className="align-content-center ps-5 fw-bold">
+            Pension Accumulation
+          </Row>
+          <Row className="justify-content-start ps-5" style={{ paddingTop: '3px' }}>
+            Retiree Health Insurance
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Other Post-Employment Benefits
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Employees Health Fund
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Social Security
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Medicare
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Workers Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Unemployment Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Pension Administration
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Personnel & Fringe (Admin)</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }} />
+          <Row className="justify-content-start ps-3 fw-bold" style={{ paddingTop: '20px' }}>
+            <hr className="solid my-0" />
+            Personnel & Fringe (Admin Staff)
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '3px' }}>
+            Salary
+          </Row>
+          <Row className="justify-content-start ps-3 fw-bold">
+            Fringe Benefits
+          </Row>
+          <Row className="align-content-center ps-5 fw-bold">
+            Pension Accumulation
+          </Row>
+          <Row className="justify-content-start ps-5" style={{ paddingTop: '3px' }}>
+            Retiree Health Insurance
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Other Post-Employment Benefits
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Employees Health Fund
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Social Security
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Medicare
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Workers Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Unemployment Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Pension Administration
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Personnel & Fringe (Admin Staff)</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }} />
+          <Row className="justify-content-start ps-3 fw-bold" style={{ paddingTop: '20px' }}>
+            <hr className="solid my-0" />
+            Personnel & Fringe (Management)
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '3px' }}>
+            Salary
+          </Row>
+          <Row className="justify-content-start ps-3 fw-bold">
+            Fringe Benefits
+          </Row>
+          <Row className="align-content-center ps-5 fw-bold">
+            Pension Accumulation
+          </Row>
+          <Row className="justify-content-start ps-5" style={{ paddingTop: '3px' }}>
+            Retiree Health Insurance
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Other Post-Employment Benefits
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Employees Health Fund
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Social Security
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Medicare
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Workers Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Unemployment Compensation
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Pension Administration
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+          </Row>
+          <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
+            <hr className="solid my-0" />
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Personnel & Fringe (Management)</h6>
+          </Row>
+          <Row className="justify-content-start fw-bold">
+            Surplus (Deficit)
+          </Row>
+          <Row className="justify-content-start ps-3 fw-bold" style={{ paddingTop: '17px' }}>
+            Expenditure line items per audited financials
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Management
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Support Services
+          </Row>
+          <Row className="align-items-center ps-5" style={{ paddingTop: '17px' }}>
+            Beneficiary Advocacy
+          </Row>
+        </Col>
+        {budget.map((data) => (
+          <Col key={data._id}>
+            <DisplayBudgetPl budget={data} />
+          </Col>
+        ))}
+      </Row>
     </Container>
-  </div>
-);
+  ) : <LoadingSpinner message="Loading Data" />);
+};
 
 export default BudgetPlInput;
