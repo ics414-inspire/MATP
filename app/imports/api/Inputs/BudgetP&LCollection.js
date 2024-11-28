@@ -195,6 +195,7 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsAdmin: {
         type: Array,
         optional: true,
+        defaultValue: [],
       },
       'fringeBenefitsAdmin.$': Object,
       'fringeBenefitsAdmin.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -214,6 +215,7 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsAdStaff: {
         type: Array,
         optional: true,
+        defaultValue: [],
       },
       'fringeBenefitsAdStaff.$': Object,
       'fringeBenefitsAdStaff.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -233,6 +235,7 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsManage: {
         type: Array,
         optional: true,
+        defaultValue: [],
       },
       'fringeBenefitsManage.$': Object,
       'fringeBenefitsManage.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -251,15 +254,19 @@ class BudgetCollection extends BaseCollection {
       expenditure: {
         type: Array,
         optional: true,
+        defaultValue: [],
       },
       'expenditure.$': Object,
       'expenditure.$.management': { type: Number, defaultValue: 0, optional: true },
       'expenditure.$.supportServices': { type: Number, defaultValue: 0, optional: true },
       'expenditure.$.beneficialAdvocacy': { type: Number, defaultValue: 0, optional: true },
-      expenditureTotal: { type: Number, optional: true },
     }));
   }
 
+  /** Defines a new Budget item.
+  * @param {Object} data - Contains fields for AuditedBalanceSheet.
+  * @return {String} docID - The docID of the newly inserted document.
+  */
   define({ owner, year, revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
     const docID = this._collection.insert({
       owner,
@@ -276,10 +283,18 @@ class BudgetCollection extends BaseCollection {
     return docID;
   }
 
-  update(docID, { revenue, expenses, manageSalary, expenditure }) {
+  /**
+   * Updates the given document with new field values.
+   * @param {String} docID - The ID of the document to update.
+   * @param {Object} updatedFields - The new values for the fields.
+   */
+  update(docID, { revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
     const updateData = {};
     if (_.isArray(revenue)) { updateData.revenue = revenue; }
     if (_.isArray(expenses)) { updateData.expenses = expenses; }
+    if (_.isArray(fringeBenefitsAdmin)) { updateData.fringeBenefitsAdmin = fringeBenefitsAdmin; }
+    if (_.isArray(fringeBenefitsAdStaff)) { updateData.fringeBenefitsAdStaff = fringeBenefitsAdStaff; }
+    if (_.isArray(fringeBenefitsManage)) { updateData.fringeBenefitsManage = fringeBenefitsManage; }
     updateData.manageSalary = manageSalary;
     if (_.isArray(expenditure)) { updateData.expenditure = expenditure; }
     this._collection.update(docID, { $set: updateData });
@@ -305,12 +320,13 @@ class BudgetCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(BudgetPublications.Budget, function () {
+      Meteor.publish(BudgetPublications.Budget, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
         }
         return this.ready();
+        // return instance._collection.find();
       });
 
       Meteor.publish(BudgetPublications.BudgetAdmin, function publish() {
@@ -336,10 +352,21 @@ class BudgetCollection extends BaseCollection {
     return null;
   }
 
+  /**
+   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
+   * This is used in the define, update, and removeIt Meteor methods.
+   * @param {String} userId - The userId of the logged in user.
+   * @throws {Meteor.Error} If the user is not logged in as an Admin or User.
+   */
   assertValidRoleForMethod(userId) {
     this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
   }
 
+  /**
+   * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
+   * @param {String} docID - The ID of the document.
+   * @return {Object} - The document's data.
+   */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const year = doc.year;
@@ -362,7 +389,6 @@ class BudgetCollection extends BaseCollection {
     const fringeBenefitsManageTotal = doc.fringeBenefitsManageTotal;
     const surplus = doc.surplus;
     const expenditure = doc.expenditure;
-    const expenditureTotal = doc.expenditureTotal;
     return {
       year,
       owner,
@@ -384,7 +410,6 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsManageTotal,
       surplus,
       expenditure,
-      expenditureTotal,
     };
   }
 

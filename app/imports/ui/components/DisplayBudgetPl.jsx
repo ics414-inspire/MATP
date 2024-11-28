@@ -155,11 +155,11 @@ function getPercentageForYear(year, key) {
 const sumArray = (array) => array.reduce((sum, item) => sum + Object.values(item).reduce((innerSum, value) => innerSum + (typeof value === 'number' ? value : 0), 0), 0);
 
 const submit = (budget, data) => {
-  const { revenue, expenses, manageSalary, expenditure } = data;
+  const { revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure } = data;
   const docID = budget._id;
   const collectionName = Budget.getCollectionName();
   const updateData = {
-    id: docID, revenue, expenses, manageSalary, expenditure };
+    id: docID, revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure };
 
   updateMethod.callPromise({ collectionName, updateData })
     .catch(error => swal('Error', error.message, 'error'))
