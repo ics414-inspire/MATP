@@ -29,7 +29,7 @@ const NavBar = () => {
           <Nav className="mx-auto justify-content-center">
             {currentUser ? ([
               <Nav.Link id={COMPONENT_IDS.NAVBAR_DASHBOARD_PAGE} as={NavLink} to="/dashboard" key="add">Dashboard</Nav.Link>,
-              <Dropdown key="dropdown">
+              <Dropdown key="dropdown" className="custom-hover-dropdown">
                 <Dropdown.Toggle id={COMPONENT_IDS.NAVBAR_DATA_INPUT} as={NavLink} className="nav-link">
                   Input Data
                 </Dropdown.Toggle>
@@ -57,12 +57,12 @@ const NavBar = () => {
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
               <Nav.Link href="https://www.spirenewyork.com/" key="spire-ny" target="_blank">Spire NY</Nav.Link>,
               <Nav.Link href="https://www.spirehawaii.com/" key="spire-hi" target="_blank">Spire HI</Nav.Link>,
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login">
+              <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login" className="custom-hover-dropdown">
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} as={NavLink} to={{ pathname: '/signin-signup', search: '?form=signin' }} activeClassName=""><PersonFill />Sign in</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} as={NavLink} to={{ pathname: '/signin-signup', search: '?form=signup' }} activeClassName=""><PersonPlusFill />Sign up</NavDropdown.Item>
               </NavDropdown>,
             ]) : (
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
+              <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser} className="custom-hover-dropdown">
                 <NavDropdown.Item as={NavLink} to="/userpage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Page</NavDropdown.Item>
                 <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
               </NavDropdown>
