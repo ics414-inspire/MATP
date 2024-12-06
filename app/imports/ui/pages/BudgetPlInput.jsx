@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { Budget, BudgetPublications } from '../../api/Inputs/BudgetP&LCollection';
+import { Budget } from '../../api/Inputs/BudgetP&LCollection';
 import DisplayBudgetPl from '../components/DisplayBudgetPl';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -16,6 +16,8 @@ const BudgetPlInput = () => {
       ready: rdy,
     };
   }, []);
+
+  console.log({ ready, budget });
 
   return (ready ? (
     <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT}>

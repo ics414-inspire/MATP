@@ -33,6 +33,8 @@ const AuditedBalanceInput = () => {
     };
   }, []);
 
+  console.log({ ready, audBalSheets });
+
   return (ready ? (
     <Container id={PAGE_IDS.AUDITED_BALANCE_INPUT}>
       <Row className="justify-content-center pb-3">

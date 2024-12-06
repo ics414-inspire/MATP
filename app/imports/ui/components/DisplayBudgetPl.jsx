@@ -18,7 +18,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 7.02,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.22,
       unemployment_compensation: 0.91,
       pension_administration: 0.00,
@@ -33,7 +33,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.84,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 0.88,
       unemployment_compensation: 0.31,
       pension_administration: 0.01,
@@ -48,7 +48,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -63,7 +63,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -78,7 +78,7 @@ const percentages = [
       other_post_employment_benefits: 7.78,
       employees_health_fund: 7.62,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.27,
       unemployment_compensation: 0.15,
       pension_administration: 0.00,
@@ -93,7 +93,7 @@ const percentages = [
       other_post_employment_benefits: 12.69,
       employees_health_fund: 7.60,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.06,
       unemployment_compensation: 0.09,
       pension_administration: 0.01,
@@ -108,7 +108,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -123,7 +123,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -138,7 +138,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicarep: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -179,6 +179,9 @@ const DisplayBudgetPl = ({ budget }) => {
   const [adminSalary, setAdminSalary] = useState(0);
   const [adStaffSalary, setAdStaffSalary] = useState(0);
   const [surplus, setSurplus] = useState(0);
+  const fringeBenefitsAdmin = budget.fringeBenefitsAdmin || [];
+  const fringeBenefitsAdStaff = budget.fringeBenefitsAdStaff || [];
+  const fringeBenefitsManage = budget.fringeBenefitsManage || [];
 
   // Dynamic calculations using `useEffect`
   useEffect(() => {
@@ -318,47 +321,47 @@ const DisplayBudgetPl = ({ budget }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.pensionAccumulation" value={fringeBenefitsAdmin[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.retireeHealthIns" value={fringeBenefitsAdmin[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.postEmploymentBen" value={fringeBenefitsAdmin[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.employeeHealthFund" value={fringeBenefitsAdmin[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.socialSecurity" value={fringeBenefitsAdmin[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.medicare" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.medicare" value={fringeBenefitsAdmin[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.workersComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.workersComp" value={fringeBenefitsAdmin[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.unemploymentComp" value={fringeBenefitsAdmin[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdmin.0.pensionAdmin" value={fringeBenefitsAdmin[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -378,47 +381,47 @@ const DisplayBudgetPl = ({ budget }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAccumulation" value={fringeBenefitsAdStaff[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.retireeHealthIns" value={fringeBenefitsAdStaff[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.postEmploymentBen" value={fringeBenefitsAdStaff[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.employeeHealthFund" value={fringeBenefitsAdStaff[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.socialSecurity" value={fringeBenefitsAdStaff[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.medicare" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.medicare" value={fringeBenefitsAdStaff[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.workersComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.workersComp" value={fringeBenefitsAdStaff[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.unemploymentComp" value={fringeBenefitsAdStaff[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" value={fringeBenefitsAdStaff[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -438,47 +441,47 @@ const DisplayBudgetPl = ({ budget }) => {
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.pensionAccumulation" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.pensionAccumulation" value={fringeBenefitsManage[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.retireeHealthIns" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.retireeHealthIns" value={fringeBenefitsManage[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.postEmploymentBen" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.postEmploymentBen" value={fringeBenefitsManage[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.employeeHealthFund" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.employeeHealthFund" value={fringeBenefitsManage[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.socialSecurity" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.socialSecurity" value={fringeBenefitsManage[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.medicare" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.medicare" value={fringeBenefitsManage[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.workersComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.workersComp" value={fringeBenefitsManage[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.unemploymentComp" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.unemploymentComp" value={fringeBenefitsManage[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.pensionAdmin" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="fringeBenefitsManage.0.pensionAdmin" value={fringeBenefitsManage[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -524,7 +527,7 @@ const DisplayBudgetPl = ({ budget }) => {
 // Require a document to be passed to this component.
 DisplayBudgetPl.propTypes = {
   budget: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    owner: PropTypes.string,
     year: PropTypes.number.isRequired,
     revenue: PropTypes.arrayOf(PropTypes.shape({
       a: PropTypes.number,
@@ -546,6 +549,7 @@ DisplayBudgetPl.propTypes = {
     })),
     expensesTotal: PropTypes.number,
     adminSalary: PropTypes.number,
+    adminTotal: PropTypes.number,
     fringeBenefitsAdmin: PropTypes.arrayOf(PropTypes.shape({
       pensionAccumulation: PropTypes.number,
       retireeHealthIns: PropTypes.number,
@@ -557,8 +561,9 @@ DisplayBudgetPl.propTypes = {
       unemploymentComp: PropTypes.number,
       pensionAdmin: PropTypes.number,
     })),
-    adminTotal: PropTypes.number,
+    fringeBenefitsAdminTotal: PropTypes.number,
     adStaffSalary: PropTypes.number,
+    adStaffTotal: PropTypes.number,
     fringeBenefitsAdStaff: PropTypes.arrayOf(PropTypes.shape({
       pensionAccumulation: PropTypes.number,
       retireeHealthIns: PropTypes.number,
@@ -570,8 +575,9 @@ DisplayBudgetPl.propTypes = {
       unemploymentComp: PropTypes.number,
       pensionAdmin: PropTypes.number,
     })),
-    adStaffTotal: PropTypes.number,
+    fringeBenefitsAdStaffTotal: PropTypes.number,
     manageSalary: PropTypes.number,
+    manageTotal: PropTypes.number,
     fringeBenefitsManage: PropTypes.arrayOf(PropTypes.shape({
       pensionAccumulation: PropTypes.number,
       retireeHealthIns: PropTypes.number,
@@ -583,13 +589,14 @@ DisplayBudgetPl.propTypes = {
       unemploymentComp: PropTypes.number,
       pensionAdmin: PropTypes.number,
     })),
-    manageTotal: PropTypes.number,
+    fringeBenefitsManageTotal: PropTypes.number,
     surplus: PropTypes.number,
     expenditure: PropTypes.arrayOf(PropTypes.shape({
       management: PropTypes.number,
       supportServices: PropTypes.number,
       beneficialAdvocacy: PropTypes.number,
     })),
+    _id: PropTypes.string,
   }).isRequired,
 };
 
