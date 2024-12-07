@@ -241,7 +241,7 @@ const DisplayBudgetPl = ({ budget }) => {
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '20px' }}>
           <Col>
-            <NumField name="revenue.0.A" style={{ height: '25px' }} decimal label={null} />
+            <NumField name="revenue.0.a" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
         <Row className="align-items-center">
