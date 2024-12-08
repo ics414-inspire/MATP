@@ -20,7 +20,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 7.02,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.22,
       unemployment_compensation: 0.91,
       pension_administration: 0.00,
@@ -35,7 +35,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.84,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 0.88,
       unemployment_compensation: 0.31,
       pension_administration: 0.01,
@@ -50,7 +50,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -65,7 +65,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -80,7 +80,7 @@ const percentages = [
       other_post_employment_benefits: 7.78,
       employees_health_fund: 7.62,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.27,
       unemployment_compensation: 0.15,
       pension_administration: 0.00,
@@ -95,7 +95,7 @@ const percentages = [
       other_post_employment_benefits: 12.69,
       employees_health_fund: 7.60,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.06,
       unemployment_compensation: 0.09,
       pension_administration: 0.01,
@@ -110,7 +110,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -125,7 +125,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -140,7 +140,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare_percent: 1.45,
+      medicare: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -195,7 +195,6 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsAdmin: {
         type: Array,
         optional: true,
-        defaultValue: [],
       },
       'fringeBenefitsAdmin.$': Object,
       'fringeBenefitsAdmin.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -215,7 +214,6 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsAdStaff: {
         type: Array,
         optional: true,
-        defaultValue: [],
       },
       'fringeBenefitsAdStaff.$': Object,
       'fringeBenefitsAdStaff.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -235,7 +233,6 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsManage: {
         type: Array,
         optional: true,
-        defaultValue: [],
       },
       'fringeBenefitsManage.$': Object,
       'fringeBenefitsManage.$.pensionAccumulation': { type: Number, defaultValue: 0, optional: true },
@@ -254,19 +251,15 @@ class BudgetCollection extends BaseCollection {
       expenditure: {
         type: Array,
         optional: true,
-        defaultValue: [],
       },
       'expenditure.$': Object,
       'expenditure.$.management': { type: Number, defaultValue: 0, optional: true },
       'expenditure.$.supportServices': { type: Number, defaultValue: 0, optional: true },
       'expenditure.$.beneficialAdvocacy': { type: Number, defaultValue: 0, optional: true },
+      expenditureTotal: { type: Number, optional: true },
     }));
   }
 
-  /** Defines a new Budget item.
-  * @param {Object} data - Contains fields for AuditedBalanceSheet.
-  * @return {String} docID - The docID of the newly inserted document.
-  */
   define({ owner, year, revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
     const docID = this._collection.insert({
       owner,
@@ -283,27 +276,14 @@ class BudgetCollection extends BaseCollection {
     return docID;
   }
 
-  /**
-   * Updates the given document with new field values.
-   * @param {String} docID - The ID of the document to update.
-   * @param {Object} updatedFields - The new values for the fields.
-   */
-  update(docID, { revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
+  update(docID, { revenue, expenses, manageSalary, expenditure }) {
     const updateData = {};
     if (_.isArray(revenue)) { updateData.revenue = revenue; }
     if (_.isArray(expenses)) { updateData.expenses = expenses; }
-    if (_.isArray(fringeBenefitsAdmin)) { updateData.fringeBenefitsAdmin = fringeBenefitsAdmin; }
-    if (_.isArray(fringeBenefitsAdStaff)) { updateData.fringeBenefitsAdStaff = fringeBenefitsAdStaff; }
-    if (_.isArray(fringeBenefitsManage)) { updateData.fringeBenefitsManage = fringeBenefitsManage; }
     updateData.manageSalary = manageSalary;
     if (_.isArray(expenditure)) { updateData.expenditure = expenditure; }
-
     this._collection.update(docID, { $set: updateData });
-
-    // Recalculate totals after updating manageSalary
-    if (manageSalary !== undefined) {
-      this.updateTotals(docID);
-    }
+    this.updateTotals(docID);
   }
 
   /**
@@ -325,13 +305,12 @@ class BudgetCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(BudgetPublications.Budget, function publish() {
+      Meteor.publish(BudgetPublications.Budget, function () {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
         }
         return this.ready();
-        // return instance._collection.find();
       });
 
       Meteor.publish(BudgetPublications.BudgetAdmin, function publish() {
@@ -357,21 +336,10 @@ class BudgetCollection extends BaseCollection {
     return null;
   }
 
-  /**
-   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
-   * This is used in the define, update, and removeIt Meteor methods.
-   * @param {String} userId - The userId of the logged in user.
-   * @throws {Meteor.Error} If the user is not logged in as an Admin or User.
-   */
   assertValidRoleForMethod(userId) {
     this.assertRole(userId, [ROLE.ADMIN, ROLE.USER]);
   }
 
-  /**
-   * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
-   * @param {String} docID - The ID of the document.
-   * @return {Object} - The document's data.
-   */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const year = doc.year;
@@ -394,6 +362,7 @@ class BudgetCollection extends BaseCollection {
     const fringeBenefitsManageTotal = doc.fringeBenefitsManageTotal;
     const surplus = doc.surplus;
     const expenditure = doc.expenditure;
+    const expenditureTotal = doc.expenditureTotal;
     return {
       year,
       owner,
@@ -415,6 +384,7 @@ class BudgetCollection extends BaseCollection {
       fringeBenefitsManageTotal,
       surplus,
       expenditure,
+      expenditureTotal,
     };
   }
 
@@ -432,9 +402,9 @@ class BudgetCollection extends BaseCollection {
     const pensionAccumulationPercentage = getPercentageForYear(year, 'pension_accumulation');
     const retireeHealthPercentage = getPercentageForYear(year, 'retiree_health_insurance');
     const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits');
-    const employeeHealthFundPercentage = getPercentageForYear(year, 'employees_health_fund');
+    const employeeHealthFundPercentage = getPercentageForYear(year, 'employee_health_fund');
     const socialSecurityPercentage = getPercentageForYear(year, 'social_security');
-    const medicarePercentage = getPercentageForYear(year, 'medicare_percent');
+    const medicarePercentage = getPercentageForYear(year, 'medicare');
     const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
     const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation');
     const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration');
@@ -449,7 +419,7 @@ class BudgetCollection extends BaseCollection {
     const adStaffSalary = adStaffTotal / (1 + compositeRate);
 
     // Calculate fringeBenefitsManage array with updated values for all fields
-    const fringeBenefitsManage = (doc.fringeBenefitsManage?.length ? doc.fringeBenefitsManage : [{}]).map((entry) => {
+    const fringeBenefitsManage = (doc.fringeBenefitsManage || []).map((entry) => {
       const pensionAccumulation = (manageSalary * pensionAccumulationPercentage) / 100;
       const retireeHealthIns = (manageSalary * retireeHealthPercentage) / 100;
       const postEmploymentBen = (manageSalary * otherPostEmpBenefitsPercentage) / 100;
@@ -475,7 +445,7 @@ class BudgetCollection extends BaseCollection {
     });
 
     // Calculate fringeBenefitsAdmin values
-    const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin?.length ? doc.fringeBenefitsAdmin : [{}]).map((entry) => {
+    const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin || []).map((entry) => {
       const adminCalculationBase = adminTotal / ((1 / compositeRate) + 1);
 
       const pensionAccumulation = (adminCalculationBase * pensionAccumulationPercentage) / compositeRate;
@@ -503,7 +473,7 @@ class BudgetCollection extends BaseCollection {
     });
 
     // Calculate fringeBenefitsAdAdmin values
-    const fringeBenefitsAdStaff = (doc.fringeBenefitsAdStaff?.length ? doc.fringeBenefitsAdStaff : [{}]).map((entry) => {
+    const fringeBenefitsAdStaff = (doc.fringeBenefitsAdmin || []).map((entry) => {
       const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1);
 
       const pensionAccumulation = (adStaffCalculationBase * pensionAccumulationPercentage) / compositeRate;
