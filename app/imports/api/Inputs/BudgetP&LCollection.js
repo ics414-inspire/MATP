@@ -20,7 +20,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 7.02,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.22,
       unemployment_compensation: 0.91,
       pension_administration: 0.00,
@@ -35,7 +35,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.84,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 0.88,
       unemployment_compensation: 0.31,
       pension_administration: 0.01,
@@ -50,7 +50,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -65,7 +65,7 @@ const percentages = [
       other_post_employment_benefits: 0.00,
       employees_health_fund: 6.81,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.16,
       unemployment_compensation: 0.25,
       pension_administration: 0.00,
@@ -80,7 +80,7 @@ const percentages = [
       other_post_employment_benefits: 7.78,
       employees_health_fund: 7.62,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.27,
       unemployment_compensation: 0.15,
       pension_administration: 0.00,
@@ -95,7 +95,7 @@ const percentages = [
       other_post_employment_benefits: 12.69,
       employees_health_fund: 7.60,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.06,
       unemployment_compensation: 0.09,
       pension_administration: 0.01,
@@ -110,7 +110,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -125,7 +125,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -140,7 +140,7 @@ const percentages = [
       other_post_employment_benefits: 14.33,
       employees_health_fund: 7.69,
       social_security: 6.20,
-      medicare: 1.45,
+      medicare_percent: 1.45,
       workers_compensation: 1.24,
       unemployment_compensation: 0.02,
       pension_administration: 0.01,
@@ -434,7 +434,7 @@ class BudgetCollection extends BaseCollection {
     const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits');
     const employeeHealthFundPercentage = getPercentageForYear(year, 'employees_health_fund');
     const socialSecurityPercentage = getPercentageForYear(year, 'social_security');
-    const medicarePercentage = getPercentageForYear(year, 'medicare');
+    const medicarePercentage = getPercentageForYear(year, 'medicare_percent');
     const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
     const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation');
     const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration');
