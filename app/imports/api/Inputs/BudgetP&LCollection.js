@@ -297,8 +297,13 @@ class BudgetCollection extends BaseCollection {
     if (_.isArray(fringeBenefitsManage)) { updateData.fringeBenefitsManage = fringeBenefitsManage; }
     updateData.manageSalary = manageSalary;
     if (_.isArray(expenditure)) { updateData.expenditure = expenditure; }
+
     this._collection.update(docID, { $set: updateData });
-    this.updateTotals(docID);
+
+    // Recalculate totals after updating manageSalary
+    if (manageSalary !== undefined) {
+      this.updateTotals(docID);
+    }
   }
 
   /**
@@ -427,7 +432,7 @@ class BudgetCollection extends BaseCollection {
     const pensionAccumulationPercentage = getPercentageForYear(year, 'pension_accumulation');
     const retireeHealthPercentage = getPercentageForYear(year, 'retiree_health_insurance');
     const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits');
-    const employeeHealthFundPercentage = getPercentageForYear(year, 'employee_health_fund');
+    const employeeHealthFundPercentage = getPercentageForYear(year, 'employees_health_fund');
     const socialSecurityPercentage = getPercentageForYear(year, 'social_security');
     const medicarePercentage = getPercentageForYear(year, 'medicare');
     const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
@@ -444,7 +449,7 @@ class BudgetCollection extends BaseCollection {
     const adStaffSalary = adStaffTotal / (1 + compositeRate);
 
     // Calculate fringeBenefitsManage array with updated values for all fields
-    const fringeBenefitsManage = (doc.fringeBenefitsManage || []).map((entry) => {
+    const fringeBenefitsManage = (doc.fringeBenefitsManage?.length ? doc.fringeBenefitsManage : [{}]).map((entry) => {
       const pensionAccumulation = (manageSalary * pensionAccumulationPercentage) / 100;
       const retireeHealthIns = (manageSalary * retireeHealthPercentage) / 100;
       const postEmploymentBen = (manageSalary * otherPostEmpBenefitsPercentage) / 100;
@@ -470,7 +475,7 @@ class BudgetCollection extends BaseCollection {
     });
 
     // Calculate fringeBenefitsAdmin values
-    const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin || []).map((entry) => {
+    const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin?.length ? doc.fringeBenefitsAdmin : [{}]).map((entry) => {
       const adminCalculationBase = adminTotal / ((1 / compositeRate) + 1);
 
       const pensionAccumulation = (adminCalculationBase * pensionAccumulationPercentage) / compositeRate;
@@ -498,7 +503,7 @@ class BudgetCollection extends BaseCollection {
     });
 
     // Calculate fringeBenefitsAdAdmin values
-    const fringeBenefitsAdStaff = (doc.fringeBenefitsAdmin || []).map((entry) => {
+    const fringeBenefitsAdStaff = (doc.fringeBenefitsAdStaff?.length ? doc.fringeBenefitsAdStaff : [{}]).map((entry) => {
       const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1);
 
       const pensionAccumulation = (adStaffCalculationBase * pensionAccumulationPercentage) / compositeRate;

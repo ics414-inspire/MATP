@@ -264,7 +264,7 @@ const DisplayBudgetPl = ({ budget }) => {
             <h6>${totalRevenue.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '20px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '15px' }}>
           <Col>
             <NumField name="expenses.0.personnel" style={{ height: '25px' }} decimal label={null} />
           </Col>
@@ -304,124 +304,124 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="expenses.0.debtService" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '20px' }}>
+        <Row className="align-items-center">
           <Col>
             <NumField name="expenses.0.other" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '4px' }}>
           <Col>
             <h6>${totalExpenses.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '55px' }}>
           <Col>
             <h6>${adminSalary.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '12px' }}>
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.pensionAccumulation" value={fringeBenefitsAdmin[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.pensionAccumulation" value={Math.round(fringeBenefitsAdmin[0]?.pensionAccumulation || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.retireeHealthIns" value={fringeBenefitsAdmin[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.retireeHealthIns" value={Math.round(fringeBenefitsAdmin[0]?.retireeHealthIns || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.postEmploymentBen" value={fringeBenefitsAdmin[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.postEmploymentBen" value={Math.round(fringeBenefitsAdmin[0]?.postEmploymentBen || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.employeeHealthFund" value={fringeBenefitsAdmin[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.employeeHealthFund" value={Math.round(fringeBenefitsAdmin[0]?.employeeHealthFund || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.socialSecurity" value={fringeBenefitsAdmin[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.socialSecurity" value={Math.round(fringeBenefitsAdmin[0]?.socialSecurity || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.medicare" value={fringeBenefitsAdmin[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.medicare" value={Math.round(fringeBenefitsAdmin[0]?.medicare || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.workersComp" value={fringeBenefitsAdmin[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.workersComp" value={Math.round(fringeBenefitsAdmin[0]?.workersComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.unemploymentComp" value={fringeBenefitsAdmin[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.unemploymentComp" value={Math.round(fringeBenefitsAdmin[0]?.unemploymentComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdmin.0.pensionAdmin" value={fringeBenefitsAdmin[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdmin.0.pensionAdmin" value={Math.round(fringeBenefitsAdmin[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '3px' }}>
           <Col>
             <h6>${fringeBenefitsAdminTotal.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '6px' }}>
           <Col>
             <h6>${adminTotal.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '58px' }}>
           <Col>
             <h6>${adStaffSalary.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '12px' }}>
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.pensionAccumulation" value={fringeBenefitsAdStaff[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAccumulation" value={Math.round(fringeBenefitsAdStaff[0]?.pensionAccumulation || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.retireeHealthIns" value={fringeBenefitsAdStaff[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.retireeHealthIns" value={Math.round(fringeBenefitsAdStaff[0]?.retireeHealthIns || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.postEmploymentBen" value={fringeBenefitsAdStaff[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.postEmploymentBen" value={Math.round(fringeBenefitsAdStaff[0]?.postEmploymentBen || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.employeeHealthFund" value={fringeBenefitsAdStaff[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.employeeHealthFund" value={Math.round(fringeBenefitsAdStaff[0]?.employeeHealthFund || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.socialSecurity" value={fringeBenefitsAdStaff[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.socialSecurity" value={Math.round(fringeBenefitsAdStaff[0]?.socialSecurity || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.medicare" value={fringeBenefitsAdStaff[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.medicare" value={Math.round(fringeBenefitsAdStaff[0]?.medicare || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.workersComp" value={fringeBenefitsAdStaff[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.workersComp" value={Math.round(fringeBenefitsAdStaff[0]?.workersComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.unemploymentComp" value={fringeBenefitsAdStaff[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.unemploymentComp" value={Math.round(fringeBenefitsAdStaff[0]?.unemploymentComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" value={fringeBenefitsAdStaff[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" value={Math.round(fringeBenefitsAdStaff[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -429,59 +429,59 @@ const DisplayBudgetPl = ({ budget }) => {
             <h6>${fringeBenefitsAdStaffTotal.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '7px' }}>
           <Col>
             <h6>${adStaffTotal.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '50px' }}>
           <Col>
             <NumField name="manageSalary" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '5px' }}>
           <Col>
-            <NumField name="fringeBenefitsManage.0.pensionAccumulation" value={fringeBenefitsManage[0]?.pensionAccumulation || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.pensionAccumulation" value={Math.round(fringeBenefitsManage[0]?.pensionAccumulation || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.retireeHealthIns" value={fringeBenefitsManage[0]?.retireeHealthIns || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.retireeHealthIns" value={Math.round(fringeBenefitsManage[0]?.retireeHealthIns || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.postEmploymentBen" value={fringeBenefitsManage[0]?.postEmploymentBen || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.postEmploymentBen" value={Math.round(fringeBenefitsManage[0]?.postEmploymentBen || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.employeeHealthFund" value={fringeBenefitsManage[0]?.employeeHealthFund || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.employeeHealthFund" value={Math.round(fringeBenefitsManage[0]?.employeeHealthFund || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.socialSecurity" value={fringeBenefitsManage[0]?.socialSecurity || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.socialSecurity" value={Math.round(fringeBenefitsManage[0]?.socialSecurity || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.medicare" value={fringeBenefitsManage[0]?.medicare || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.medicare" value={Math.round(fringeBenefitsManage[0]?.medicare || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.workersComp" value={fringeBenefitsManage[0]?.workersComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.workersComp" value={Math.round(fringeBenefitsManage[0]?.workersComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.unemploymentComp" value={fringeBenefitsManage[0]?.unemploymentComp || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.unemploymentComp" value={Math.round(fringeBenefitsManage[0]?.unemploymentComp || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
           <Col>
-            <NumField name="fringeBenefitsManage.0.pensionAdmin" value={fringeBenefitsManage[0]?.pensionAdmin || 0} style={{ height: '25px' }} decimal label={null} readOnly />
+            <NumField name="fringeBenefitsManage.0.pensionAdmin" value={Math.round(fringeBenefitsManage[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
         <Row className="align-items-center">
@@ -489,7 +489,7 @@ const DisplayBudgetPl = ({ budget }) => {
             <h6>${fringeBenefitsManageTotal.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '9px' }}>
           <Col>
             <h6>${manageTotal.toFixed(2)}</h6>
           </Col>
@@ -499,7 +499,7 @@ const DisplayBudgetPl = ({ budget }) => {
             <h6>${surplus.toFixed(2)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '45px' }}>
           <Col>
             <NumField name="expenditure.0.management" style={{ height: '25px' }} decimal label={null} />
           </Col>
@@ -514,7 +514,7 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="expenditure.0.beneficialAdvocacy" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Col>
+        <Col style={{ paddingTop: '20px', paddingBottom: '20px', paddingLeft: '6px' }}>
           <SubmitField value="Update" />
         </Col>
         <ErrorsField />
