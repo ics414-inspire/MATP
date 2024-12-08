@@ -264,9 +264,9 @@ class BudgetCollection extends BaseCollection {
   }
 
   /** Defines a new Budget item.
-  * @param {Object} data - Contains fields for AuditedBalanceSheet.
-  * @return {String} docID - The docID of the newly inserted document.
-  */
+   * @param {Object} data - Contains fields for BudgetP&L.
+   * @return {String} docID - The docID of the newly inserted document.
+   */
   define({ owner, year, revenue, expenses, fringeBenefitsAdmin, fringeBenefitsAdStaff, fringeBenefitsManage, manageSalary, expenditure }) {
     const docID = this._collection.insert({
       owner,
