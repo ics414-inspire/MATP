@@ -123,7 +123,7 @@ const BudgetPlInput = () => {
           </Row>
           <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />
-            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
           </Row>
           <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />
@@ -169,7 +169,7 @@ const BudgetPlInput = () => {
           </Row>
           <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />
-            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
           </Row>
           <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />
@@ -215,7 +215,7 @@ const BudgetPlInput = () => {
           </Row>
           <Row className="align-items-center ps-5" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />
-            <h6 className="text-center" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
+            <h6 className="text-end" style={{ paddingTop: '2px' }}>Fringe Benefits</h6>
           </Row>
           <Row className="align-items-center ps-3" style={{ paddingTop: '6px' }}>
             <hr className="solid my-0" />

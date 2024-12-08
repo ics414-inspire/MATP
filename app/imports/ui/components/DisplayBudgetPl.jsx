@@ -259,9 +259,9 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="revenue.0.coreOpBudgetNotAuth" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingLeft: '8px' }}>
           <Col>
-            <h6>${totalRevenue.toFixed(2)}</h6>
+            <h6>${totalRevenue.toFixed(0)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '15px' }}>
@@ -309,14 +309,14 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="expenses.0.other" style={{ height: '25px' }} decimal label={null} />
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '4px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '4px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${totalExpenses.toFixed(2)}</h6>
+            <h6>${totalExpenses.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '55px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '55px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${adminSalary.toFixed(2)}</h6>
+            <h6>${adminSalary.toFixed(0)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '12px' }}>
@@ -364,19 +364,19 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="fringeBenefitsAdmin.0.pensionAdmin" value={Math.round(fringeBenefitsAdmin[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '3px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '3px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${fringeBenefitsAdminTotal.toFixed(2)}</h6>
+            <h6>${fringeBenefitsAdminTotal.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '6px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '6px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${adminTotal.toFixed(2)}</h6>
+            <h6>${adminTotal.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '58px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '58px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${adStaffSalary.toFixed(2)}</h6>
+            <h6>${adStaffSalary.toFixed(0)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '12px' }}>
@@ -424,14 +424,14 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="fringeBenefitsAdStaff.0.pensionAdmin" value={Math.round(fringeBenefitsAdStaff[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingLeft: '8px' }}>
           <Col>
-            <h6>${fringeBenefitsAdStaffTotal.toFixed(2)}</h6>
+            <h6>${fringeBenefitsAdStaffTotal.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '7px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '7px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${adStaffTotal.toFixed(2)}</h6>
+            <h6>${adStaffTotal.toFixed(0)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '50px' }}>
@@ -484,19 +484,19 @@ const DisplayBudgetPl = ({ budget }) => {
             <NumField name="fringeBenefitsManage.0.pensionAdmin" value={Math.round(fringeBenefitsManage[0]?.pensionAdmin || 0)} style={{ height: '25px' }} decimal label={null} readOnly />
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingTop: '5px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${fringeBenefitsManageTotal.toFixed(2)}</h6>
+            <h6>${fringeBenefitsManageTotal.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center" style={{ paddingTop: '9px' }}>
+        <Row className="align-items-center" style={{ paddingTop: '10px', paddingLeft: '8px' }}>
           <Col>
-            <h6>${manageTotal.toFixed(2)}</h6>
+            <h6>${manageTotal.toFixed(0)}</h6>
           </Col>
         </Row>
-        <Row className="align-items-center">
+        <Row className="align-items-center" style={{ paddingLeft: '8px' }}>
           <Col>
-            <h6>${surplus.toFixed(2)}</h6>
+            <h6>${surplus.toFixed(0)}</h6>
           </Col>
         </Row>
         <Row className="align-items-center" style={{ paddingTop: '45px' }}>
