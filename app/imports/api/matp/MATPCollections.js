@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 // inputing ABS collections
-import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';// inputing ABS collections
+import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';
+import { Budget } from '../Inputs/BudgetP&LCollection';
+
+// inputing ABS collections
 
 class MATPClass {
   collections;
@@ -16,6 +19,7 @@ class MATPClass {
     this.collections = [
       AdminProfiles,
       AuditedBalanceSheet, // inputing ABS collections
+      Budget,
       UserProfiles,
     ];
     /*
@@ -25,6 +29,7 @@ class MATPClass {
       AdminProfiles,
       UserProfiles,
       AuditedBalanceSheet, // inputing ABS collections
+      Budget,
     ];
 
     /*
