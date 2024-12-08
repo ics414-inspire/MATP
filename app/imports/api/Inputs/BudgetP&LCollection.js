@@ -429,16 +429,16 @@ class BudgetCollection extends BaseCollection {
     const year = doc.year;
 
     // Retrieve the percentage for the year
-    const pensionAccumulationPercentage = getPercentageForYear(year, 'pension_accumulation');
-    const retireeHealthPercentage = getPercentageForYear(year, 'retiree_health_insurance');
-    const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits');
-    const employeeHealthFundPercentage = getPercentageForYear(year, 'employees_health_fund');
-    const socialSecurityPercentage = getPercentageForYear(year, 'social_security');
-    const medicarePercentage = getPercentageForYear(year, 'medicare_percent');
-    const workersCompPercentage = getPercentageForYear(year, 'workers_compensation');
-    const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation');
-    const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration');
-    const compositeRate = getPercentageForYear(year, 'composite_rate');
+    const pensionAccumulationPercentage = getPercentageForYear(year, 'pension_accumulation') / 100 || 0;
+    const retireeHealthPercentage = getPercentageForYear(year, 'retiree_health_insurance') / 100 || 0;
+    const otherPostEmpBenefitsPercentage = getPercentageForYear(year, 'other_post_employment_benefits') / 100 || 0;
+    const employeeHealthFundPercentage = getPercentageForYear(year, 'employees_health_fund') / 100 || 0;
+    const socialSecurityPercentage = getPercentageForYear(year, 'social_security') / 100 || 0;
+    const medicarePercentage = getPercentageForYear(year, 'medicare_percent') / 100 || 0;
+    const workersCompPercentage = getPercentageForYear(year, 'workers_compensation') / 100 || 0;
+    const unemploymentCompPercentage = getPercentageForYear(year, 'unemployment_compensation') / 100 || 0;
+    const pensionAdminPercentage = getPercentageForYear(year, 'pension_administration') / 100 || 0;
+    const compositeRate = getPercentageForYear(year, 'composite_rate') / 100 || 0;
 
     const manageSalary = doc.manageSalary || 0;
     const personnelExpenses = doc.expenses?.[0]?.personnel || 0;
@@ -450,15 +450,15 @@ class BudgetCollection extends BaseCollection {
 
     // Calculate fringeBenefitsManage array with updated values for all fields
     const fringeBenefitsManage = (doc.fringeBenefitsManage?.length ? doc.fringeBenefitsManage : [{}]).map((entry) => {
-      const pensionAccumulation = (manageSalary * pensionAccumulationPercentage) / 100;
-      const retireeHealthIns = (manageSalary * retireeHealthPercentage) / 100;
-      const postEmploymentBen = (manageSalary * otherPostEmpBenefitsPercentage) / 100;
-      const employeeHealthFund = (manageSalary * employeeHealthFundPercentage) / 100;
-      const socialSecurity = (manageSalary * socialSecurityPercentage) / 100;
-      const medicare = (manageSalary * medicarePercentage) / 100;
-      const workersComp = (manageSalary * workersCompPercentage) / 100;
-      const unemploymentComp = (manageSalary * unemploymentCompPercentage) / 100;
-      const pensionAdmin = (manageSalary * pensionAdminPercentage) / 100;
+      const pensionAccumulation = (manageSalary * pensionAccumulationPercentage) || 0;
+      const retireeHealthIns = (manageSalary * retireeHealthPercentage) || 0;
+      const postEmploymentBen = (manageSalary * otherPostEmpBenefitsPercentage) || 0;
+      const employeeHealthFund = (manageSalary * employeeHealthFundPercentage) || 0;
+      const socialSecurity = (manageSalary * socialSecurityPercentage) || 0;
+      const medicare = (manageSalary * medicarePercentage) || 0;
+      const workersComp = (manageSalary * workersCompPercentage) || 0;
+      const unemploymentComp = (manageSalary * unemploymentCompPercentage) || 0;
+      const pensionAdmin = (manageSalary * pensionAdminPercentage) || 0;
 
       return {
         ...entry,
@@ -476,17 +476,17 @@ class BudgetCollection extends BaseCollection {
 
     // Calculate fringeBenefitsAdmin values
     const fringeBenefitsAdmin = (doc.fringeBenefitsAdmin?.length ? doc.fringeBenefitsAdmin : [{}]).map((entry) => {
-      const adminCalculationBase = adminTotal / ((1 / compositeRate) + 1);
+      const adminCalculationBase = adminTotal / ((1 / compositeRate) + 1) || 0;
 
-      const pensionAccumulation = (adminCalculationBase * pensionAccumulationPercentage) / compositeRate;
-      const retireeHealthIns = (adminCalculationBase * retireeHealthPercentage) / compositeRate;
-      const postEmploymentBen = (adminCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate;
-      const employeeHealthFund = (adminCalculationBase * employeeHealthFundPercentage) / compositeRate;
-      const socialSecurity = (adminCalculationBase * socialSecurityPercentage) / compositeRate;
-      const medicare = (adminCalculationBase * medicarePercentage) / compositeRate;
-      const workersComp = (adminCalculationBase * workersCompPercentage) / compositeRate;
-      const unemploymentComp = (adminCalculationBase * unemploymentCompPercentage) / compositeRate;
-      const pensionAdmin = (adminCalculationBase * pensionAdminPercentage) / compositeRate;
+      const pensionAccumulation = (adminCalculationBase * pensionAccumulationPercentage) / compositeRate || 0;
+      const retireeHealthIns = (adminCalculationBase * retireeHealthPercentage) / compositeRate || 0;
+      const postEmploymentBen = (adminCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate || 0;
+      const employeeHealthFund = (adminCalculationBase * employeeHealthFundPercentage) / compositeRate || 0;
+      const socialSecurity = (adminCalculationBase * socialSecurityPercentage) / compositeRate || 0;
+      const medicare = (adminCalculationBase * medicarePercentage) / compositeRate || 0;
+      const workersComp = (adminCalculationBase * workersCompPercentage) / compositeRate || 0;
+      const unemploymentComp = (adminCalculationBase * unemploymentCompPercentage) / compositeRate || 0;
+      const pensionAdmin = (adminCalculationBase * pensionAdminPercentage) / compositeRate || 0;
 
       return {
         ...entry,
@@ -504,17 +504,17 @@ class BudgetCollection extends BaseCollection {
 
     // Calculate fringeBenefitsAdAdmin values
     const fringeBenefitsAdStaff = (doc.fringeBenefitsAdStaff?.length ? doc.fringeBenefitsAdStaff : [{}]).map((entry) => {
-      const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1);
+      const adStaffCalculationBase = adStaffTotal / ((1 / compositeRate) + 1) || 0;
 
-      const pensionAccumulation = (adStaffCalculationBase * pensionAccumulationPercentage) / compositeRate;
-      const retireeHealthIns = (adStaffCalculationBase * retireeHealthPercentage) / compositeRate;
-      const postEmploymentBen = (adStaffCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate;
-      const employeeHealthFund = (adStaffCalculationBase * employeeHealthFundPercentage) / compositeRate;
-      const socialSecurity = (adStaffCalculationBase * socialSecurityPercentage) / compositeRate;
-      const medicare = (adStaffCalculationBase * medicarePercentage) / compositeRate;
-      const workersComp = (adStaffCalculationBase * workersCompPercentage) / compositeRate;
-      const unemploymentComp = (adStaffCalculationBase * unemploymentCompPercentage) / compositeRate;
-      const pensionAdmin = (adStaffCalculationBase * pensionAdminPercentage) / compositeRate;
+      const pensionAccumulation = (adStaffCalculationBase * pensionAccumulationPercentage) / compositeRate || 0;
+      const retireeHealthIns = (adStaffCalculationBase * retireeHealthPercentage) / compositeRate || 0;
+      const postEmploymentBen = (adStaffCalculationBase * otherPostEmpBenefitsPercentage) / compositeRate || 0;
+      const employeeHealthFund = (adStaffCalculationBase * employeeHealthFundPercentage) / compositeRate || 0;
+      const socialSecurity = (adStaffCalculationBase * socialSecurityPercentage) / compositeRate || 0;
+      const medicare = (adStaffCalculationBase * medicarePercentage) / compositeRate || 0;
+      const workersComp = (adStaffCalculationBase * workersCompPercentage) / compositeRate || 0;
+      const unemploymentComp = (adStaffCalculationBase * unemploymentCompPercentage) / compositeRate || 0;
+      const pensionAdmin = (adStaffCalculationBase * pensionAdminPercentage) / compositeRate || 0;
 
       return {
         ...entry,

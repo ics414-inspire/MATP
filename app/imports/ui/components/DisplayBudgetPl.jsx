@@ -211,7 +211,7 @@ const DisplayBudgetPl = ({ budget }) => {
     const adStaffTotalValue = (expenditureArray[0]?.management || 0) - manageTotalValue;
     const adminTotalValue = personnelExpenses - manageTotalValue - adStaffTotalValue;
 
-    const compositeRate = getPercentageForYear(budget.year, 'composite_rate') || 0;
+    const compositeRate = getPercentageForYear(budget.year, 'composite_rate') / 100 || 0;
 
     const adminSalaryValue = adminTotalValue / (1 + compositeRate);
     const adStaffSalaryValue = adStaffTotalValue / (1 + compositeRate);
