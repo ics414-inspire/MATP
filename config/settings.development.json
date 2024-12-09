@@ -16,6 +16,14 @@
     { "owner":  "admin@foo.com", "year": 1 }
   ],
 
+  "defaultBudget": [
+    { "owner":  "john@foo.com", "year": 6 },
+    { "owner":  "john@foo.com", "year": 7 },
+    { "owner":  "john@foo.com", "year": 8 },
+    { "owner":  "john@foo.com", "year": 9 },
+    { "owner":  "admin@foo.com", "year": 1 }
+  ],
+
   "public": {
     "development": true
   }

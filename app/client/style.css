@@ -404,7 +404,7 @@ hr {
 }
 
 .navbar-logo {
-  width: 250px;
+  width: 175px;
   position: 15px 20px;
   height: auto;
   transition: transform 0.3s ease;
@@ -643,11 +643,24 @@ hr {
 }
 
 .navbar {
+  display: flex;
+  justify-content: space-between; /* Space out the left, center, and right sections */
+  align-items: center; /* Vertically align items */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000; /* Ensure it stays above other content, signin/signup page (important) */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adds a light shadow */
+  border-bottom: 1px solid #ddd; /* Subtle border for separation */
+}
+
+.navbar .dropdown-menu {
+  border-radius: 0;
+}
+
+.custom-hover-dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 /* Styles specifically for Sign In buttons */
