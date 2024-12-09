@@ -4,6 +4,9 @@ import { UserProfiles } from '../user/UserProfileCollection';
 // inputing ABS collections
 import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';
 import { Budget } from '../Inputs/BudgetP&LCollection';
+import { AccountantProfiles } from '../user/AccountantProfileCollection';
+import { ClientProfiles } from '../user/ClientProfileCollection';
+import { BossAccountantProfiles } from '../user/BossAccountantProfileCollection';
 
 // inputing ABS collections
 
@@ -21,6 +24,9 @@ class MATPClass {
       AuditedBalanceSheet, // inputing ABS collections
       Budget,
       UserProfiles,
+      AccountantProfiles,
+      ClientProfiles,
+      BossAccountantProfiles,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -28,6 +34,9 @@ class MATPClass {
     this.collectionLoadSequence = [
       AdminProfiles,
       UserProfiles,
+      AccountantProfiles,
+      ClientProfiles,
+      BossAccountantProfiles,
       AuditedBalanceSheet, // inputing ABS collections
       Budget,
     ];
