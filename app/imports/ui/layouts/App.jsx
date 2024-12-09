@@ -29,6 +29,7 @@ import CSV from '../pages/CSV';
 import AboutUs from '../pages/AboutUs';
 import FinancialProjection from '../pages/4100';
 import EditableSpreadsheet2005 from '../pages/2005_2';
+import Page2503 from '../pages/2503';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
           <Route path="/financial-projection" element={<ProtectedRoute><FinancialProjection /></ProtectedRoute>} />
           <Route path="/2005" element={<ProtectedRoute><EditableSpreadsheet2005 /></ProtectedRoute>} />
+          <Route path="/2503" element={<ProtectedRoute><Page2503 /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
