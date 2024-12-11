@@ -1,8 +1,15 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
-    },
-    { "email": "john@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "John", "lastName": "Doe" }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "Spire" },
+    { "email": "john@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "John Doe", "lastName": "Company 1" },
+    { "email": "jane@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "Jane Doe", "lastName": "Company 2" },
+    { "email": "accountant1@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "James Doe", "lastName": "Company 3" },
+    { "email": "accountant2@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "Jace Doe", "lastName": "Company 4" },
+    { "email": "accountant3@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "Jannet Doe", "lastName": "Company 5" },
+    { "email": "accountant4@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "Jake Doe", "lastName": "Company 6" },
+    { "email": "accountant5@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "Joyce Doe", "lastName": "Company 7" },
+    { "email": "accountant6@foo.com", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "Janice Doe", "lastName": "Company 8" },
+    { "email": "client", "password": "changeme", "role": "CLIENT", "firstName": "Sarah", "lastName": "Green" }
   ],
   "defaultAuditedBalanceSheets": [
     { "owner":  "john@foo.com", "year": 1 },
@@ -13,7 +20,15 @@
     { "owner":  "john@foo.com", "year": 6 },
     { "owner":  "john@foo.com", "year": 7 },
     { "owner":  "john@foo.com", "year": 8 },
-    { "owner":  "admin@foo.com", "year": 1 }
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 2 },
+    { "owner":  "admin@foo.com", "year": 3 },
+    { "owner":  "admin@foo.com", "year": 4 },
+    { "owner":  "admin@foo.com", "year": 5 },
+    { "owner":  "admin@foo.com", "year": 6 },
+    { "owner":  "admin@foo.com", "year": 7 },
+    { "owner":  "admin@foo.com", "year": 8 }
   ],
 
   "defaultBudget": [
@@ -21,7 +36,10 @@
     { "owner":  "john@foo.com", "year": 7 },
     { "owner":  "john@foo.com", "year": 8 },
     { "owner":  "john@foo.com", "year": 9 },
-    { "owner":  "admin@foo.com", "year": 1 }
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 2 },
+    { "owner":  "admin@foo.com", "year": 3 },
+    { "owner":  "admin@foo.com", "year": 4 }
   ],
 
   "public": {

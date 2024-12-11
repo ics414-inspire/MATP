@@ -7,13 +7,12 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignOut from '../pages/SignOut';
 import SignInSignUpPage from '../pages/SignInSignUpPage';
 import UserPage from '../pages/UserPage';
+import ListProfiles from '../pages/ListProfiles';
 import NavBar from '../components/NavBar';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
@@ -29,6 +28,7 @@ import AboutUs from '../pages/AboutUs';
 import FinancialProjection from '../pages/4100';
 import EditableSpreadsheet2005 from '../pages/2005_2';
 import Page2503 from '../pages/2503';
+import EditProfile from '../pages/EditProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -59,10 +59,11 @@ const App = () => {
           <Route path="/csv" element={<ProtectedRoute><CSV /></ProtectedRoute>} />
           <Route path="/audited" element={<ProtectedRoute><Audited /></ProtectedRoute>} />
           <Route path="/financial-projection" element={<ProtectedRoute><FinancialProjection /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListProfiles /></AdminProtectedRoute>} />
+          <Route path="/edit/:_id" element={<AdminProtectedRoute ready={ready}><EditProfile /></AdminProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
           <Route path="/2005" element={<ProtectedRoute><EditableSpreadsheet2005 /></ProtectedRoute>} />
           <Route path="/2503" element={<ProtectedRoute><Page2503 /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/manage-database" element={<AdminProtectedRoute ready={ready}><ManageDatabase /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />

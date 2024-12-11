@@ -1,6 +1,7 @@
 /** Define ids for each page. */
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
+  EDIT_USER_PROFILE: 'edit-user-profile',
   EDIT_STUFF: 'edit-stuff',
   LANDING: 'landing',
   AUDITED_BALANCE_INPUT: 'audited-balance-input',
@@ -9,6 +10,7 @@ export const PAGE_IDS = {
   DASHBOARD: 'dashboard',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
+  LIST_PROFILES: 'list-profiles',
   MANAGE_DATABASE: 'manage-database',
   NOT_AUTHORIZED: 'not-authorized',
   NOT_FOUND: 'not-found',

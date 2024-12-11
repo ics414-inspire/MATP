@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
-import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js';
+import { Stuffs } from '../stuff/StuffCollection';
+
 /**
  * Represents a user, which is someone who has a Meteor account.
  *
@@ -11,7 +12,7 @@ import { AuditedBalanceSheet } from '../Inputs/AuditedBalanceSheetCollection.js'
  *
  * Note that this collection does not extend any of our Base collections, because it has a very limited API
  * which should be used by clients to access the various Profile collections.
- * stuff
+ *
  * It is not saved out or restored when the DB is dumped. It is not listed in RadGrad.collections.
  *
  * Clients provide a "user" as a parameter, which is either the username (i.e. email) or userID.
@@ -69,6 +70,40 @@ class UserCollection {
   }
 
   /**
+   * Updates the user's username and email (these are the same values).
+   * Sign in checks meteor/accounts-base (not BaseProfileCollection schema),
+   * so a different method is needed to update the username and email.
+   * @param userID The userID of the user.
+   * @param email The new email.
+   */
+  updateUsernameAndEmail(userID, email) {
+    if (Meteor.isServer) {
+      Accounts.setUsername(userID, email);
+      Meteor.users.update(userID, { $set: { 'emails.0.address': email } });
+    }
+  }
+
+  /**
+   * Checks user input old password vs password stored in database.
+   * If it matches, update password to the new password.
+   * This is a client side only function.
+   * @param oldPassword The user's old password.
+   * @param newPassword The user's new password.
+   */
+  updatePassword(oldPassword, newPassword) {
+    Accounts.changePassword(oldPassword, newPassword);
+  }
+
+  /**
+   * Changes the role of the user.
+   * @param userID The _id of the user's Meteor.users document.
+   * @param role The new role.
+   */
+  changeRole(userID, role) {
+    Roles.setUserRoles(userID, [role]);
+  }
+
+  /**
    * Asserts that the passed user has the specified role.
    * @param user The user (username or userID).
    * @param role The role or an array of roles.
@@ -94,7 +129,7 @@ class UserCollection {
    * @return {boolean}
    */
   isReferenced(user) {
-    return AuditedBalanceSheet.find({ owner: user }).fetch().length > 0;
+    return Stuffs.find({ owner: user }).fetch().length > 0;
   }
 
   /**
@@ -155,7 +190,6 @@ class UserCollection {
     }
     return profile;
   }
-
 }
 
 export const Users = new UserCollection();
