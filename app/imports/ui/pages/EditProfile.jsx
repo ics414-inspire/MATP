@@ -1,6 +1,6 @@
 import React from 'react';
 import swal from 'sweetalert';
-import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Card, Col, Row, Button } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SubmitField, TextField, SelectField } from 'uniforms-bootstrap5';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -125,26 +125,27 @@ const EditProfile = () => {
     updateMethod.callPromise({ collectionName: collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Item updated successfully', 'success'));
-    navigate('/profiles');
+    navigate('/admin');
   };
 
   return subReady ? (
-    <Container id={PAGE_IDS.EDIT_USER_PROFILE} className="py-3">
+    <Card id={PAGE_IDS.EDIT_USER_PROFILE} style={{ height: '100vh' }}>
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center text-black">
-            <h2>Edit User</h2>
+          <Col className="text-center text-black py-4">
+            <h2>Edit Profile</h2>
           </Col>
           <AutoForm model={userDocument} schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField id={COMPONENT_IDS.ACCOUNT_SETTINGS_FIRST_NAME} name="firstName" placeholder="First Name" />
-                <TextField id={COMPONENT_IDS.ACCOUNT_SETTINGS_LAST_NAME} name="lastName" placeholder="Last Name" />
+                <TextField id={COMPONENT_IDS.ACCOUNT_SETTINGS_FIRST_NAME} name="firstName" placeholder="First Name" label="Name" />
+                <TextField id={COMPONENT_IDS.ACCOUNT_SETTINGS_LAST_NAME} name="lastName" placeholder="Last Name" label="Company Name" />
                 <TextField id={COMPONENT_IDS.ACCOUNT_SETTINGS_EMAIL} name="email" placeholder="email" />
                 <Row>
                   <SelectField
                     id={COMPONENT_IDS.ACCOUNT_SETTINGS_ROLE}
                     name="roleType"
+                    label="Role"
                   >
                     {roleTypes.map((aRoleType, key) => (
                       <option value={aRoleType} key={key}>{aRoleType}</option>))}
@@ -160,7 +161,7 @@ const EditProfile = () => {
                       id={COMPONENT_IDS.DELETE_USER_ACCOUNT}
                       onClick={() => {
                         removeItMethod.callPromise({ collectionName: collectionName, instance: _docId });
-                        navigate('/profiles');
+                        navigate('/admin');
                       }}
                     >
                       Delete Account
@@ -172,7 +173,7 @@ const EditProfile = () => {
           </AutoForm>
         </Col>
       </Row>
-    </Container>
+    </Card>
   ) : <LoadingSpinner />;
 };
 export default EditProfile;

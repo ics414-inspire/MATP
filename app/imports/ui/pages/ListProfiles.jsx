@@ -50,10 +50,10 @@ const ListProfiles = () => {
   }, []);
 
   return ((userSubReady && adminSubReady && accountantSubReady && clientSubReady && bossAccountantSubReady) ? (
-    <Card id={PAGE_IDS.LIST_PROFILES} className="py-3" style={{ height: '100vh' }}>
+    <Card id={PAGE_IDS.LIST_PROFILES} style={{ height: '100vh' }}>
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center text-black py-lg-5"><h2>Profiles</h2></Col>
+          <Col className="text-center text-black py-lg-4"><h2>Profiles</h2></Col>
           <Table>
             <thead>
               <tr>
