@@ -7,9 +7,9 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const UserProfileItem = ({ profile }) => (
   <tr>
-    <td style={{ verticalAlign: 'middle' }}>{profile.email}</td>
     <td style={{ verticalAlign: 'middle' }}>{profile.firstName}</td>
     <td style={{ verticalAlign: 'middle' }}>{profile.lastName}</td>
+    <td style={{ verticalAlign: 'middle' }}>{profile.email}</td>
     <td style={{ verticalAlign: 'middle' }}>{profile.role}</td>
     <td style={{ textAlign: 'center' }}>
       <Link
