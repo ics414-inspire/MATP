@@ -9,14 +9,17 @@ import ImageCarousel from '../components/ImageCarousel';
 /* A simple static component to render some text for the landing page. */
 const Landing = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  // eslint-disable-next-line no-unused-vars
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
 
+  // eslint-disable-next-line no-unused-vars
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
 
   // Handle selection of the active slide in the carousel
+  // eslint-disable-next-line no-unused-vars
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
@@ -26,7 +29,7 @@ const Landing = () => {
     navigate('/signin-signup?form=signin'); // Replace '/signin' with the correct path for your sign-in page
   };
 
-  const featureLink = currentUser ? '/dashboard' : '/signin-signup?form=signin';
+  // const featureLink = currentUser ? '/dashboard' : '/signin-signup?form=signin';
 
   return (
     <>
@@ -35,7 +38,7 @@ const Landing = () => {
         <div className="overlay-text">
           <h1><strong>Welcome to InSpire Hawai{'\u02BB'}i</strong></h1>
           <p>Our goal is to create an autonomous organization platform for the company SPIRE Hawai{'\u02BB'}i</p>
-          <button className="get-started-button" onClick={handleGetStartedClick}>Get Started</button>
+          <button type="button" className="get-started-button" onClick={handleGetStartedClick}>Get Started</button>
         </div>
       </div>
 
