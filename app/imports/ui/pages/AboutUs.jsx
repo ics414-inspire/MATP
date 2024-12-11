@@ -39,7 +39,7 @@ const AboutUs = () => (
       <Col md={4}>
         <Card className="text-center">
           <Card.Body>
-            <Card.Title>Feature One</Card.Title>
+            <Card.Title>Feature 1: Dashboard</Card.Title>
             <Card.Text>
               Dashboard view of all the company assets, providing a quick overview of the organization&apos;s
               financial status.
@@ -50,7 +50,7 @@ const AboutUs = () => (
       <Col md={4}>
         <Card className="text-center">
           <Card.Body>
-            <Card.Title>Feature Two</Card.Title>
+            <Card.Title>Feature 2: Assets</Card.Title>
             <Card.Text>
               Individual asset view with detailed information, allowing you to explore specific entries
               and gain deeper insights.
@@ -61,7 +61,7 @@ const AboutUs = () => (
       <Col md={4}>
         <Card className="text-center">
           <Card.Body>
-            <Card.Title>Feature Three</Card.Title>
+            <Card.Title>Feature 3: Visualization</Card.Title>
             <Card.Text>
               Visualization tools for the company assets, helping to understand trends and make data-driven
               decisions.

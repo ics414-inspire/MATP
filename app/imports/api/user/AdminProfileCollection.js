@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+// eslint-disable-next-line import/no-cycle
 import { UserProfiles } from './UserProfileCollection';
 
 class AdminProfileCollection extends BaseProfileCollection {
