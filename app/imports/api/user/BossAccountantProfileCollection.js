@@ -5,6 +5,7 @@ import { Roles } from 'meteor/alanning:roles';
 import BaseProfileCollection from './BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Users } from './UserCollection';
+/* eslint-disable import/no-cycle */
 import { UserProfiles } from './UserProfileCollection';
 import { AdminProfiles } from './AdminProfileCollection';
 import { AccountantProfiles } from './AccountantProfileCollection';

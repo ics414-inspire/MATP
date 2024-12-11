@@ -1,8 +1,10 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
-    },
-    { "email": "john@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "John", "lastName": "Doe" }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP" },
+    { "email": "john@foo.com", "password": "I50sAE05P?&", "role": "USER" , "firstName": "John", "lastName": "Doe" },
+    { "email": "accountant", "password": "changeme", "role": "ACCOUNTANT", "clients": ["client"], "firstName": "John", "lastName": "Doe" },
+    { "email": "boss", "password": "changeme", "role": "BOSSACCOUNTANT", "clients": ["client"], "firstName": "Mike", "lastName": "Brown" },
+    { "email": "client", "password": "changeme", "role": "CLIENT", "firstName": "Sarah", "lastName": "Green" }
   ],
   "defaultAuditedBalanceSheets": [
     { "owner":  "john@foo.com", "year": 1 },
@@ -13,7 +15,15 @@
     { "owner":  "john@foo.com", "year": 6 },
     { "owner":  "john@foo.com", "year": 7 },
     { "owner":  "john@foo.com", "year": 8 },
-    { "owner":  "admin@foo.com", "year": 1 }
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 2 },
+    { "owner":  "admin@foo.com", "year": 3 },
+    { "owner":  "admin@foo.com", "year": 4 },
+    { "owner":  "admin@foo.com", "year": 5 },
+    { "owner":  "admin@foo.com", "year": 6 },
+    { "owner":  "admin@foo.com", "year": 7 },
+    { "owner":  "admin@foo.com", "year": 8 }
   ],
 
   "defaultBudget": [
@@ -21,7 +31,10 @@
     { "owner":  "john@foo.com", "year": 7 },
     { "owner":  "john@foo.com", "year": 8 },
     { "owner":  "john@foo.com", "year": 9 },
-    { "owner":  "admin@foo.com", "year": 1 }
+    { "owner":  "admin@foo.com", "year": 1 },
+    { "owner":  "admin@foo.com", "year": 2 },
+    { "owner":  "admin@foo.com", "year": 3 },
+    { "owner":  "admin@foo.com", "year": 4 }
   ],
 
   "public": {

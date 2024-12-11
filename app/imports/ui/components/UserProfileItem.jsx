@@ -7,13 +7,17 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const UserProfileItem = ({ profile }) => (
   <tr>
-    <td>{profile.email}</td>
-    <td>{profile.firstName}</td>
-    <td>{profile.lastName}</td>
-    <td>{profile.role}</td>
-    <td>{}</td>
-    <td>
-      <Link className={COMPONENT_IDS.LIST_PROFILES_EDIT} to={`/edit/${profile._id}`}>Edit</Link>
+    <td style={{ verticalAlign: 'middle' }}>{profile.email}</td>
+    <td style={{ verticalAlign: 'middle' }}>{profile.firstName}</td>
+    <td style={{ verticalAlign: 'middle' }}>{profile.lastName}</td>
+    <td style={{ verticalAlign: 'middle' }}>{profile.role}</td>
+    <td style={{ textAlign: 'center' }}>
+      <Link
+        className={`btn btn-primary btn-sm ${COMPONENT_IDS.LIST_PROFILES_EDIT}`}
+        to={`/edit/${profile._id}`}
+      >
+        Edit
+      </Link>
     </td>
   </tr>
 );
