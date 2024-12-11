@@ -26,7 +26,11 @@ const Landing = () => {
 
   // Handler to navigate to the sign-in page
   const handleGetStartedClick = () => {
-    navigate('/signin-signup?form=signin'); // Replace '/signin' with the correct path for your sign-in page
+    if (currentUser) {
+      navigate('/dashboard'); // Navigate to the dashboard if the user is signed in
+    } else {
+      navigate('/signin-signup?form=signin'); // Navigate to the sign-in page if the user is not signed in
+    }
   };
 
   // const featureLink = currentUser ? '/dashboard' : '/signin-signup?form=signin';
