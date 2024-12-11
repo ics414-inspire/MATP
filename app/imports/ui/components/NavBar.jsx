@@ -43,7 +43,6 @@ const NavBar = () => {
                   <Dropdown.Item id={COMPONENT_IDS.NAVBAR_CSV_INPUT_PAGE} as={NavLink} to="/csv">CSV File</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>,
-              <Nav.Link as={NavLink} to="/information" key="add">Information</Nav.Link>,
               <Nav.Link as={NavLink} to="/contact" key="contact">Contact Us</Nav.Link>,
             ]) : ''}
             {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
