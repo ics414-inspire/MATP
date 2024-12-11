@@ -32,6 +32,7 @@ import Page2503 from '../pages/2503';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
+  // eslint-disable-next-line no-unused-vars
   const { ready, isLogged } = useTracker(() => {
     const rdy = Roles.subscription.ready();
     return {
@@ -44,7 +45,7 @@ const App = () => {
       <div className="d-flex flex-column min-vh-100">
         <NavBar />
         <Routes>
-          <Route exact path="/" element={isLogged ? <Dashboard /> : <Landing />} />
+          <Route exact path="/" element={<Landing />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/signin-signup" element={<SignInSignUpPage />} />
@@ -81,7 +82,7 @@ const App = () => {
 const ProtectedRoute = ({ children }) => {
   const isLogged = Meteor.userId() !== null;
   console.log('ProtectedRoute', isLogged);
-  return isLogged ? children : <Navigate to="/signin" />;
+  return isLogged ? children : <Navigate to="/signin-signup?form=signin" />;
 };
 
 /**
@@ -92,7 +93,7 @@ const ProtectedRoute = ({ children }) => {
 const AdminProtectedRoute = ({ ready, children }) => {
   const isLogged = Meteor.userId() !== null;
   if (!isLogged) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin-signup?form=signin" />;
   }
   if (!ready) {
     return <LoadingSpinner />;

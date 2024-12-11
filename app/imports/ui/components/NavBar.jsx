@@ -20,7 +20,7 @@ const NavBar = () => {
         <Navbar.Brand
           id={COMPONENT_IDS.NAVBAR_LANDING_PAGE}
           as={NavLink}
-          to={currentUser ? '/dashboard' : '/'}
+          to="/"
         >
           <Image className="navbar-logo" alt="spire logo" src="/images/inspire.gif" />
         </Navbar.Brand>
