@@ -23,7 +23,6 @@ import AuditedBalanceInput from '../pages/AuditedBalanceInput';
 import BudgetPlInput from '../pages/BudgetPlInput';
 import Audited from '../pages/Audited';
 import Dashboard from '../pages/Dashboard';
-import Information from '../pages/Information';
 import ContactUs from '../components/ContactUs';
 import CSV from '../pages/CSV';
 import AboutUs from '../pages/AboutUs';
@@ -55,7 +54,6 @@ const App = () => {
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/dashboard/*" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/information" element={<ProtectedRoute><Information /></ProtectedRoute>} />
           <Route path="/auditedbalanceinput" element={<ProtectedRoute><AuditedBalanceInput /></ProtectedRoute>} />
           <Route path="/budgetplinput" element={<ProtectedRoute><BudgetPlInput /></ProtectedRoute>} />
           <Route path="/csv" element={<ProtectedRoute><CSV /></ProtectedRoute>} />
