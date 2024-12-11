@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
+import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import ImageCarousel from '../components/ImageCarousel';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => {
+  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
+  // eslint-disable-next-line no-unused-vars
+  const { currentUser } = useTracker(() => ({
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+  }), []);
+
+  // eslint-disable-next-line no-unused-vars
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
 
   // Handle selection of the active slide in the carousel
+  // eslint-disable-next-line no-unused-vars
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   // Handler to navigate to the sign-in page
   const handleGetStartedClick = () => {
-    navigate('/signin'); // Replace '/signin' with the correct path for your sign-in page
+    navigate('/signin-signup?form=signin'); // Replace '/signin' with the correct path for your sign-in page
   };
+
+  // const featureLink = currentUser ? '/dashboard' : '/signin-signup?form=signin';
 
   return (
     <>
@@ -26,7 +38,7 @@ const Landing = () => {
         <div className="overlay-text">
           <h1><strong>Welcome to InSpire Hawai{'\u02BB'}i</strong></h1>
           <p>Our goal is to create an autonomous organization platform for the company SPIRE Hawai{'\u02BB'}i</p>
-          <button className="get-started-button" onClick={handleGetStartedClick}>Get Started</button>
+          <button type="button" className="get-started-button" onClick={handleGetStartedClick}>Get Started</button>
         </div>
       </div>
 
@@ -41,17 +53,17 @@ const Landing = () => {
             <div className="grid">
               <div className="g-col-4 feature-card">
                 <i className="fas fa-chart-line feature-icon" />
-                <h3>Feature One</h3>
+                <h3>Feature 1: Dashboard</h3>
                 <p>Dashboard view of all the company assets</p>
               </div>
               <div className="g-col-4 feature-card">
                 <i className="fas fa-eye feature-icon" />
-                <h3>Feature Two</h3>
+                <h3>Feature 2: Assets</h3>
                 <p>Individual asset view with detailed information</p>
               </div>
               <div className="g-col-4 feature-card">
                 <i className="fas fa-chart-pie feature-icon" />
-                <h3>Feature Three</h3>
+                <h3>Feature 3: Visualization</h3>
                 <p>Visualization for the company assets</p>
               </div>
             </div>

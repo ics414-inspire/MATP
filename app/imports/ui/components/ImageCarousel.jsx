@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Carousel, Col, Row, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -79,5 +80,15 @@ const DashboardButton = ({ text, path }) => (
     </Button>
   </Col>
 );
+
+ButtonLink.propTypes = {
+  path: PropTypes.func.isRequired,
+  text: PropTypes.func.isRequired,
+  description: PropTypes.func.isRequired,
+};
+DashboardButton.propTypes = {
+  text: PropTypes.func.isRequired,
+  path: PropTypes.func.isRequired,
+};
 
 export default ImageCarousel;
